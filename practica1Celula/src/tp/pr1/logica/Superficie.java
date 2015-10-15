@@ -1,4 +1,4 @@
-package practica1Celula;
+package tp.pr1.logica;
 
 public class Superficie {
 	private Celula[][] superficie;
