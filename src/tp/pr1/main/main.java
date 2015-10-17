@@ -1,10 +1,16 @@
 package tp.pr1.main;
+import tp.pr1.control.Controlador;
+import java.util.Scanner;
 
 public class main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Hello World");
+		
+		Scanner sc = new Scanner(System.in);
+		Controlador ctrl = new Controlador(sc);
+		
+		ctrl.realizaSimulacion();
+		
 	}
 
 }
