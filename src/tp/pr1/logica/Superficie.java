@@ -2,15 +2,13 @@ package tp.pr1.logica;
 
 public class Superficie {
 	private Celula[][] superficie;
-	private int nf;
-	private int nc;
+	private int filas;
+	private int columnas;
 	
 	//constructora de la superficie
 	public Superficie(int nf, int nc){
-		for (int i=0;i<nf;i++){
-			for (int y=0; y<nc; y++){
-				
-			}
-		}
+		this.filas=nf;
+		this.columnas=nc;
+		this.superficie = new Celula[nf][nc];
 	};
 }
