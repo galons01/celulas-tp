@@ -1,6 +1,7 @@
 package tp.pr1.control;
 
 import java.util.Scanner;
+
 import tp.pr1.logica.Mundo;
 
 public class Controlador {
@@ -9,7 +10,7 @@ public class Controlador {
 	private Scanner in;
 	private Mundo mundo;
 	
-	public Controlador(/*Mundo mundo,*/ Scanner in) {
+	public Controlador(Mundo mundo, Scanner in) {
 		this.in = in;
 		//Inicializar mundo
 	}
@@ -21,55 +22,67 @@ public class Controlador {
 	
 	public void realizaSimulacion() {
 		String comando;
+		String[] palabras;
 		int f, c;
+		
+		String mensajeError = "ERROR: Comando desconocido.";
+		
 		 do {
 			 System.out.print("Comando > ");
-			 comando = this.in.next();
+			 comando = this.in.nextLine();
+			 palabras = comando.split(" ");
+			 comando = palabras[0];
 			 
-			//Siguiente paso
-			 if(igualesIns(comando,"PASO")) {
+			 
+			 if (palabras.length==1){
+					//Siguiente paso
+				 if(igualesIns(comando,"PASO")) {
+					 
+				 }
+				 
+					//Iniciar simulación
+				 else if(igualesIns(comando,"INICIAR")) {
+
+				 }
+				 
+				//Muestra ayuda
+				 else if(igualesIns(comando,"AYUDA")) {
+					 
+				 }
+				 
+				//Vacía el mundo
+				 else if(igualesIns(comando,"VACIAR")) {
+					 
+				 }
+				 
+				 //Si no deseaba salir: ERROR
+				 else if(!igualesIns(comando,"SALIR"))  {
+					 System.out.println(mensajeError);
+				 }
 				 
 			 }
-			 
-			//Iniciar simulación
-			 else if(igualesIns(comando,"INICIAR")) {
-
-			 }
-			 
-			//Nueva célula
-			 else if(igualesIns(comando,"CREARCELULA")) {
-
-				 f = this.in.nextInt();
-				 c = this.in.nextInt();
-			 }
-			 
-			//Elimina una célula
-			 else if(igualesIns(comando,"ELIMINARCELULA")) {
-
-				 f = this.in.nextInt();
-				 c = this.in.nextInt();
-			 }
-			 
-			//Muestra ayuda
-			 else if(igualesIns(comando,"AYUDA")) {
+			 else if(palabras.length==3){
+				 f = Integer.parseInt(palabras[1]);
+				 c = Integer.parseInt(palabras[2]);
 				 
-			 }
-			 
-			//Vacía el mundo
-			 else if(igualesIns(comando,"VACIAR")) {
+				//Nueva célula
+				 if(igualesIns(comando,"CREARCELULA")) {
+
+				 }
 				 
+					//Elimina una célula
+				 else if(igualesIns(comando,"ELIMINARCELULA")) {
+
+				 }
+				 
+				 else {
+					 System.out.println(mensajeError);
+				 }
 			 }
-			 
-			//Abandonar simulación
-			 else if(igualesIns(comando,"SALIR")) {
-				 //En principio nada por aquí.
-				 //Borrar si no es necesario
-			 }
-			 
+
 			 //Comando inválido
 			 else {
-				 System.out.println("ERROR: Comando desconocido.");
-				 comando = "";
+				 System.out.println(mensajeError);
 			 }
 			 
 		 } while(!igualesIns(comando,"SALIR")); //comando != "salir"
