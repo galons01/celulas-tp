@@ -9,7 +9,20 @@ public class Mundo {
 	
 	private Superficie superficie = new Superficie(N_FILAS,N_COLUMNAS);
 	
-	public void evoluciona(){
+	public void evoluciona() {
 		
+	}
+	
+	public boolean crearCelula(int fila, int columna) {
+		return this.superficie.insertarCelula(fila, columna);
+	}
+	
+	int numAleatorio(int min, int max) {
+		if(min<max){
+			return (int)Math.random()*(max-min+1)+min;	
+		}
+		else {
+			return 0;
+		}
 	}
 }

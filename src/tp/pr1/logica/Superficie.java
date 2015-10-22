@@ -10,5 +10,14 @@ public class Superficie {
 		this.filas=nf;
 		this.columnas=nc;
 		this.superficie = new Celula[nf][nc];
-	};
+	}
+	
+	public boolean insertarCelula(int fila, int columna){
+		boolean vacio = this.superficie[fila][columna]==null;
+		if(vacio){
+			this.superficie[fila][columna] = new Celula();
+		}
+		return vacio;
+	}
+	
 }
