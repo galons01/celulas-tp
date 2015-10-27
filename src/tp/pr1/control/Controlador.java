@@ -12,7 +12,7 @@ public class Controlador {
 	
 	public Controlador(Mundo mundo, Scanner in) {
 		this.in = in;
-		//Inicializar mundo
+		this.mundo = mundo;
 	}
 	
 	//Comprueba si son iguales (case insensitive)
@@ -37,12 +37,12 @@ public class Controlador {
 			 if (palabras.length==1){
 					//Siguiente paso
 				 if(igualesIns(comando,"PASO")) {
-					 
+					 //evoluciona();
 				 }
 				 
 					//Iniciar simulación
 				 else if(igualesIns(comando,"INICIAR")) {
-
+					 mundo.iniciar();
 				 }
 				 
 				//Muestra ayuda

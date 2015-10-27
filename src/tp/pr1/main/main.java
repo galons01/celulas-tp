@@ -1,7 +1,7 @@
 package tp.pr1.main;
+
 import tp.pr1.control.Controlador;
 import tp.pr1.logica.Mundo;
-
 import java.util.Scanner;
 
 public class main {
