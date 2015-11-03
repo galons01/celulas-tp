@@ -5,14 +5,10 @@ public class Mundo {
 	
 	private final static int N_FILAS=3;
 	private final static int N_COLUMNAS=4;
-	
 	private final static int DEF_CELULAS=6;
 	
 	private Superficie superficie = new Superficie(N_FILAS,N_COLUMNAS);
-	
-	public void evoluciona() {
-		//Evolucionar aquí <---
-	}
+
 	
 	//Crea una nueva célula en el mundo
 	public boolean crearCelula(int fila, int columna) {
@@ -44,7 +40,7 @@ public class Mundo {
 	
 	/*Revisa los alrededores de una célula en busca de
 	una posición libre aleatoria*/
-	public boolean inspeccionarAlrededores(Casilla pos) {
+	private boolean inspecAlrededores(Casilla pos) {
 		//Si la posición en cuestión tiene una célula
 		if(!this.superficie.posLibre(pos.getFila(),pos.getColumna())) {
 			
@@ -83,7 +79,59 @@ public class Mundo {
 			return false;	//No había célula en la posición indicada
 	}
 	
-	public void moverCelula(int f, int c) {
-		
+	private int inspecSuperficie(Casilla[] ocupadas) {
+		int n = 0;
+		for(int i = 0; i<this.superficie.getFilas(); i++) {
+			for( int j=0; j<this.superficie.getColumnas(); j++) {
+				if(!this.superficie.posLibre(i, j)) {
+					ocupadas[n] = new Casilla(i,j);
+					n++;
+				}
+			}
+		}
+		return n;
+	}
+	
+	private void moverCelula(int f, int c) {
+		Casilla pos = new Casilla(f,c);
+		if(this.inspecAlrededores(pos)) {
+			this.superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
+		}
+		else if(this.superficie.leQuedanVidas()) {//Función hipotética (por hacer)
+			this.superficie.restarvidas();//Función hipotética (por hacer)
+		}
+		else {
+			this.superficie.eliminarCelula(f, c);
+		}
+	}
+	
+	private void reproducirCelula(int f, int c) {
+		Casilla pos = new Casilla(f,c);
+		if(this.inspecAlrededores(pos)) {
+			this.superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
+			this.crearCelula(f, c);
+		} else {
+			this.superficie.eliminarCelula(f, c);
+		}
+	}
+	
+	public void evoluciona() {
+		Casilla[] ocupadas = new Casilla[this.superficie.getColumnas()*this.superficie.getFilas()];
+		/*Casilla pos = new Casilla();*/
+		int f, c;
+		int nLibres = inspecSuperficie(ocupadas);
+		for(int a=0; a<nLibres; a++) {
+			f = ocupadas[a].getFila();
+			c = ocupadas[a].getColumna();
+			/*pos.setFila(f);
+			pos.setFila(c);*/
+			if(this.superficie.seVaAReproducir(f,c)) {//Función hipotética (por hacer)
+				this.reproducirCelula(f, c);
+			} else {
+				this.moverCelula(f, c);
+				
+			}
+		}
+		System.out.println(this);
 	}
 }
