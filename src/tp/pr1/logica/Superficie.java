@@ -4,6 +4,7 @@ public class Superficie {
 	private Celula[][] superficie;
 	private int filas;
 	private int columnas;
+	private int nCelulas = 0;
 	
 	//Constructor de la superficie
 	public Superficie(int nf, int nc){
@@ -22,6 +23,7 @@ public class Superficie {
 		boolean vacio = this.posLibre(fila,columna);
 		if(vacio){
 			this.superficie[fila][columna] = celula;
+			this.nCelulas++;
 		}
 		return vacio;
 	}
@@ -29,11 +31,12 @@ public class Superficie {
 	//Elimina una célula de una posición del tablero
 	public void eliminarCelula(int fila, int columna){
 		this.superficie[fila][columna] = null;
+		this.nCelulas--;
 	}
 	
 	//Mueve una célula si la posición está disponible
 	public boolean moverCelula(int f1, int c1, int f2, int c2) {
-			if(this.posLibre(f2,c2)) {			
+		if(this.posLibre(f2,c2)) {			
 			Celula cel = this.superficie[f1][c1];
 			this.insertarCelula(cel, f2, c2);
 			this.eliminarCelula(c1, c1);
