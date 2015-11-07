@@ -71,10 +71,8 @@ public class Mundo {
 			//Si hay al menos 1 posición libre
 			encontradoHueco = l > 0;
 			if(encontradoHueco) {
-				l--;
-				l = Mundo.numAleatorio(0,l);
-				pos.setColumna(libres[l].getColumna());
-				pos.setFila(libres[l].getFila());
+				l = Mundo.numAleatorio(0,l-1);
+				libres[l].copiar(pos);
 			}/*Esto ^^^ probablemente vaya mejor en otra 
 				función a parte. Ahí lo dejo de momento*/
 			
@@ -96,7 +94,7 @@ public class Mundo {
 		if(this.inspecAlrededores(pos)) {
 			/*Mueve la célula y resta paso reproducción*/
 			this.superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
-			this.superficie.darPaso(f,c);
+			this.superficie.darPaso(pos.getFila(),pos.getColumna());
 			return true;
 		}
 		/*Si no se puede mover*/
@@ -121,6 +119,7 @@ public class Mundo {
 				
 				if(this.moverCelula(pos)) {
 					this.crearCelula(f,c);
+					this.superficie.reproducir(pos.getFila(),pos.getColumna());
 					System.out.println("Nace nueva célula en (" + f + "," + c + ") " + 
 							"cuyo padre ha sido (" + pos.getFila() + "," + pos.getColumna() + ") ");
 				}
@@ -151,34 +150,40 @@ public class Mundo {
 	 Recorre la superficie en busca de células.
 	 Devuelve un array con las posiciones ocupadas.
 	*/
-	private int inspecSuperficie(Casilla[] ocupadas) {
+	private void inspecSuperficie(Casilla[] ocupadas) {
 		int n = 0;	/*Número de células*/
 		int j;		/*Contador bucle while*/
 		for(int i = 0; i<this.superficie.getFilas(); i++) {
 			j = 0;
 			while(j<this.superficie.getColumnas() && n<this.superficie.nCelulas()) {
-				if(!this.superficie.posLibre(i, j)) {
+				if(!this.superficie.posLibre(i,j)) {
 					ocupadas[n] = new Casilla(i,j);
 					n++;
 				}
 				j++;
 			}
 		}
-		return n;
 	}
 	
 	public void evoluciona() {
-		Casilla[] ocupadas = new Casilla[this.superficie.getColumnas()*this.superficie.getFilas()];
+		/*
+		 Foto del número de células. Podría ser modificado durante
+		 el bucle dando lugar a errores.
+		 */
+		int n = this.superficie.nCelulas();
+		Casilla[] ocupadas = new Casilla[n];
 		int f, c;
-		int nLibres = inspecSuperficie(ocupadas);
 		
-		for(int a=0; a<nLibres; a++) {
+		inspecSuperficie(ocupadas);
+		
+		for(int a=0; a<n; a++) {
 			f = ocupadas[a].getFila();
 			c = ocupadas[a].getColumna();
 			paso(f,c);
 		}
 		System.out.println(this);
 	}
+	
 	
 	public String toString() {
 		StringBuilder mostrar = new StringBuilder();
@@ -191,7 +196,7 @@ public class Mundo {
 				else {
 					pasosReprod = this.superficie.getPasosReprod(i,j);
 					pasosMuerte = this.superficie.getPasosMuerte(i,j);
-					mostrar.append("[" + pasosMuerte + "," + pasosReprod +"]");
+					mostrar.append("[" + pasosMuerte + "-" + pasosReprod +"]");
 				}
 				mostrar.append(" ");
 			}

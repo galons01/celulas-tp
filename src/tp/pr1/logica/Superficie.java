@@ -34,13 +34,12 @@ public class Superficie {
 		this.nCelulas--;
 	}
 	
-	/*ATENCIÓN - ¿DEBERÍA RESTAR UN PASO A LA CÉLULA? */
 	//Mueve una célula si la posición está disponible
 	public boolean moverCelula(int f1, int c1, int f2, int c2) {
 		if(this.posLibre(f2,c2)) {			
 			Celula cel = this.superficie[f1][c1];
 			this.insertarCelula(cel, f2, c2);
-			this.eliminarCelula(c1, c1);
+			this.eliminarCelula(f1, c1);
 			return true;
 		}
 		else
@@ -70,6 +69,9 @@ public class Superficie {
 	
 	public boolean puedeReprod(int f, int c) {
 		return this.superficie[f][c].puedeReprod();
+	}
+	public boolean reproducir(int f, int c) {
+		return this.superficie[f][c].reproducir();
 	}
 	
 	public void estarQuieta(int f, int c) {

@@ -1,7 +1,7 @@
 package tp.pr1.logica;
 
 public class Celula {
-	private static final short MAX_PASOS_SIN_MOVER = 3;
+	private static final short MAX_PASOS_SIN_MOVER = 2;
 	private static final short PASOS_REPRODUCCION = 4;
 
 	private short pasosReprod;	//Pasos que le quedan para dividirse (pasos movidos)
@@ -30,7 +30,7 @@ public class Celula {
 	
 	/*Resta un paso para la reproduccion de la célula */
 	public void darPaso() {
-		if(this.pasosReprod <= 0)
+		if(this.pasosReprod > 0)
 			this.pasosReprod--;
 	}
 	
