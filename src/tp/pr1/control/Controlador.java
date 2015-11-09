@@ -52,7 +52,7 @@ public class Controlador {
 				 
 				//Vacía el mundo
 				 else if(igualesIns(comando,"VACIAR")) {
-					 
+					 mundo.vaciar();
 				 }
 				 
 				 //Si no deseaba salir: ERROR
