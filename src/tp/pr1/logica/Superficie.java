@@ -15,17 +15,17 @@ public class Superficie {
 	
 	//Comprueba la disponibilidad de una casilla
 	public boolean posLibre(int fila, int columna) {
-		return this.superficie[fila][columna] != null;
+		return this.superficie[fila][columna] == null;
 	}
 	
 	//Inserta una célula en una posición del tablero
 	public boolean insertarCelula(Celula celula, int fila, int columna){
-		boolean vacio = this.posLibre(fila,columna);
-		if(vacio){
+		boolean libre = this.posLibre(fila,columna);
+		if(libre){
 			this.superficie[fila][columna] = celula;
 			this.nCelulas++;
 		}
-		return vacio;
+		return libre;
 	}
 	
 	//Elimina una célula de una posición del tablero
@@ -39,7 +39,7 @@ public class Superficie {
 		if(this.posLibre(f2,c2)) {			
 			Celula cel = this.superficie[f1][c1];
 			this.insertarCelula(cel, f2, c2);
-			this.eliminarCelula(c1, c1);
+			this.eliminarCelula(f1, c1);
 			return true;
 		}
 		else
@@ -52,6 +52,42 @@ public class Superficie {
 	
 	public int getColumnas() {
 		return this.columnas;
+	}
+	
+	public int nCelulas() {
+		return this.nCelulas;
+	}
+	
+	
+	/************************************************
+	*  Funciones puente entre el mundo y la célula  *
+	************************************************/
+	
+	public boolean puedeMoverse(int f, int c) {
+		return this.superficie[f][c].puedeMoverse();
+	}
+	
+	public boolean puedeReprod(int f, int c) {
+		return this.superficie[f][c].puedeReprod();
+	}
+	public boolean reproducir(int f, int c) {
+		return this.superficie[f][c].reproducir();
+	}
+	
+	public void estarQuieta(int f, int c) {
+		this.superficie[f][c].estarQuieta();
+	}
+	
+	public void darPaso(int f, int c) {
+		this.superficie[f][c].darPaso();
+	}
+	
+	public int getPasosReprod(int f, int c) { 
+		return this.superficie[f][c].getPasosReprod();
+	}
+
+	public int getPasosMuerte(int f, int c) {
+		return this.superficie[f][c].getPasosMuerte();
 	}
 	
 }
