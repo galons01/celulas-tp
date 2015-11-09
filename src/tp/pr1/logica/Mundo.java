@@ -166,13 +166,7 @@ public class Mundo {
 	}
 	
 		public void vaciar(){
-		/* ver esto*/
-		/*tambien se puede usar la variable local*/
-		/*tambien se puede usar la variable local*/
-		/*tambien se puede usar la variable local*/
-		/*tambien se puede usar la variable local*/
-		/*tambien se puede usar la variable local*/
-		/*ver esto*/
+		/* metodo para limpiar una superficie dejando una superficie sin celulas.*/
 		int f = superficie.getFilas();		
 		int c = superficie.getColumnas();
 		
