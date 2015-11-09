@@ -4,6 +4,17 @@ import java.util.Scanner;
 
 import tp.pr1.logica.Mundo;
 
+public void ayuda(){
+		System.out.println("PASO: Realiza un movimiento sobre cada una de las células del mundo, respetando" + "las reglas de evolución de éste.");
+		System.out.println("INICIAR: Inicia la simulación. Es decir inicializa el mundo eliminando las células anteriores de la superficie e introduciendo nuevas células en posiciones aleatorias.");
+		System.out.println("El número de células vendrá especificado por una constante.");
+		System.out.println("CREARCELULA f c: Crea una nueva célula y la introduce en el mundo en la posición (f,c). Si la posición está ocupada manda un mensaje de error.");
+		System.out.println("ELIMINARCELULA f c: Elimina la célula del mundo en la posición (f,c). En caso de que dicha posición estuviera vacía manda un mensaje de error.");
+		System.out.println("AYUDA: Muestra los distintos comandos que se pueden ejecutar en la Práctica 1, junto con una breve descripción de lo que hacen.");
+		System.out.println("VACIAR: Elimina todas las células del mundo.");
+		System.out.println("SALIR: Es una metainstrucción que nos permite abandonar la simulación");
+	}
+
 public class Controlador {
 	
 	//Scanner para leer de teclado (sólo una vez por clase)
@@ -47,7 +58,7 @@ public class Controlador {
 				 
 				//Muestra ayuda
 				 else if(igualesIns(comando,"AYUDA")) {
-					 
+					 ayuda();
 				 }
 				 
 				//Vacía el mundo
