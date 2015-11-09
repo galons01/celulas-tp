@@ -115,6 +115,25 @@ public class Mundo {
 		}
 	}
 	
+		public void vaciar(){
+		/* ver esto*/
+		/*tambien se puede usar la variable local*/
+		/*tambien se puede usar la variable local*/
+		/*tambien se puede usar la variable local*/
+		/*tambien se puede usar la variable local*/
+		/*tambien se puede usar la variable local*/
+		/*ver esto*/
+		int f = superficie.getFilas();		
+		int c = superficie.getColumnas();
+		
+		for (int i=0; i<f; i++){
+			for (int y=0; y<c; y++){
+				if (!superficie.posLibre(i, y))
+				superficie.eliminarCelula(i, y);
+			}
+		}
+	}
+	
 	public void evoluciona() {
 		Casilla[] ocupadas = new Casilla[this.superficie.getColumnas()*this.superficie.getFilas()];
 		/*Casilla pos = new Casilla();*/
