@@ -48,7 +48,7 @@ public class Controlador {
 			 if (palabras.length==1){
 					//Siguiente paso
 				 if(igualesIns(comando,"PASO")) {
-					 //evoluciona();
+					 mundo.evoluciona();
 				 }
 				 
 					//Iniciar simulación
