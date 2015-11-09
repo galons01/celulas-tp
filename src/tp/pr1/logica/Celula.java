@@ -5,7 +5,7 @@ public class Celula {
 	private static final short PASOS_REPRODUCCION = 4;
 
 	private short pasosReprod;	//Pasos que le quedan para dividirse (pasos movidos)
-	private short pasosMuerte;	//Pasos que le quedan para morir (pasos sin moverse)
+	private short pasosMuerte;	//Pasos que le quedan para morir (sin moverse)
 	
 	public Celula() {
 		this.pasosReprod = Celula.PASOS_REPRODUCCION;
@@ -19,34 +19,23 @@ public class Celula {
 	public short getPasosMuerte() {
 		return this.pasosMuerte;
 	}
-	
-	public boolean puedeReprod() { 
-		return this.pasosReprod == 0;
-	}
 
-	public boolean puedeMoverse() {
-		return this.pasosMuerte > 0;
-	}
-	
-	/*Resta un paso para la reproduccion de la célula */
-	public void darPaso() {
+	public boolean darPaso() {
 		if(this.pasosReprod <= 0)
+			return false;
+		else {
 			this.pasosReprod--;
-	}
-	
-	/*Resta un paso para la muerte de la célula */
-	public void estarQuieta() {
-		if(this.pasosMuerte > 0)
-			this.pasosMuerte--;
-	}
-	
-	/*Reproduce una célula si puede*/
-	public boolean reproducir() {
-		if(this.pasosReprod == 0) {
-			this.pasosReprod = Celula.PASOS_REPRODUCCION;
 			return true;
 		}
-		return false;
+	}
+	
+	public boolean estarQuieta() {
+		if(this.pasosMuerte <= 0)
+			return false;
+		else {
+			this.pasosMuerte--;
+			return true;
+		}
 	}
 	
 }
