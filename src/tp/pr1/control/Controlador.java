@@ -70,7 +70,7 @@ public class Controlador {
 				 else if(!igualesIns(comando,"SALIR"))  {
 					 System.out.println(mensajeError);
 				 }
-				 
+				 System.out.println(mundo.toString());
 			 }
 			 else if(palabras.length==3){
 				 f = Integer.parseInt(palabras[1]);
@@ -89,6 +89,7 @@ public class Controlador {
 				 else {
 					 System.out.println(mensajeError);
 				 }
+				 System.out.println(mundo.toString());
 			 }
 
 			 //Comando inválido
