@@ -194,7 +194,6 @@ public class Mundo {
 			c = ocupadas[a].getColumna();
 			paso(f,c);
 		}
-		System.out.println(this);
 	}
 	
 	
