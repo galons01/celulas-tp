@@ -78,12 +78,12 @@ public class Controlador {
 				 
 				//Nueva célula
 				 if(igualesIns(comando,"CREARCELULA")) {
-
+					mundo.crearCelula(f, c);
 				 }
 				 
 					//Elimina una célula
 				 else if(igualesIns(comando,"ELIMINARCELULA")) {
-
+					mundo.eliminarCelula(f, c);
 				 }
 				 
 				 else {
