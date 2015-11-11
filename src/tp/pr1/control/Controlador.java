@@ -37,12 +37,12 @@ public class Controlador {
 			 if (palabras.length==1){
 					//Siguiente paso
 				 if(igualesIns(comando,"PASO")) {
-					 mundo.evoluciona();
+					 this.mundo.evoluciona();
 				 }
 				 
 					//Iniciar simulación
 				 else if(igualesIns(comando,"INICIAR")) {
-					 mundo.iniciar();
+					 this.mundo.iniciar();
 				 }
 				 
 				//Muestra ayuda
@@ -52,14 +52,13 @@ public class Controlador {
 				 
 				//Vacía el mundo
 				 else if(igualesIns(comando,"VACIAR")) {
-					 mundo.vaciar();
+					 this.mundo.vaciar();
 				 }
 				 
 				 //Si no deseaba salir: ERROR
 				 else if(!igualesIns(comando,"SALIR"))  {
 					 System.out.println(mensajeError);
 				 }
-				 System.out.println(mundo.toString());
 			 }
 			 else if(palabras.length==3){
 				 f = Integer.parseInt(palabras[1]);
@@ -67,24 +66,25 @@ public class Controlador {
 				 
 				//Nueva célula
 				 if(igualesIns(comando,"CREARCELULA")) {
-					mundo.crearCelula(f, c);
+					this.mundo.crearCelula(f, c);
 				 }
 				 
 					//Elimina una célula
 				 else if(igualesIns(comando,"ELIMINARCELULA")) {
-					mundo.eliminarCelula(f, c);
+					this.mundo.eliminarCelula(f, c);
 				 }
 				 
 				 else {
 					 System.out.println(mensajeError);
 				 }
-				 System.out.println(mundo.toString());
 			 }
 
 			 //Comando inválido
 			 else {
 				 System.out.println(mensajeError);
 			 }
+			 
+			 System.out.println(this.mundo.toString());
 			 
 		 } while(!igualesIns(comando,"SALIR")); //comando != "salir"
 	}
