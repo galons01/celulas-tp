@@ -11,7 +11,16 @@ public class Superficie {
 		this.filas=nf;
 		this.columnas=nc;
 		this.superficie = new Celula[nf][nc];
+		this.vaciar();
 	}
+	
+	/*Limpia la superficie dejándola sin celulas.*/
+	public void vaciar(){
+		for (int i=0; i<this.filas; i++)
+			for (int j=0; j<this.columnas; j++)
+				this.superficie[i][j] = null;
+	}
+	
 	
 	//Comprueba la disponibilidad de una casilla
 	public boolean posLibre(int fila, int columna) {

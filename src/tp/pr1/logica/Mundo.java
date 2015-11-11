@@ -1,5 +1,4 @@
 package tp.pr1.logica;
-import tp.pr1.logica.Casilla;
 
 public class Mundo {
 	
@@ -33,7 +32,7 @@ public class Mundo {
 		int i = 0;
 		int f, c;
 		
-		//this.superfice.vaciar();
+		this.superficie.vaciar();
 		while(i<Mundo.DEF_CELULAS) {
 			f = numAleatorio(0,this.superficie.getFilas()-1);
 			c = numAleatorio(0,this.superficie.getColumnas()-1);
@@ -165,17 +164,9 @@ public class Mundo {
 		}
 	}
 	
-		public void vaciar(){
-		/* metodo para limpiar una superficie dejando una superficie sin celulas.*/
-		int f = superficie.getFilas();		
-		int c = superficie.getColumnas();
-		
-		for (int i=0; i<f; i++){
-			for (int y=0; y<c; y++){
-				if (!superficie.posLibre(i, y))
-				superficie.eliminarCelula(i, y);
-			}
-		}
+	/*Función puente para vaciar la superficie*/
+	public void vaciar(){
+		this.superficie.vaciar();
 	}
 	
 	public void evoluciona() {
