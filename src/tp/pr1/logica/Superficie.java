@@ -67,6 +67,9 @@ public class Superficie {
 		return this.nCelulas;
 	}
 	
+	public boolean posValida(int f, int c) {
+		return f>=0 && f<this.filas && c>=0 && c<this.columnas;
+	}
 	
 	/************************************************
 	*  Funciones puente entre el mundo y la célula  *

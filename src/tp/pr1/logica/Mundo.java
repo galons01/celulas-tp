@@ -10,12 +10,20 @@ public class Mundo {
 
 	
 	//Crea una nueva célula en el mundo
-	public boolean crearCelula(int fila, int columna) {
-		return this.superficie.insertarCelula(new Celula(), fila, columna);
+	public boolean crearCelula(int f, int c) {
+		if(this.superficie.posValida(f, c))
+			return this.superficie.insertarCelula(new Celula(), f, c);
+		else
+			return false;
 	}
 	//Elimina una célula del mundo (para usar desde fuera)
-	public void eliminarCelula(int f, int c) {
-		this.superficie.eliminarCelula(f, c);
+	public boolean eliminarCelula(int f, int c) {
+		if(this.superficie.posValida(f, c)) {
+			this.superficie.eliminarCelula(f, c);
+			return true;
+		}
+		else
+			return false;
 	}
 
 	

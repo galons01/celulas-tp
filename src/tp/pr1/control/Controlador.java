@@ -66,16 +66,22 @@ public class Controlador {
 				 
 				//Nueva célula
 				 if(igualesIns(comando,"CREARCELULA")) {
-					this.mundo.crearCelula(f, c);
-					System.out.print("Creamos célula en la posición ");
-					System.out.println("(" + f + "," + c + ")");
+					if(this.mundo.crearCelula(f, c)) {
+						System.out.print("Creamos célula en la posición ");
+						System.out.println("(" + f + "," + c + ")");
+					}
+					else
+						System.out.println("No es posible crear una célula en esa posición");
 				 }
 				 
 					//Elimina una célula
 				 else if(igualesIns(comando,"ELIMINARCELULA")) {
-					this.mundo.eliminarCelula(f, c);
-					System.out.print("Eliminamos célula en la posición ");
-					System.out.println("(" + f + "," + c + ")");
+					if(this.mundo.eliminarCelula(f, c)) {
+						System.out.print("Eliminamos célula en la posición ");
+						System.out.println("(" + f + "," + c + ")");
+					}
+					else
+						System.out.println("Posición inválida");
 				 }
 				 
 				 else {
