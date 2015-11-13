@@ -1,7 +1,6 @@
 package tp.pr1.control;
 
 import java.util.Scanner;
-
 import tp.pr1.logica.Mundo;
 
 public class Controlador {
@@ -53,6 +52,7 @@ public class Controlador {
 				//Vacía el mundo
 				 else if(igualesIns(comando,"VACIAR")) {
 					 this.mundo.vaciar();
+					 System.out.println("Vaciando la superficie...");
 				 }
 				 
 				 //Si no deseaba salir: ERROR
@@ -67,11 +67,15 @@ public class Controlador {
 				//Nueva célula
 				 if(igualesIns(comando,"CREARCELULA")) {
 					this.mundo.crearCelula(f, c);
+					System.out.print("Creamos célula en la posición ");
+					System.out.println("(" + f + "," + c + ")");
 				 }
 				 
 					//Elimina una célula
 				 else if(igualesIns(comando,"ELIMINARCELULA")) {
 					this.mundo.eliminarCelula(f, c);
+					System.out.print("Eliminamos célula en la posición ");
+					System.out.println("(" + f + "," + c + ")");
 				 }
 				 
 				 else {
@@ -87,6 +91,8 @@ public class Controlador {
 			 System.out.println(this.mundo.toString());
 			 
 		 } while(!igualesIns(comando,"SALIR")); //comando != "salir"
+		 
+		 System.out.println("Fin de la simulación...");
 	}
 	
 	public static void ayuda(){
