@@ -27,12 +27,14 @@ public class Mundo {
 	}
 
 	
-	//Devuelve un entero aleatorio entre min y max
+	//Devuelve un entero pseudo-aleatorio entre min y max
 	public static int numAleatorio(int min, int max) {
-		//if(min<max)
-			return (int)(Math.random()*(max-min+1)+min);	
-		/*else
-			return 0;*/
+		if(min>max) {	/*Swap numbers*/
+			min = min + max; //Total = max + min
+			max = min - max; //max = total - max = min(old)
+			min = min - max; //min = total - max = total - min = max(old)
+		}
+		return (int)(Math.random()*(max-min+1)+min);	
 	}
 
 	//Crea DEF_CELULAS células en posiciones aleatorias
@@ -65,7 +67,7 @@ public class Mundo {
 			int l = 0;	//Contador de libres[]
 			boolean encontradoHueco;
 			
-			//Recorre los alrededores
+			//Recorre las posiciones colindantes
 			for(int i = topF; i<=bottomF; i++) {
 				for(int j = leftC; j<=rightC; j++) {
 					//Si la posición está libre -> añadir al array
@@ -78,10 +80,11 @@ public class Mundo {
 			//Si hay al menos 1 posición libre
 			encontradoHueco = l > 0;
 			if(encontradoHueco) {
+				/*Elegimos una posición aleatoria entre las libres y 
+				la copiamos a la variable de salida */
 				l = Mundo.numAleatorio(0,l-1);
 				libres[l].copiar(pos);
-			}/*Esto ^^^ probablemente vaya mejor en otra 
-				función a parte. Ahí lo dejo de momento*/
+			}
 			
 			return encontradoHueco;	//True si había un hueco alrededor
 		}
@@ -93,11 +96,11 @@ public class Mundo {
 	 INTENTA mover una célula
 	*/
 	private boolean moverCelula(Casilla pos) {
-		
 		/*Copiamos la posicion original*/
 		int f = pos.getFila();
 		int c = pos.getColumna();
-		/*Si se puede mover*/
+
+		/*Si se puede mover porque hay un hueco*/
 		if(this.inspecAlrededores(pos)) {
 			/*Mueve la célula y resta paso reproducción*/
 			this.superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
@@ -106,14 +109,14 @@ public class Mundo {
 		}
 		/*Si no se puede mover*/
 		else {
-			/*Resta un paso*/
+			/*Resta un paso para morir*/
 			this.superficie.estarQuieta(f,c);
 			return false;
 		}
 	}
 	
 	/*
-	 Aplica la lógica para una célula.
+	 Aplica la lógica del mundo para una célula.
 	 */
 	private void paso(int f, int c) {
 		
@@ -123,7 +126,7 @@ public class Mundo {
 			
 			/*Si le toca reproducirse */
 			if(this.superficie.puedeReprod(f,c)) {
-				
+				/*Se mueve la madre y nace la hija*/
 				if(this.moverCelula(pos)) {
 					this.crearCelula(f,c);
 					this.superficie.reproducir(pos.getFila(),pos.getColumna());
@@ -158,11 +161,16 @@ public class Mundo {
 	 Devuelve un array con las posiciones ocupadas.
 	*/
 	private void inspecSuperficie(Casilla[] ocupadas) {
-		int n = 0;	/*Número de células*/
-		int j;		/*Contador bucle while*/
-		for(int i = 0; i<this.superficie.getFilas(); i++) {
+		int N = this.superficie.nCelulas();	/*Número total de células en la superficie*/
+		int n = 0;				/*Contador de número de células*/
+		int j;					/*Contador bucle while*/
+		int F = this.superficie.getFilas();	/*Número de  filas*/
+		int C = this.superficie.getColumnas();	/*Número de columnas*/
+
+		for(int i = 0; i<F; i++) {
 			j = 0;
-			while(j<this.superficie.getColumnas() && n<this.superficie.nCelulas()) {
+			while(j<C && n<N) {
+				/*Si encuentra una posición ocupada (una célula)*/
 				if(!this.superficie.posLibre(i,j)) {
 					ocupadas[n] = new Casilla(i,j);
 					n++;
@@ -179,23 +187,24 @@ public class Mundo {
 	
 	public void evoluciona() {
 		/*
-		 Foto del número de células. Podría ser modificado durante
-		 el bucle dando lugar a errores.
-		 */
+		 Foto del número de células en la superficie. Podría ser modificado 
+		 durante el bucle dando lugar a errores.
+		*/
 		int n = this.superficie.nCelulas();
 		Casilla[] ocupadas = new Casilla[n];
 		int f, c;
 		
+		/*Busca las células que hay en el mundo*/
 		inspecSuperficie(ocupadas);
-		
-		for(int a=0; a<n; a++) {
-			f = ocupadas[a].getFila();
-			c = ocupadas[a].getColumna();
+		/*Y aplica la lógica para cada una de ellas*/
+		for(int i=0; i<n; i++) {
+			f = ocupadas[i].getFila();
+			c = ocupadas[i].getColumna();
 			paso(f,c);
 		}
 	}
 	
-	
+	/*Devuelve un string del mundo*/
 	public String toString() {
 		StringBuilder mostrar = new StringBuilder();
 		int pasosReprod, pasosMuerte;
@@ -216,3 +225,4 @@ public class Mundo {
 		return mostrar.toString();
 	}
 }
+

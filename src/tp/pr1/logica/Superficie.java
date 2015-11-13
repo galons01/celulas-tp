@@ -67,6 +67,7 @@ public class Superficie {
 		return this.nCelulas;
 	}
 	
+	/*Posición válida dentro de la superficie*/
 	public boolean posValida(int f, int c) {
 		return f>=0 && f<this.filas && c>=0 && c<this.columnas;
 	}
