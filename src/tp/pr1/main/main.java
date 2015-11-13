@@ -13,10 +13,7 @@ public class main {
 		
 		Controlador ctrl = new Controlador(mundo, sc);
 		
-		ctrl.realizaSimulacion();
-		
-		System.out.println("Adios!");	//Mensaje de prueba
-		
+		ctrl.realizaSimulacion();	
 	}
 
 }
