@@ -7,7 +7,7 @@ public class Mundo {
 	private final static int DEF_CELULAS = N_FILAS*N_COLUMNAS/4; /*25% de células aleatorias*/
 	
 	private Superficie superficie = new Superficie(N_FILAS,N_COLUMNAS);
-
+	
 	
 	//Crea una nueva célula en el mundo
 	public boolean crearCelula(int f, int c) {

@@ -63,7 +63,7 @@ public class Controlador {
 			 else if(palabras.length==3){
 				 f = Integer.parseInt(palabras[1]);
 				 c = Integer.parseInt(palabras[2]);
-				 
+				
 				//Nueva célula
 				 if(igualesIns(comando,"CREARCELULA")) {
 					if(this.mundo.crearCelula(f, c)) {
