@@ -1,4 +1,12 @@
+#Binaries are ignored
 /bin/
+
+#Javadoc files
+/doc/
+
+#Eclipse project files
 .classpath
 .project
+
+#File with the authors' names
 alumnos.txt
