@@ -28,7 +28,7 @@ public class ComandoAyuda extends Comando {
 	 * @return String con la descripción.
 	 */
 	public String textoAyuda() {
-		return "AYUDA: Muestra los comandos disponibles y una breve descirpción de lo que hacen";
+		return "AYUDA: Muestra los comandos disponibles y una breve descripción de lo que hacen";
 	}
 
 }
