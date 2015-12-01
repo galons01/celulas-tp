@@ -22,25 +22,21 @@ public class Controlador {
 		Comando comando;
 		String[] palabras;
 		
-		 do {
-			 System.out.print("Comando > ");
+		while(mundo.simulacionTerminada()) {
+			System.out.print(this.mundo.toString());
+			System.out.print("Comando > ");
 
-			 palabras = this.in.nextLine().split(" ");
-			 comando = ParserComandos.parseaComando(palabras);
-			 
-			 if(comando != null) {
-				 comando.ejecuta(this.mundo);
-			 }
-			 //Comando inválido
-			 else {
-				 System.out.println("ERROR: Comando desconocido.");
-			 }
-			 
-			 System.out.println(this.mundo.toString());
-			 
-		 } while(!Comando.igualesIns(palabras[0],"SALIR")); //comando != "salir"
-		 
-		 System.out.println("Fin de la simulación...");
+			palabras = this.in.nextLine().split(" ");
+			comando = ParserComandos.parseaComando(palabras);
+			
+			if(comando != null) {
+				comando.ejecuta(this.mundo);
+			}
+			//Comando inválido
+			else System.out.println("ERROR: Comando desconocido.");
+		}
+		
+		System.out.println("Fin de la simulación...");
 	}
 	
 }

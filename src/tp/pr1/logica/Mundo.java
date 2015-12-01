@@ -7,6 +7,24 @@ public class Mundo {
 	private final static int DEF_CELULAS = N_FILAS*N_COLUMNAS/4; /*25% de células aleatorias*/
 	
 	private Superficie superficie = new Superficie(N_FILAS,N_COLUMNAS);
+	private boolean simulacionTerminada = true;
+	
+	
+	/**
+	 * Indica si la simulación ha terminado de ejecutarse.
+	 * @return Booleano inidcando true si la simulación está activa.
+	 */
+	public boolean simulacionTerminada() {
+		return this.simulacionTerminada;
+	}
+	
+	
+	/**
+	 * Indica al mundo que debe terminar la simulación.
+	 */
+	public void terminarSimulacion() {
+		this.simulacionTerminada = false;
+	}
 	
 	
 	//Crea una nueva célula en el mundo

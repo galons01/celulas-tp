@@ -9,7 +9,7 @@ public class ComandoSalir extends Comando {
 	 * @param mundo
 	 */
 	public void ejecuta(Mundo mundo) {
-		//Salir no hace nada
+		mundo.terminarSimulacion();
 	}
 
 	/**
