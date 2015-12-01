@@ -4,18 +4,28 @@ public class Mundo {
 	
 	private final static int N_FILAS = 3;
 	private final static int N_COLUMNAS = 4;
-	private final static int DEF_CELULAS = N_FILAS*N_COLUMNAS/4; /*25% de células aleatorias*/
+	private final static int DEF_CELULAS = N_FILAS*N_COLUMNAS/3; /*33% de células aleatorias*/
+	private final static int DEF_CELULAS_COMPLEJAS = DEF_CELULAS/2; /*50% de células complejas*/
 	
 	private Superficie superficie = new Superficie(N_FILAS,N_COLUMNAS);
 	
 	
-	//Crea una nueva célula en el mundo
-	public boolean crearCelula(int f, int c) {
+	//Crea una nueva célula simple en el mundo
+	public boolean crearCelulaSimple(int f, int c) {
 		if(this.superficie.posValida(f, c))
-			return this.superficie.insertarCelula(new Celula(), f, c);
+			return this.superficie.insertarCelula(new CelulaSimple(), f, c);
 		else
 			return false;
 	}
+		
+	//Crea una nueva célula compleja en el mundo
+	public boolean crearCelulaCompleja(int f, int c) {
+		if(this.superficie.posValida(f, c))
+			return this.superficie.insertarCelula(new CelulaCompleja(), f, c);
+		else
+			return false;
+	}
+	
 	//Elimina una célula del mundo (para usar desde fuera)
 	public boolean eliminarCelula(int f, int c) {
 		if(this.superficie.posValida(f, c)) {
@@ -43,10 +53,20 @@ public class Mundo {
 		int f, c;
 		
 		this.superficie.vaciar();
-		while(i<Mundo.DEF_CELULAS) {
+		
+		/*Crea las células complejas*/
+		while(i<Mundo.DEF_CELULAS_COMPLEJAS) {
 			f = numAleatorio(0,this.superficie.getFilas()-1);
 			c = numAleatorio(0,this.superficie.getColumnas()-1);
-			if(this.crearCelula(f,c))
+			if(this.crearCelulaCompleja(f,c))
+				i++;
+		}
+		/*Crea las células simples*/
+		i = 0;
+		while(i<(Mundo.DEF_CELULAS-Mundo.DEF_CELULAS_COMPLEJAS)) {
+			f = numAleatorio(0,this.superficie.getFilas()-1);
+			c = numAleatorio(0,this.superficie.getColumnas()-1);
+			if(this.crearCelulaSimple(f,c))
 				i++;
 		}
 	}
