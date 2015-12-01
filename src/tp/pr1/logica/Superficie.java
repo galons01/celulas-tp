@@ -102,5 +102,8 @@ public class Superficie {
 	public int getPasosMuerte(int f, int c) {
 		return this.superficie[f][c].getPasosMuerte();
 	}
+	public boolean esComestible(int f, int c) {
+		return this.superficie[f][c].esComestible();
+	}
 	
 }
