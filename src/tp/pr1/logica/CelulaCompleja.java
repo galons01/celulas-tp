@@ -15,8 +15,29 @@ public class CelulaCompleja extends Celula {
 	}
 	
 	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie){
+		int nC = superficie.getColumnas();
+		int nF = superficie.getFilas();
 		
-		return (new Casilla(0,0));
+		Casilla[] disponibles = new Casilla[nF*nC];	//Array de posiciones libres
+		int l = 0;	//Contador de disponibles[]
+		
+		for (int i=0; i<nF; i++){
+			for (int j=0; j<nC; j++){
+				if(superficie.posLibre(i,j) || superficie.esComestible(i,j)){
+					disponibles[l]= new Casilla(i,j);
+					l++;
+				}
+			}
+		}
+		
+		if(l>0) {
+			/*Elegimos una posición aleatoria entre las libres y 
+			la copiamos a la variable de salida */
+			l = Mundo.numAleatorio(0,l-1);
+			superficie.eliminarCelula(disponibles[l].getFila(), disponibles[l].getColumna());
+			superficie.moverCelula(f, c, disponibles[l].getFila(), disponibles[l].getColumna());
+			}
+		return disponibles[l];
 	}
 	
 	public void comer() {

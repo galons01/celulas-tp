@@ -4,9 +4,6 @@ public abstract class Celula {
 	
 	protected boolean comestible;
 	
-	public Celula() {
-	}
-	
 	public abstract Casilla ejecutaMovimiento(int f, int c, Superficie superficie);
 	public abstract boolean esComestible();
 }

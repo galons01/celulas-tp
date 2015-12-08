@@ -76,6 +76,10 @@ public class Superficie {
 	*  Funciones puente entre el mundo y la célula  *
 	************************************************/
 	
+	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie){
+		return this.superficie[f][c].ejecutaMovimiento(f, c, superficie);
+	}
+	
 	public boolean puedeMoverse(int f, int c) {
 		return this.superficie[f][c].puedeMoverse();
 	}
@@ -101,6 +105,9 @@ public class Superficie {
 
 	public int getPasosMuerte(int f, int c) {
 		return this.superficie[f][c].getPasosMuerte();
+	}
+	public boolean esComestible(int f, int c) {
+		return this.superficie[f][c].esComestible();
 	}
 	
 }
