@@ -14,34 +14,64 @@ public class CelulaSimple extends Celula {
 	}
 	
 	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie){
-		//Si la posición en cuestión tiene una célula
+		//Si la posiciÃ³n en cuestiÃ³n tiene una cÃ©lula
 		if(!superficie.posLibre(f,c)) {
-			
-			//Nos aseguramos de que no nos salimos
-			int leftC = Math.max(c-1,0),	//Columna izquierda ó 0
-				rightC = Math.min(c+1, superficie.getColumnas()-1); //Columna derecha o nColumnas
-			int topF = Math.max(f-1,0),	//Fila superior ó 0
-				bottomF = Math.min(f+1, superficie.getFilas()-1);	//Fila inferior o nFilas
-			
-			Casilla[] libres = new Casilla[8];	//Array de posiciones libres
-			int l = 0;	//Contador de libres[]
-			
-			//Recorre las posiciones colindantes
-			for(int i = topF; i<=bottomF; i++) {
-				for(int j = leftC; j<=rightC; j++) {
-					//Si la posición está libre -> añadir al array
-					if(superficie.posLibre(i,j)){
-						libres[l] = new Casilla(i,j);
-						l++;
+			/*si a la celula le quedan movimientos*/
+			if(this.puedeMoverse()){
+				
+				
+				//Nos aseguramos de que no nos salimos
+				int leftC = Math.max(c-1,0),	//Columna izquierda Ã³ 0
+					rightC = Math.min(c+1, superficie.getColumnas()-1); //Columna derecha o nColumnas
+				int topF = Math.max(f-1,0),	//Fila superior Ã³ 0
+					bottomF = Math.min(f+1, superficie.getFilas()-1);	//Fila inferior o nFilas
+				
+				Casilla[] libres = new Casilla[8];	//Array de posiciones libres
+				int l = 0;	//Contador de libres[]
+				
+				//Recorre las posiciones colindantes
+				for(int i = topF; i<=bottomF; i++) {
+					for(int j = leftC; j<=rightC; j++) {
+						//Si la posiciÃ³n estÃ¡ libre -> aÃ±adir al array
+						if(superficie.posLibre(i,j)){
+							libres[l] = new Casilla(i,j);
+							l++;
+						}
 					}
 				}
+				//Si hay al menos 1 posiciÃ³n libre
+				if(l > 0) {					
+					/*Elegimos una posiciÃ³n aleatoria entre las libres y 
+					la copiamos a la variable de salida */
+					l = Mundo.numAleatorio(0,l-1);
+					int col=libres[l].getColumna();
+					int fil=libres[l].getFila();
+					// si puede reproducirse, se reproduce
+					if(this.puedeReprod()){
+						superficie.insertarCelula(new CelulaSimple(), fil, col);
+						this.reproducir();
+						System.out.println("Nace nueva cÃ©lula en (" + fil + "," + col + ") " + 
+								"cuyo padre ha sido (" + f + "," + c + ") ");
+						//un else o if no es necesario dado que siempre puede moverse y por lo tanto reproducirse.
+					}
+					//si no puede reproducirse(porque no le toca), se mueve
+					else{
+						superficie.moverCelula(f,c,fil,col);
+						System.out.println("Movimiento de (" + f + "," + c + ") " + 
+								"a (" + fil + "," + col + ") ");
+					}
+					return libres[l];
+				}
+				//si no hay huecos libres pero debe moverse
+				else{
+					this.estarQuieta();
+				}
+
 			}
-			//Si hay al menos 1 posición libre
-			if(l > 0) {
-				/*Elegimos una posición aleatoria entre las libres y 
-				la copiamos a la variable de salida */
-				l = Mundo.numAleatorio(0,l-1);
-				return libres[l];
+			else{
+				superficie.eliminarCelula(f, c);
+				System.out.println("Muere la cÃ©lula de la casilla (" + f + "," + c + ") " + 
+						"por inactividad");
 			}
 		}
 		return null;
