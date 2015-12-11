@@ -14,107 +14,113 @@ public class CelulaSimple extends Celula {
 	}
 	
 	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie){
-		//Si la posiciÃ³n en cuestiÃ³n tiene una cÃ©lula
+		Casilla pos = null;
+		/*Si le quedan movimientos */
+		if(this.pasosMuerte > 0) {
+			pos = new Casilla(f,c);
+			
+			/*Si le toca reproducirse */
+			if(this.pasosReprod <= 0) {
+				/*Se mueve la madre y nace la hija*/
+				if(CelulaSimple.moverCelula(pos,superficie) != null) {
+					superficie.insertarCelula(new CelulaSimple(),f,c);
+					this.pasosReprod = CelulaSimple.PASOS_REPRODUCCION;
+					System.out.println("Nace nueva célula en (" + f + "," + c + ") " + 
+							"cuyo padre ha sido (" + pos.getFila() + "," + pos.getColumna() + ") ");
+				}
+				/*Si no se puede dividir, muere*/
+				else {
+					superficie.eliminarCelula(f,c);
+					System.out.println("Muere la célula de la casilla (" + f + "," + c + ") " + 
+							"por no poder reproducirse");
+				}
+				
+			}
+			/*Si no le tocaba reproducirse, intenta moverse */
+			else if(CelulaSimple.moverCelula(pos, superficie) != null) {
+				this.pasosReprod--;
+				System.out.println("Movimiento de (" + f + "," + c + ") " + 
+						"a (" + pos.getFila() + "," + pos.getColumna() + ") ");
+			}
+			/*Si no se reproduce ni se mueve*/
+			else {
+				this.pasosMuerte--;
+			}
+		}
+		/*Si no le quedan pasos se muere*/
+		else {
+			superficie.eliminarCelula(f,c);
+			System.out.println("Muere la célula de la casilla (" + f + "," + c + ") " + 
+					"por inactividad");
+		}
+		return pos;
+	}
+	
+	
+	/**
+	 * INTENTA mover una célula
+	 * @param pos Posición de entrada y salida, null si no se ha movido
+	 * @return Devuelve el parámetro pos también.
+	 */
+	private static Casilla moverCelula(Casilla pos, Superficie superficie) {
+		/*Copiamos la posicion original*/
+		int f = pos.getFila();
+		int c = pos.getColumna();
+		
+		/*Busca una casilla a la que moverse*/
+		pos.set(CelulaSimple.inspecAlrededores(f,c,superficie));
+		/*Si se puede mover porque hay un hueco*/
+		if(pos!=null) {
+			superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
+		}
+		return pos;
+	}
+	
+	
+	/**
+	 * Revisa los alrededores de una célula en busca de una posición 
+	 * libre aleatoria en torno a la posición indicada.
+	 * @param f Fila
+	 * @param c Columna
+	 * @param superficie
+	 * @return Posición libre aleatoria, null si no hay ninguna
+	 */
+	private static Casilla inspecAlrededores(int f, int c, Superficie superficie) {
+		//Si la posición en cuestión tiene una célula
 		if(!superficie.posLibre(f,c)) {
-			/*si a la celula le quedan movimientos*/
-			if(this.puedeMoverse()){
-				
-				
-				//Nos aseguramos de que no nos salimos
-				int leftC = Math.max(c-1,0),	//Columna izquierda Ã³ 0
-					rightC = Math.min(c+1, superficie.getColumnas()-1); //Columna derecha o nColumnas
-				int topF = Math.max(f-1,0),	//Fila superior Ã³ 0
-					bottomF = Math.min(f+1, superficie.getFilas()-1);	//Fila inferior o nFilas
-				
-				Casilla[] libres = new Casilla[8];	//Array de posiciones libres
-				int l = 0;	//Contador de libres[]
-				
-				//Recorre las posiciones colindantes
-				for(int i = topF; i<=bottomF; i++) {
-					for(int j = leftC; j<=rightC; j++) {
-						//Si la posiciÃ³n estÃ¡ libre -> aÃ±adir al array
-						if(superficie.posLibre(i,j)){
-							libres[l] = new Casilla(i,j);
-							l++;
-						}
+			//Nos aseguramos de que no nos salimos
+			int leftC = Math.max(c-1,0),	//Columna izquierda ó 0
+				rightC = Math.min(c+1, superficie.getColumnas()-1); //Columna derecha o nColumnas
+			int topF = Math.max(f-1,0),	//Fila superior ó 0
+				bottomF = Math.min(f+1, superficie.getFilas()-1);	//Fila inferior o nFilas
+			
+			Casilla[] libres = new Casilla[8];	//Array de posiciones libres
+			int l = 0;							//Contador de libres[]
+			
+			//Recorre las posiciones colindantes
+			for(int i = topF; i<=bottomF; i++) {
+				for(int j = leftC; j<=rightC; j++) {
+					//Si la posición está libre -> añadir al array
+					if(superficie.posLibre(i,j)){
+						libres[l] = new Casilla(i,j);
+						l++;
 					}
 				}
-				//Si hay al menos 1 posiciÃ³n libre
-				if(l > 0) {					
-					/*Elegimos una posiciÃ³n aleatoria entre las libres y 
-					la copiamos a la variable de salida */
-					l = Mundo.numAleatorio(0,l-1);
-					int col=libres[l].getColumna();
-					int fil=libres[l].getFila();
-					// si puede reproducirse, se reproduce
-					if(this.puedeReprod()){
-						superficie.insertarCelula(new CelulaSimple(), fil, col);
-						this.reproducir();
-						System.out.println("Nace nueva cÃ©lula en (" + fil + "," + col + ") " + 
-								"cuyo padre ha sido (" + f + "," + c + ") ");
-						//un else o if no es necesario dado que siempre puede moverse y por lo tanto reproducirse.
-					}
-					//si no puede reproducirse(porque no le toca), se mueve
-					else{
-						superficie.moverCelula(f,c,fil,col);
-						System.out.println("Movimiento de (" + f + "," + c + ") " + 
-								"a (" + fil + "," + col + ") ");
-					}
-					return libres[l];
-				}
-				//si no hay huecos libres pero debe moverse
-				else{
-					this.estarQuieta();
-				}
-
 			}
-			else{
-				superficie.eliminarCelula(f, c);
-				System.out.println("Muere la cÃ©lula de la casilla (" + f + "," + c + ") " + 
-						"por inactividad");
-			}
+			/*Si hay al menos 1 posición libre
+			  devuelve una posicion aleatoria libre*/
+			if(l > 0)
+				return libres[Mundo.numAleatorio(0,l-1)];
 		}
 		return null;
 	}
 	
+
 	public boolean esComestible() {
 		return this.comestible;
 	}
 	
-	public short getPasosReprod() { 
-		return this.pasosReprod;
-	}
-
-	public short getPasosMuerte() {
-		return this.pasosMuerte;
-	}
-	
-	public boolean puedeReprod() { 
-		return this.pasosReprod == 0;
-	}
-
-	public boolean puedeMoverse() {
-		return this.pasosMuerte > 0;
-	}
-	
-	/*Resta un paso para la reproduccion de la célula */
-	public void darPaso() {
-		if(this.pasosReprod > 0)
-			this.pasosReprod--;
-	}
-	
-	/*Resta un paso para la muerte de la célula */
-	public void estarQuieta() {
-		if(this.pasosMuerte > 0)
-			this.pasosMuerte--;
-	}
-	
-	/*Reproduce una célula si puede*/
-	public boolean reproducir() {
-		if(this.pasosReprod == 0) {
-			this.pasosReprod = CelulaSimple.PASOS_REPRODUCCION;
-			return true;
-		}
-		return false;
+	public String toString() {
+		return "[" + this.pasosMuerte + " - " + this.pasosReprod + "]";
 	}
 }
