@@ -1,23 +1,35 @@
 package tp.pr1.logica;
 
 public class Casilla {
-	private int fila = 0; 	/*fila en la que se posiciona*/
-	private int col = 0;	/*columna en la que se posiciona*/
+	private int fila = 0;
+	private int col = 0;
 	
 	public Casilla (int f, int c) {
 		this.fila = f;
 		this.col = c;
 	}
-	// copia una casilla 
-	public void copiar(Casilla c) {
-		c.fila = this.fila;
-		c.col = this.col;
+	
+	/**
+	 * Copia una casilla en la casilla actual
+	 * @param c Casilla a copiar
+	 */
+	public void set(Casilla c) {
+		this.fila = c.fila;
+		this.col = c.col;
 	}
-	//  obtener la columna
+	
+	/**
+	 * Getter de la columna
+	 * @return Un entero representando una columna
+	 */
 	public int getColumna() {
 		return this.col;
 	}
-	//  obtiene la fila
+	
+	/**
+	 * Getter de la fila
+	 * @return Un entero representando una fila
+	 */
 	public int getFila() {
 		return this.fila;
 	}

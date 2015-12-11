@@ -12,18 +12,20 @@ public class Mundo {
 	
 	//Crea una nueva célula simple en el mundo
 	public boolean crearCelulaSimple(int f, int c) {
-		if(this.superficie.posValida(f, c))
-			return this.superficie.insertarCelula(new CelulaSimple(), f, c);
-		else
-			return false;
+		if(this.superficie.posValida(f,c) && this.superficie.posLibre(f,c)) {
+			this.superficie.insertarCelula(new CelulaSimple(), f, c);
+			return true;
+		}
+		else return false;
 	}
 		
 	//Crea una nueva célula compleja en el mundo
 	public boolean crearCelulaCompleja(int f, int c) {
-		if(this.superficie.posValida(f, c))
-			return this.superficie.insertarCelula(new CelulaCompleja(), f, c);
-		else
-			return false;
+		if(this.superficie.posValida(f,c) && this.superficie.posLibre(f,c)) {
+			this.superficie.insertarCelula(new CelulaCompleja(), f, c);
+			return true;
+		}
+		else return false;
 	}
 	
 	//Elimina una célula del mundo (para usar desde fuera)
@@ -71,115 +73,7 @@ public class Mundo {
 		}
 	}
 	
-	/*Revisa los alrededores de una célula en busca de
-	una posición libre aleatoria*/
-	private boolean inspecAlrededores(Casilla pos) {
-		//Si la posición en cuestión tiene una célula
-		if(!this.superficie.posLibre(pos.getFila(),pos.getColumna())) {
-			
-			//Nos aseguramos de que no nos salimos
-			int leftC = Math.max(pos.getColumna()-1,0),	//Columna izquierda ó 0
-				rightC = Math.min(pos.getColumna()+1, this.superficie.getColumnas()-1); //Columna derecha o nColumnas
-			int topF = Math.max(pos.getFila()-1,0),	//Fila superior ó 0
-				bottomF = Math.min(pos.getFila()+1, this.superficie.getFilas()-1);	//Fila inferior o nFilas
-			
-			Casilla[] libres = new Casilla[8];	//Array de posiciones libres
-			int l = 0;	//Contador de libres[]
-			boolean encontradoHueco;
-			
-			//Recorre las posiciones colindantes
-			for(int i = topF; i<=bottomF; i++) {
-				for(int j = leftC; j<=rightC; j++) {
-					//Si la posición está libre -> añadir al array
-					if(this.superficie.posLibre(i,j)){
-						libres[l] = new Casilla(i,j);
-						l++;
-					}
-				}
-			}
-			//Si hay al menos 1 posición libre
-			encontradoHueco = l > 0;
-			if(encontradoHueco) {
-				/*Elegimos una posición aleatoria entre las libres y 
-				la copiamos a la variable de salida */
-				l = Mundo.numAleatorio(0,l-1);
-				libres[l].copiar(pos);
-			}
-			
-			return encontradoHueco;	//True si había un hueco alrededor
-		}
-		else
-			return false;	//No había célula en la posición indicada
-	}
 	
-	/*
-	 INTENTA mover una célula
-	*/
-	private boolean moverCelula(Casilla pos) {
-		/*Copiamos la posicion original*/
-		int f = pos.getFila();
-		int c = pos.getColumna();
-
-		/*Si se puede mover porque hay un hueco*/
-		if(this.inspecAlrededores(pos)) {
-			/*Mueve la célula y resta paso reproducción*/
-			this.superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
-			this.superficie.darPaso(pos.getFila(),pos.getColumna());
-			return true;
-		}
-		/*Si no se puede mover*/
-		else {
-			/*Resta un paso para morir*/
-			this.superficie.estarQuieta(f,c);
-			return false;
-		}
-	}
-	
-	/*
-	 Aplica la lógica del mundo para una célula.
-	 */
-	private void paso(int f, int c) {
-		/*celula simple*/
-		if(this.superficie.esComestible(f,c)){
-			/*Si le quedan movimientos */
-			if(this.superficie.puedeMoverse(f,c)) {
-				Casilla pos = new Casilla(f,c);
-				
-				/*Si le toca reproducirse */
-				if(this.superficie.puedeReprod(f,c)) {
-					/*Se mueve la madre y nace la hija*/
-					if(this.moverCelula(pos)) {
-						this.crearCelulaSimple(f,c); //modificado
-						this.superficie.reproducir(pos.getFila(),pos.getColumna());
-						System.out.println("Nace nueva célula en (" + f + "," + c + ") " + 
-								"cuyo padre ha sido (" + pos.getFila() + "," + pos.getColumna() + ") ");
-					}
-					/*Si no se puede dividir, muere*/
-					else {
-						this.superficie.eliminarCelula(f, c);
-						System.out.println("Muere la célula de la casilla (" + f + "," + c + ") " + 
-								"por no poder reproducirse");
-					}
-					
-				}
-				/*Si no le tocaba reproducirse, intenta moverse */
-				else if(this.moverCelula(pos)) {
-					System.out.println("Movimiento de (" + f + "," + c + ") " + 
-							"a (" + pos.getFila() + "," + pos.getColumna() + ") ");
-				}
-			}
-			/*Si no le quedan pasos se muere*/
-			else {
-				this.superficie.eliminarCelula(f, c);
-				System.out.println("Muere la célula de la casilla (" + f + "," + c + ") " + 
-						"por inactividad");
-			}
-		}
-		/*celula compleja*/
-		else{
-			this.superficie.ejecutaMovimiento(f, c, superficie);
-		}
-	}
 	
 	
 	/*
@@ -226,29 +120,15 @@ public class Mundo {
 		for(int i=0; i<n; i++) {
 			f = ocupadas[i].getFila();
 			c = ocupadas[i].getColumna();
-			paso(f,c);
+			this.superficie.ejecutaMovimiento(f, c);
 		}
 	}
 	
-	/*Devuelve un string del mundo*/
+	/**
+	 * Representa en un String la superficie.
+	 */
 	public String toString() {
-		StringBuilder mostrar = new StringBuilder();
-		int pasosReprod, pasosMuerte;
-		for(int i = 0; i< this.superficie.getFilas(); i++) {
-			for(int j = 0; j< this.superficie.getColumnas(); j++) {
-				if(this.superficie.posLibre(i,j)) {
-					mostrar.append("  -  ");
-				}
-				else {
-					pasosReprod = this.superficie.getPasosReprod(i,j);
-					pasosMuerte = this.superficie.getPasosMuerte(i,j);
-					mostrar.append("[" + pasosMuerte + "-" + pasosReprod +"]");
-				}
-				mostrar.append(" ");
-			}
-			mostrar.append("\n");
-		}
-		return mostrar.toString();
+		return this.superficie.toString();
 	}
 }
 

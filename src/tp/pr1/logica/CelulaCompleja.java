@@ -7,7 +7,7 @@ public class CelulaCompleja extends Celula {
 	
 	public CelulaCompleja() {
 		this.comestible = false;
-		this.celsComidas = CelulaCompleja.MAX_COMER;
+		this.celsComidas = 0;
 	}
 	
 	public boolean esComestible() {
@@ -15,63 +15,76 @@ public class CelulaCompleja extends Celula {
 	}
 	
 	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie){
-		int nC = superficie.getColumnas();
-		int nF = superficie.getFilas();
-
+		Casilla pos = null;
+		boolean celulaComestible;
 		
-		Casilla[] disponibles = new Casilla[nF*nC];	//Array de posiciones libres
-		int l = 0;	//Contador de disponibles[]
-		
-		for (int i=0; i<nF; i++){
-			for (int j=0; j<nC; j++){
-				if(superficie.posLibre(i,j) || superficie.esComestible(i,j)){
-					disponibles[l]= new Casilla(i,j);
-					l++;
-				}
-			}
-		}
-		//si hay casillas disponibles
-		if(l>0) {
-			/*Elegimos una posiciÃ³n aleatoria entre las libres y 
-			la copiamos a la variable de salida */
-			l = Mundo.numAleatorio(0,l-1);
-			int fil=disponibles[l].getFila();//@german ¿es mas claro asi o con disponibles que piensas? es mas bonito con fil y col en mi opinion pero puede ser menos legible...
-			int col=disponibles[l].getColumna();
-			boolean zampaCelulas=false;			//nueva boleana para el mensaje de la celula compleja que muestra si ha comido o no
-			//si la casilla esta ocupada por una celula, la compleja come a la simple
-			if(!superficie.posLibre(fil,col)){
-				zampaCelulas=true;
-				this.comer();
-				superficie.eliminarCelula(disponibles[l].getFila(), disponibles[l].getColumna());
-				}
-			//se mueve
-				superficie.moverCelula(f, c, disponibles[l].getFila(), disponibles[l].getColumna());
-				if(zampaCelulas){
-					System.out.println("Celula compleja en (" + f + "," + c + ") " + 
-						"se mueve a (" + fil + "," + col + ") --COME--");
-					//si la celula compleja come hasta reventar... revienta (superando el limite de las celulas maximas comidas)
-					if(!this.puedeComer()){
-						superficie.eliminarCelula(fil,col);
-						System.out.println("Explota la celula compleja en (" + fil + "," + col + ") ");
+		if(!superficie.posLibre(f,c)) {
+			/*Busca una posición válida a la que moverse*/
+			pos = CelulaCompleja.inspecSuperficie(f, c, superficie);
+			/*Si hay casillas disponibles*/
+			if(pos!=null) {
+				/*Si va a comer otra célula*/
+				celulaComestible = !superficie.posLibre(pos.getFila(), pos.getColumna());
+				
+				superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
+				System.out.print("Celula compleja en (" + f + "," + c + ") " + 
+						"se mueve a (" + pos.getFila() + "," + pos.getColumna() + ")");
+				
+				if(celulaComestible) {
+					this.celsComidas++;
+					System.out.println("--COME--");
+					/*Si ha comido demasiado, explota*/
+					if(this.celsComidas >= CelulaCompleja.MAX_COMER) {
+						superficie.eliminarCelula(f, c);
+						System.out.println("Explota la celula compleja en "
+								+ "(" + pos.getFila() + "," + pos.getColumna() + ") ");
 					}
 				}
 				else
-					System.out.println("Celula compleja en (" + f + "," + c + ") " + 
-							"se mueve a (" + fil + "," + col + ") --NO COME--");
-				return disponibles[l];
+					System.out.println("--NO COME--");
 			}
-			// si no hay casillas disponibles para moverse no afecta a la celula compleja, es decir, no hace falta un else
-		else{
-			return null; // si no hay posible movimiento, no se mueve
 		}
+		return pos;
 	}
 	
-	public void comer() {
-		if(this.celsComidas > 0)
-			this.celsComidas--;
+	
+	/**
+	 * Revisa la superficie en busca de una posición válida aleatoria
+	 * para una célula compleja.
+	 * @param f Fila
+	 * @param c Columna
+	 * @param superficie
+	 * @return Posición válida aleatoria, null si no hay ninguna
+	 */
+	private static Casilla inspecSuperficie(int f, int c, Superficie superficie) {
+		//Si la posición en cuestión tiene una célula
+		if(!superficie.posLibre(f,c)) {
+			int nC = superficie.getColumnas();
+			int nF = superficie.getFilas();
+
+			Casilla[] disponibles = new Casilla[nF*nC];	//Array de posiciones válidas
+			int l = 0;	//Contador de disponibles[]
+			
+			for (int i=0; i<nF; i++){
+				for (int j=0; j<nC; j++){
+					if(superficie.posLibre(i,j) || superficie.esComestible(i,j)){
+						disponibles[l]= new Casilla(i,j);
+						l++;
+					}
+				}
+			}
+			
+			/*Si hay al menos 1 posición válida
+			  devuelve una posicion aleatoria válida*/
+			if(l > 0) {
+				return disponibles[Mundo.numAleatorio(0,l-1)];
+			}
+		}
+		return null;
 	}
 	
-	public boolean puedeComer() {
-		return this.celsComidas > 0;
+
+	public String toString() {
+		return "( " + this.celsComidas + " )";
 	}
 }
