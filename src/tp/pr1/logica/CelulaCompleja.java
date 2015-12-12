@@ -26,7 +26,9 @@ public class CelulaCompleja extends Celula {
 				/*Si existe otra cÃ©lula*/
 				existeCelula = !superficie.posLibre(pos.getFila(), pos.getColumna());
 				if(existeCelula && superficie.esComestible(pos.getFila(), pos.getColumna()) || !existeCelula){
-					
+					if(existeCelula){
+						superficie.eliminarCelula(pos.getFila(),pos.getColumna())
+					}
 					superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
 					System.out.print("Celula compleja en (" + f + "," + c + ") " + 
 							"se mueve a (" + pos.getFila() + "," + pos.getColumna() + ")");				
