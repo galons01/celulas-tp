@@ -16,32 +16,37 @@ public class CelulaCompleja extends Celula {
 	
 	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie){
 		Casilla pos = null;
-		boolean celulaComestible;
+		boolean existeCelula;
 		
 		if(!superficie.posLibre(f,c)) {
-			/*Busca una posición válida a la que moverse*/
-			pos = CelulaCompleja.inspecSuperficie(f, c, superficie);
+			/*Busca una posiciÃ³n vÃ¡lida a la que moverse*/
+			pos = superficie.posAleatoria();
 			/*Si hay casillas disponibles*/
 			if(pos!=null) {
-				/*Si va a comer otra célula*/
-				celulaComestible = !superficie.posLibre(pos.getFila(), pos.getColumna());
-				
-				superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
-				System.out.print("Celula compleja en (" + f + "," + c + ") " + 
-						"se mueve a (" + pos.getFila() + "," + pos.getColumna() + ")");
-				
-				if(celulaComestible) {
-					this.celsComidas++;
-					System.out.println("--COME--");
-					/*Si ha comido demasiado, explota*/
-					if(this.celsComidas >= CelulaCompleja.MAX_COMER) {
-						superficie.eliminarCelula(pos.getFila(), pos.getColumna());
-						System.out.println("Explota la celula compleja en "
-								+ "(" + pos.getFila() + "," + pos.getColumna() + ") ");
+				/*Si existe otra cÃ©lula*/
+				existeCelula = !superficie.posLibre(pos.getFila(), pos.getColumna());
+				if(existeCelula && superficie.esComestible(pos.getFila(), pos.getColumna()) || !existeCelula){
+					
+					superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
+					System.out.print("Celula compleja en (" + f + "," + c + ") " + 
+							"se mueve a (" + pos.getFila() + "," + pos.getColumna() + ")");				
+					if(existeCelula) {
+						this.celsComidas++;
+						System.out.println("--COME--");
+						/*Si ha comido demasiado, explota*/
+						if(this.celsComidas >= CelulaCompleja.MAX_COMER) {
+							superficie.eliminarCelula(pos.getFila(), pos.getColumna());
+							System.out.println("Explota la celula compleja en "
+									+ "(" + pos.getFila() + "," + pos.getColumna() + ") ");
+						}
 					}
+					else
+						System.out.println("--NO COME--");
 				}
-				else
-					System.out.println("--NO COME--");
+				else{
+					return null;
+				}
+					
 			}
 		}
 		return pos;
