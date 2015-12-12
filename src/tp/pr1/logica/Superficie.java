@@ -66,7 +66,9 @@ public class Superficie {
 		return f>=0 && f<this.filas && c>=0 && c<this.columnas;
 	}
 	
-	
+	public Casilla posAleatoria(){
+		return new Casilla(Mundo.numAleatorio(0,this.filas),Mundo.numAleatorio(0,this.columnas));
+	}
 	
 	/**
 	 * Representa en un String la superficie.
