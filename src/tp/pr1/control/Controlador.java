@@ -66,12 +66,12 @@ public class Controlador {
 				
 				//Nueva célula
 				 if(igualesIns(comando,"CREARCELULA")) {
-					if(this.mundo.crearCelula(f, c)) {
+					/*if(this.mundo.crearCelula(f, c)) {
 						System.out.print("Creamos célula en la posición ");
 						System.out.println("(" + f + "," + c + ")");
 					}
 					else
-						System.out.println("No es posible crear una célula en esa posición");
+						System.out.println("No es posible crear una célula en esa posición");*/
 				 }
 				 
 					//Elimina una célula
