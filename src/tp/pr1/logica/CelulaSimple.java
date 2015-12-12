@@ -66,14 +66,15 @@ public class CelulaSimple extends Celula {
 		/*Copiamos la posicion original*/
 		int f = pos.getFila();
 		int c = pos.getColumna();
-		
+
 		/*Busca una casilla a la que moverse*/
-		pos.set(CelulaSimple.inspecAlrededores(f,c,superficie));
+		Casilla nuevaPos = CelulaSimple.inspecAlrededores(f,c,superficie);
 		/*Si se puede mover porque hay un hueco*/
-		if(pos!=null) {
+		if(nuevaPos!=null) {
+			pos.set(nuevaPos); /*Para devolverlo por el parámetro*/
 			superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
 		}
-		return pos;
+		return nuevaPos;
 	}
 	
 	
