@@ -17,7 +17,11 @@ public class Controlador {
 		this.mundo = mundo;
 	}
 	
-	
+	/**
+	 * Comienza la simulacion del mundo. Pide comandos al usuario por medio
+	 * de una terminal. La función se mantendrá en bucle mientras no se
+	 * introduzca el comando salir.
+	 */
 	public void realizaSimulacion() {
 		Comando comando;
 		String[] palabras;
