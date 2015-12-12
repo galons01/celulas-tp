@@ -47,8 +47,17 @@ public class Casilla {
 	}
 	
 	
+	/**
+	 * Comprueba si las casillas son iguales.
+	 * @param c Casilla con la que compara
+	 * @return true si son iguales, false si son distintas
+	 */
 	public boolean equals(Casilla c) {
 		return this.fila == c.fila && this.col == c.col;
+	}
+	
+	public String toString() {
+		return "(" + this.fila + "," + this.col + ")";
 	}
 	
 }

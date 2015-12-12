@@ -26,7 +26,7 @@ public class CelulaSimple extends Celula {
 					superficie.insertarCelula(new CelulaSimple(),f,c);
 					this.pasosReprod = CelulaSimple.PASOS_REPRODUCCION;
 					System.out.println("Nace nueva célula en (" + f + "," + c + ") " + 
-							"cuyo padre ha sido (" + pos.getFila() + "," + pos.getColumna() + ") ");
+							"cuyo padre ha sido " + pos);
 				}
 				/*Si no se puede dividir, muere*/
 				else {
@@ -39,8 +39,7 @@ public class CelulaSimple extends Celula {
 			/*Si no le tocaba reproducirse, intenta moverse */
 			else if(CelulaSimple.moverCelula(pos, superficie) != null) {
 				this.pasosReprod--;
-				System.out.println("Movimiento de (" + f + "," + c + ") " + 
-						"a (" + pos.getFila() + "," + pos.getColumna() + ") ");
+				System.out.println("Movimiento de (" + f + "," + c + ") a " + pos);
 			}
 			/*Si no se reproduce ni se mueve*/
 			else {
