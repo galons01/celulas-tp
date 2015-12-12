@@ -16,7 +16,13 @@ public class Mundo {
 		else
 			return false;
 	}
-	//Elimina una célula del mundo (para usar desde fuera)
+	
+	/**
+	 * Elimina una celula del mundo (para usar desde fuera)
+	 * @param f Fila
+	 * @param c Columna
+	 * @return Devuelve si se movio la celula
+	 */
 	public boolean eliminarCelula(int f, int c) {
 		if(this.superficie.posValida(f, c)) {
 			this.superficie.eliminarCelula(f, c);
@@ -180,11 +186,16 @@ public class Mundo {
 		}
 	}
 	
-	/*Función puente para vaciar la superficie*/
+	/**
+	 * Limpia la superficie del mundo, dejándolo sin células
+	 */
 	public void vaciar(){
 		this.superficie.vaciar();
 	}
 	
+	/**
+	 * Da un paso en la evolución del mundo para todas las células.
+	 */
 	public void evoluciona() {
 		/*
 		 Foto del número de células en la superficie. Podría ser modificado 
