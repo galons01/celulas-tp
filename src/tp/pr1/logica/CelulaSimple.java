@@ -108,7 +108,7 @@ public class CelulaSimple extends Celula {
 				}
 			}
 			/*Si hay al menos 1 posición libre
-			  devuelve una posicion aleatoria libre*/
+			  devuelve una posición aleatoria libre*/
 			if(l > 0)
 				return libres[Mundo.numAleatorio(0,l-1)];
 		}
@@ -121,6 +121,6 @@ public class CelulaSimple extends Celula {
 	}
 	
 	public String toString() {
-		return "[" + this.pasosMuerte + " - " + this.pasosReprod + "]";
+		return "[" + this.pasosMuerte + "-" + this.pasosReprod + "]";
 	}
 }
