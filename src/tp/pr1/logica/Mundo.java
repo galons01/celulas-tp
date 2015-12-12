@@ -112,7 +112,7 @@ public class Mundo {
 		*/
 		int n = this.superficie.nCelulas();
 		Casilla[] ocupadas = new Casilla[n];
-		int f, c;
+		int f, c, x;
 		
 		/*Busca las células que hay en el mundo*/
 		inspecSuperficie(ocupadas);
@@ -121,9 +121,18 @@ public class Mundo {
 			f = ocupadas[i].getFila();
 			c = ocupadas[i].getColumna();
 			this.superficie.ejecutaMovimiento(f, c);
+			if(f<casillamovida.getFila() || f==casillamovida.getFila() && c<casillamovida.getColumna())
+			x = buscar(casillamovida, ocupadas, n);
 		}
 	}
-	
+	public int buscar(Casilla casillamovida,Casilla[] ocupadas,int n){
+		
+			for(int y=0; y<n; y++)
+				if(casillamovida==ocupadas[n]){
+					return y;
+				}
+			return n+1;
+	}
 	/**
 	 * Representa en un String la superficie.
 	 */
