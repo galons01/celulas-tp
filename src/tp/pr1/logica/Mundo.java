@@ -131,7 +131,7 @@ public class Mundo {
 				if(casillamovida==ocupadas[n]){
 					return y;
 				}
-			return n+1;
+			return -1;
 	}
 	/**
 	 * Representa en un String la superficie.
