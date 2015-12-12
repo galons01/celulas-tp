@@ -128,7 +128,7 @@ public class Mundo {
 	public int buscar(Casilla casillamovida,Casilla[] ocupadas,int n){
 		
 			for(int y=0; y<n; y++)
-				if(casillamovida==ocupadas[n]){
+				if(casillamovida.getFila()==ocupadas[n].getFila() && casillamovida.getColumna()==ocupadas[n].getColumna()){
 					return y;
 				}
 			return -1;
