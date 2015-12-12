@@ -74,30 +74,30 @@ public class Mundo {
 	}
 	
 	
-	
-	
 	/*
 	 Recorre la superficie en busca de células.
 	 Devuelve un array con las posiciones ocupadas.
 	*/
-	private void inspecSuperficie(Casilla[] ocupadas) {
+	private ListaCasillas inspecSuperficie() {
 		int N = this.superficie.nCelulas();	/*Número total de células en la superficie*/
+		ListaCasillas ocupadas = new ListaCasillas(N);
 		int n = 0;				/*Contador de número de células*/
 		int j;					/*Contador bucle while*/
 		int F = this.superficie.getFilas();	/*Número de  filas*/
 		int C = this.superficie.getColumnas();	/*Número de columnas*/
-
+		
 		for(int i = 0; i<F; i++) {
 			j = 0;
 			while(j<C && n<N) {
 				/*Si encuentra una posición ocupada (una célula)*/
 				if(!this.superficie.posLibre(i,j)) {
-					ocupadas[n] = new Casilla(i,j);
+					ocupadas.add(new Casilla(i,j), n);
 					n++;
 				}
 				j++;
 			}
 		}
+		return ocupadas;
 	}
 	
 	/*Función puente para vaciar la superficie*/
@@ -110,29 +110,28 @@ public class Mundo {
 		 Foto del número de células en la superficie. Podría ser modificado 
 		 durante el bucle dando lugar a errores.
 		*/
-		int n = this.superficie.nCelulas();
-		Casilla[] ocupadas = new Casilla[n];
-		int f, c, x;
+		ListaCasillas ocupadas;
+		int x;
+		Casilla nuevaPos;
 		
 		/*Busca las células que hay en el mundo*/
-		inspecSuperficie(ocupadas);
+		ocupadas = inspecSuperficie();
+		
 		/*Y aplica la lógica para cada una de ellas*/
-		for(int i=0; i<n; i++) {
-			f = ocupadas[i].getFila();
-			c = ocupadas[i].getColumna();
-			this.superficie.ejecutaMovimiento(f, c);
-			if(f<casillamovida.getFila() || f==casillamovida.getFila() && c<casillamovida.getColumna())
-			x = buscar(casillamovida, ocupadas, n);
+		for(int i=0; i<ocupadas.len(); i++) {
+			nuevaPos = this.superficie.ejecutaMovimiento(ocupadas.get(i));
+			
+			/*Asegurándose de que la posición a la que se ha movido
+			  no está en la lista para que no se mueva dos veces*/
+			if(nuevaPos.greater(ocupadas.get(i))) {
+				x = ocupadas.buscar(nuevaPos);
+				if(x>=0)
+					ocupadas.eliminarCasilla(x);
+			}
 		}
 	}
-	public int buscar(Casilla casillamovida,Casilla[] ocupadas,int n){
-		
-			for(int y=0; y<n; y++)
-				if(casillamovida.getFila()==ocupadas[n].getFila() && casillamovida.getColumna()==ocupadas[n].getColumna()){
-					return y;
-				}
-			return -1;
-	}
+
+	
 	/**
 	 * Representa en un String la superficie.
 	 */

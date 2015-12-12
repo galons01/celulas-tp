@@ -92,7 +92,9 @@ public class Superficie {
 	*  Funciones puente entre el mundo y la célula  *
 	************************************************/
 	
-	public Casilla ejecutaMovimiento(int f, int c){
+	public Casilla ejecutaMovimiento(Casilla pos){
+		int f = pos.getFila();
+		int c = pos.getColumna();
 		return this.superficie[f][c].ejecutaMovimiento(f, c, this);
 	}
 	
