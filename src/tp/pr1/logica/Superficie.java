@@ -66,8 +66,15 @@ public class Superficie {
 		return f>=0 && f<this.filas && c>=0 && c<this.columnas;
 	}
 	
+	
+	/**
+	 * Devuelve una posición aleatoria de la superficie.
+	 * @return Casilla aleatoria.
+	 */
 	public Casilla posAleatoria(){
-		return new Casilla(Mundo.numAleatorio(0,this.filas),Mundo.numAleatorio(0,this.columnas));
+		int f = Mundo.numAleatorio(0,this.filas-1);
+		int c = Mundo.numAleatorio(0,this.columnas-1);
+		return new Casilla(f,c);
 	}
 	
 	/**
