@@ -35,7 +35,7 @@ public class CelulaCompleja extends Celula {
 					System.out.println("--COME--");
 					/*Si ha comido demasiado, explota*/
 					if(this.celsComidas >= CelulaCompleja.MAX_COMER) {
-						superficie.eliminarCelula(f, c);
+						superficie.eliminarCelula(pos.getFila(), pos.getColumna());
 						System.out.println("Explota la celula compleja en "
 								+ "(" + pos.getFila() + "," + pos.getColumna() + ") ");
 					}
