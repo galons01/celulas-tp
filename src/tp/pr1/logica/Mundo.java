@@ -121,12 +121,15 @@ public class Mundo {
 		for(int i=0; i<ocupadas.len(); i++) {
 			nuevaPos = this.superficie.ejecutaMovimiento(ocupadas.get(i));
 			
-			/*Asegurándose de que la posición a la que se ha movido
-			  no está en la lista para que no se mueva dos veces*/
-			if(nuevaPos.greater(ocupadas.get(i))) {
-				x = ocupadas.buscar(nuevaPos);
-				if(x>=0)
-					ocupadas.eliminarCasilla(x);
+			/*Si se ha movido*/
+			if(nuevaPos!=null) {
+				/*Asegurándose de que la posición a la que se ha movido
+				  no está en la lista para que no se mueva dos veces*/
+				if(nuevaPos.greater(ocupadas.get(i))) {
+					x = ocupadas.buscar(nuevaPos);
+					if(x>=0)
+						ocupadas.eliminarCasilla(x);
+				}
 			}
 		}
 	}
