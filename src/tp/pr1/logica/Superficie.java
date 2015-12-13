@@ -73,17 +73,33 @@ public class Superficie {
 		this.eliminarCelula(f1, c1);
 	}
 	
+	
+	/**
+	 * Getter filas. Devuelve el número de filas que hay en la superficie.
+	 * @return Entero indicando las filas.
+	 */
 	public int getFilas() {
 		return this.filas;
 	}
 	
+	
+	/**
+	 * Getter columnas. Devuelve el número de columnas que hay en la superficie.
+	 * @return Entero indicando las columnas.
+	 */
 	public int getColumnas() {
 		return this.columnas;
 	}
 	
+	
+	/**
+	 * Getter de nCelulas. Devuelve el número de células que hay en la superficie.
+	 * @return Entero indicando el número de células.
+	 */
 	public int nCelulas() {
 		return this.nCelulas;
 	}
+	
 	
 	/**
 	 * Valida que la posición esté dentro de la superficie
@@ -106,6 +122,7 @@ public class Superficie {
 		return new Casilla(f,c);
 	}
 	
+	
 	/**
 	 * Representa en un String la superficie.
 	 */
@@ -126,16 +143,31 @@ public class Superficie {
 		return mostrar.toString();
 	}
 
+	
+	
 	/************************************************
 	*  Funciones puente entre el mundo y la célula  *
 	************************************************/
 	
+	
+	/**
+	 * Ejecuta la lógica de una célula en la superficie
+	 * @param f Fila en la que se ebcuentra la célula dentro de la superficie
+	 * @param c Columna en la que se ebcuentra la célula dentro de la superficie
+	 * @param superficie Superficie en la que se encuentra la célula
+	 * @return Casilla a la que se ha movido o null.
+	 */
 	public Casilla ejecutaMovimiento(Casilla pos){
 		int f = pos.getFila();
 		int c = pos.getColumna();
 		return this.superficie[f][c].ejecutaMovimiento(f, c, this);
 	}
 	
+	
+	/**
+	 * Determina si la célula en la posición (f,c) es comestible o no.
+	 * @return true si es comestible, false en caso contrario
+	 */
 	public boolean esComestible(int f, int c) {
 		if(this.superficie[f][c]!=null)
 			return this.superficie[f][c].esComestible();
