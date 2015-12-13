@@ -1,52 +1,26 @@
 package tp.pr1.logica;
 
-public class Celula {
-	private static final short MAX_PASOS_SIN_MOVER = 2;
-	private static final short PASOS_REPRODUCCION = 4;
-
-	private short pasosReprod;	//Pasos que le quedan para dividirse (pasos movidos)
-	private short pasosMuerte;	//Pasos que le quedan para morir (pasos sin moverse)
+public abstract class Celula {
 	
-	public Celula() {
-		this.pasosReprod = Celula.PASOS_REPRODUCCION;
-		this.pasosMuerte = Celula.MAX_PASOS_SIN_MOVER;
-	}
+	protected boolean comestible;
 	
-	public short getPasosReprod() { 
-		return this.pasosReprod;
-	}
-
-	public short getPasosMuerte() {
-		return this.pasosMuerte;
-	}
+	/**
+	 * Ejecuta la lógica de una célula en una superficie
+	 * @param f Fila en la que se ebcuentra la célula dentro de la superficie
+	 * @param c Columna en la que se ebcuentra la célula dentro de la superficie
+	 * @param superficie Superficie en la que se ebcuentra la célula
+	 * @return Casilla a la que se ha movido o null.
+	 */
+	public abstract Casilla ejecutaMovimiento(int f, int c, Superficie superficie);
 	
-	public boolean puedeReprod() { 
-		return this.pasosReprod == 0;
-	}
-
-	public boolean puedeMoverse() {
-		return this.pasosMuerte > 0;
-	}
+	/**
+	 * Determina si una célula es comestible o no.
+	 * @return true si es comestible, false en caso contrario
+	 */
+	public abstract boolean esComestible();
 	
-	/*Resta un paso para la reproduccion de la célula */
-	public void darPaso() {
-		if(this.pasosReprod > 0)
-			this.pasosReprod--;
-	}
-	
-	/*Resta un paso para la muerte de la célula */
-	public void estarQuieta() {
-		if(this.pasosMuerte > 0)
-			this.pasosMuerte--;
-	}
-	
-	/*Reproduce una célula si puede*/
-	public boolean reproducir() {
-		if(this.pasosReprod == 0) {
-			this.pasosReprod = Celula.PASOS_REPRODUCCION;
-			return true;
-		}
-		return false;
-	}
-	
+	/**
+	 * @return String que representa una célula
+	 */
+	public abstract String toString();
 }

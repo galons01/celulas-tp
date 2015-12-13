@@ -1,5 +1,6 @@
 package tp.pr1.logica;
 
+
 public class Superficie {
 	private Celula[][] superficie;
 	private int filas;
@@ -34,18 +35,16 @@ public class Superficie {
 		return this.superficie[fila][columna] == null;
 	}
 	
+
 	/**
 	 * Inserta una célula en una posición de la superficie
 	 * @param f Fila en la superficie
 	 * @param c Columna en la superficie
 	 */
-	public boolean insertarCelula(Celula celula, int fila, int columna){
-		boolean libre = this.posLibre(fila,columna);
-		if(libre){
-			this.superficie[fila][columna] = celula;
+	public void insertarCelula(Celula celula, int fila, int columna){
+		if(this.superficie[fila][columna]==null)
 			this.nCelulas++;
-		}
-		return libre;
+		this.superficie[fila][columna] = celula;
 	}
 	
 	
@@ -55,8 +54,10 @@ public class Superficie {
 	 * @param c Columna en la superficie
 	 */
 	public void eliminarCelula(int fila, int columna){
-		this.superficie[fila][columna] = null;
-		this.nCelulas--;
+		if(this.superficie[fila][columna]!=null) {
+			this.superficie[fila][columna] = null;
+			this.nCelulas--;
+		}
 	}
 	
 	
@@ -67,15 +68,9 @@ public class Superficie {
 	 * @param f2 Fila destino en la superficie
 	 * @param c2 Columna destino en la superficie
 	 */
-	public boolean moverCelula(int f1, int c1, int f2, int c2) {
-		if(this.posLibre(f2,c2)) {			
-			Celula cel = this.superficie[f1][c1];
-			this.insertarCelula(cel, f2, c2);
-			this.eliminarCelula(f1, c1);
-			return true;
-		}
-		else
-			return false;
+	public void moverCelula(int f1, int c1, int f2, int c2) {			
+		this.insertarCelula(this.superficie[f1][c1], f2, c2);
+		this.eliminarCelula(f1, c1);
 	}
 	
 	public int getFilas() {
@@ -95,35 +90,51 @@ public class Superficie {
 		return f>=0 && f<this.filas && c>=0 && c<this.columnas;
 	}
 	
+	
+	/**
+	 * Devuelve una posición aleatoria de la superficie.
+	 * @return Casilla aleatoria.
+	 */
+	public Casilla posAleatoria(){
+		int f = Mundo.numAleatorio(0,this.filas-1);
+		int c = Mundo.numAleatorio(0,this.columnas-1);
+		return new Casilla(f,c);
+	}
+	
+	/**
+	 * Representa en un String la superficie.
+	 */
+	public String toString() {
+		StringBuilder mostrar = new StringBuilder();
+		for(int i = 0; i< this.filas; i++) {
+			for(int j = 0; j< this.columnas; j++) {
+				if(this.posLibre(i,j)) {
+					mostrar.append("  -  ");
+				}
+				else {
+					mostrar.append(this.superficie[i][j]);
+				}
+				mostrar.append(" ");
+			}
+			mostrar.append("\n");
+		}
+		return mostrar.toString();
+	}
+
 	/************************************************
 	*  Funciones puente entre el mundo y la célula  *
 	************************************************/
 	
-	public boolean puedeMoverse(int f, int c) {
-		return this.superficie[f][c].puedeMoverse();
+	public Casilla ejecutaMovimiento(Casilla pos){
+		int f = pos.getFila();
+		int c = pos.getColumna();
+		return this.superficie[f][c].ejecutaMovimiento(f, c, this);
 	}
 	
-	public boolean puedeReprod(int f, int c) {
-		return this.superficie[f][c].puedeReprod();
-	}
-	public boolean reproducir(int f, int c) {
-		return this.superficie[f][c].reproducir();
-	}
-	
-	public void estarQuieta(int f, int c) {
-		this.superficie[f][c].estarQuieta();
-	}
-	
-	public void darPaso(int f, int c) {
-		this.superficie[f][c].darPaso();
-	}
-	
-	public int getPasosReprod(int f, int c) { 
-		return this.superficie[f][c].getPasosReprod();
-	}
-
-	public int getPasosMuerte(int f, int c) {
-		return this.superficie[f][c].getPasosMuerte();
+	public boolean esComestible(int f, int c) {
+		if(this.superficie[f][c]!=null)
+			return this.superficie[f][c].esComestible();
+		else return false;
 	}
 	
 }
