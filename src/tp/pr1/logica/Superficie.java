@@ -85,7 +85,12 @@ public class Superficie {
 		return this.nCelulas;
 	}
 	
-	/*Posición válida dentro de la superficie*/
+	/**
+	 * Valida que la posición esté dentro de la superficie
+	 * @param f Fila
+	 * @parama c Columna
+	 * @return true si está dentro, false en caso contrario
+	 */
 	public boolean posValida(int f, int c) {
 		return f>=0 && f<this.filas && c>=0 && c<this.columnas;
 	}

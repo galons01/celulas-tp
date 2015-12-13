@@ -17,15 +17,17 @@ public class ComandoCrearCelulaSimple extends Comando {
 
 	/**
 	 * Ejecuta el comando.
-	 * @param mundo
+	 * @param mundo Mundo sobre el que se ejecuta la acción.
 	 */
 	public void ejecuta(Mundo mundo) {
-		if(mundo.crearCelulaSimple(this.fila, this.columna)) { //TODO
-			System.out.print("Creamos célula simple en la posición ");
-			System.out.println("(" + this.fila + "," + this.columna + ")");
+		if(mundo.posValida(this.fila,this.columna)) {
+			if(mundo.crearCelulaSimple(this.fila, this.columna)) {
+				System.out.print("Creamos célula simple en la posición (");
+				System.out.println( this.fila + "," + this.columna + ")");
+			}
+			else System.out.println("Ya hay una célula en esa posición");
 		}
-		else
-			System.out.println("No es posible crear una célula en esa posición");
+		else System.out.println("Posición inválida");
 	}
 	
 	

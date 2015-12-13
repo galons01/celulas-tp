@@ -28,18 +28,28 @@ public class Mundo {
 	}
 	
 	
-	//Crea una nueva célula simple en el mundo
+	/**
+	 * Crea una celula simple en el mundo (para usar desde fuera)
+	 * @param f Fila
+	 * @param c Columna
+	 * @return Devuelve si ce creó la celula
+	 */
 	public boolean crearCelulaSimple(int f, int c) {
-		if(this.superficie.posValida(f,c) && this.superficie.posLibre(f,c)) {
+		if(this.superficie.posLibre(f,c)) {
 			this.superficie.insertarCelula(new CelulaSimple(), f, c);
 			return true;
 		}
 		else return false;
 	}
 		
-	//Crea una nueva célula compleja en el mundo
+	/**
+	 * Crea una celula compleja en el mundo (para usar desde fuera)
+	 * @param f Fila
+	 * @param c Columna
+	 * @return Devuelve si ce creó la celula
+	 */
 	public boolean crearCelulaCompleja(int f, int c) {
-		if(this.superficie.posValida(f,c) && this.superficie.posLibre(f,c)) {
+		if(this.superficie.posLibre(f,c)) {
 			this.superficie.insertarCelula(new CelulaCompleja(), f, c);
 			return true;
 		}
@@ -54,26 +64,33 @@ public class Mundo {
 	 * @return Devuelve si se movio la celula
 	 */
 	public boolean eliminarCelula(int f, int c) {
-		if(this.superficie.posValida(f, c)) {
+		if(!this.superficie.posLibre(f, c)) {
 			this.superficie.eliminarCelula(f, c);
 			return true;
 		}
-		else
-			return false;
+		else return false;
 	}
 
 	
-	//Devuelve un entero pseudo-aleatorio entre min y max
-	public static int numAleatorio(int min, int max) {
-		if(min>max) {	/*Swap numbers*/
-			min = min + max; //Total = max + min
-			max = min - max; //max = total - max = min(old)
-			min = min - max; //min = total - max = total - min = max(old)
+	/**
+	 * Devuelve un número entero positivo pseudo-aleatorio 
+	 * entre a y b (ambos incluidos).
+	 * @param a Cota (debe ser un número natural o cero).
+	 * @param b Cota (debe ser un número natural o cero).
+	 * @return Número pseudo-aleatorio. 
+	 */
+	public static int numAleatorio(int a, int b) {
+		if(a>b) {	/*Swap numbers*/
+			a = a + b; //a = a + b
+			b = a - b; //b(new) = (a+b) - b = a(old)
+			a = a - b; //a(new) = (a+b) - b(new) = (a+b) - ((a+b)-b) = b(old)
 		}
-		return (int)(Math.random()*(max-min+1)+min);	
+		return (int)(Math.random()*(b-a+1)+a);	
 	}
 
-	//Crea DEF_CELULAS células en posiciones aleatorias
+	/**
+	 * Inicializa el mundo con células aleatorias.
+	 */
 	public void iniciar() {
 		int i = 0;
 		int f, c;
@@ -98,10 +115,10 @@ public class Mundo {
 	}
 	
 	
-	/*
-	 Recorre la superficie en busca de células.
-	 Devuelve un array con las posiciones ocupadas.
-	*/
+	/**
+	 * Recorre la superficie del mundo en busca de células.
+	 * @return Devuelve una ListaCasillas con las posiciones ocupadas por células.
+	 */
 	private ListaCasillas inspecSuperficie() {
 		int N = this.superficie.nCelulas();	/*Número total de células en la superficie*/
 		ListaCasillas ocupadas = new ListaCasillas(N);
@@ -169,6 +186,16 @@ public class Mundo {
 	 */
 	public String toString() {
 		return this.superficie.toString();
+	}
+	
+	/**
+	 * Valida que la posición esté dentro del mundo
+	 * @param f Fila
+	 * @parama c Columna
+	 * @return true si está dentro, false en caso contrario
+	 */
+	public boolean posValida(int f, int c) {
+		return this.superficie.posValida(f,c);
 	}
 }
 

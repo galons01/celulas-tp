@@ -17,16 +17,18 @@ public class ComandoEliminarCelula extends Comando {
 	
 
 	/**
-	 * Ejecuta el comando.
-	 * @param mundo
+	 * Ejecuta el comando eliminarcelula. Elimina una celula del mundo.
+	 * @param mundo Mundo sobre el que se ejecuta la acción.
 	 */
 	public void ejecuta(Mundo mundo) {
-		if(mundo.eliminarCelula(this.fila, this.columna)) {
-			System.out.print("Eliminamos célula en la posición (");
-			System.out.println( this.fila + "," + this.columna + ")");
+		if(mundo.posValida(this.fila,this.columna)) {
+			if(mundo.eliminarCelula(this.fila, this.columna)) {
+				System.out.print("Eliminamos la célula en la posición (");
+				System.out.println( this.fila + "," + this.columna + ")");
+			}
+			else System.out.println("No hay una célula en esa posición");
 		}
-		else
-			System.out.println("Posición inválida");
+		else System.out.println("Posición inválida");
 	}
 	
 	

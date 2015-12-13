@@ -20,12 +20,14 @@ public class ComandoCrearCelulaCompleja extends Comando {
 	 * @param mundo
 	 */
 	public void ejecuta(Mundo mundo) {
-		if(mundo.crearCelulaCompleja(this.fila, this.columna)) {
-			System.out.print("Creamos célula compleja en la posición (");
-			System.out.println( this.fila + "," + this.columna + ")");
+		if(mundo.posValida(this.fila,this.columna)) {
+			if(mundo.crearCelulaCompleja(this.fila, this.columna)) {
+				System.out.print("Creamos célula compleja en la posición (");
+				System.out.println( this.fila + "," + this.columna + ")");
+			}
+			else System.out.println("Ya hay una célula en esa posición");
 		}
-		else
-			System.out.println("No es posible crear una célula en esa posición");
+		else System.out.println("Posición inválida");
 	}
 	
 	
