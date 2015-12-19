@@ -25,7 +25,7 @@ public class CelulaCompleja extends Celula {
 			/*Si está libre o es comestible*/
 			hayCelula = !superficie.posLibre(pos.getFila(), pos.getColumna());
 			if(!hayCelula || superficie.esComestible(pos.getFila(), pos.getColumna())){
-				superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
+				superficie.mover(f, c, pos.getFila(), pos.getColumna());
 				System.out.print("Celula compleja en (" + f + "," + c + ") " + 
 						"se mueve a " + pos);				
 				/*Si había otra célula*/
@@ -34,7 +34,7 @@ public class CelulaCompleja extends Celula {
 					System.out.println("--COME--");
 					/*Si ha comido demasiado, explota*/
 					if(this.celsComidas >= CelulaCompleja.MAX_COMER) {
-						superficie.eliminarCelula(pos.getFila(), pos.getColumna());
+						superficie.eliminar(pos.getFila(), pos.getColumna());
 						System.out.println("Explota la celula compleja en " + pos);
 					}
 				}

@@ -5,7 +5,7 @@ public class Superficie {
 	private Celula[][] superficie;
 	private int filas;
 	private int columnas;
-	private int nCelulas = 0;
+	private int nElems = 0;
 	
 	public Superficie(int nf, int nc){
 		this.filas=nf;
@@ -16,7 +16,7 @@ public class Superficie {
 	
 	
 	/**
-	 * Limpia la superficie dejándola sin celulas.
+	 * Limpia la superficie dejándola vacía.
 	 */
 	public void vaciar(){
 		for (int i=0; i<this.filas; i++)
@@ -37,40 +37,41 @@ public class Superficie {
 	
 
 	/**
-	 * Inserta una célula en una posición de la superficie
+	 * Inserta un elemento en una posición de la superficie
+	 * @param elem Elemento a insertar en la superficie.
 	 * @param f Fila en la superficie
 	 * @param c Columna en la superficie
 	 */
-	public void insertarCelula(Celula celula, int fila, int columna){
+	public void insertar(Celula elem, int fila, int columna){
 		if(this.superficie[fila][columna]==null)
-			this.nCelulas++;
-		this.superficie[fila][columna] = celula;
+			this.nElems++;
+		this.superficie[fila][columna] = elem;
 	}
 	
 	
 	/**
-	 * Elimina una célula en una posición de la superficie
+	 * Elimina un elemento en una posición de la superficie
 	 * @param f Fila en la superficie
 	 * @param c Columna en la superficie
 	 */
-	public void eliminarCelula(int fila, int columna){
+	public void eliminar(int fila, int columna){
 		if(this.superficie[fila][columna]!=null) {
 			this.superficie[fila][columna] = null;
-			this.nCelulas--;
+			this.nElems--;
 		}
 	}
 	
 	
 	/**
-	 * Mueve una célula de una posición de la superficie a otra
+	 * Mueve un elemento de una posición de la superficie a otra
 	 * @param f1 Fila de origen en la superficie
 	 * @param c1 Columna de origne en la superficie
 	 * @param f2 Fila destino en la superficie
 	 * @param c2 Columna destino en la superficie
 	 */
-	public void moverCelula(int f1, int c1, int f2, int c2) {			
-		this.insertarCelula(this.superficie[f1][c1], f2, c2);
-		this.eliminarCelula(f1, c1);
+	public void mover(int f1, int c1, int f2, int c2) {			
+		this.insertar(this.superficie[f1][c1], f2, c2);
+		this.eliminar(f1, c1);
 	}
 	
 	
@@ -93,11 +94,11 @@ public class Superficie {
 	
 	
 	/**
-	 * Getter de nCelulas. Devuelve el número de células que hay en la superficie.
-	 * @return Entero indicando el número de células.
+	 * Devuelve el número de elementos dentro de la superficie.
+	 * @return Entero indicando el número de elementos.
 	 */
-	public int nCelulas() {
-		return this.nCelulas;
+	public int nElems() {
+		return this.nElems;
 	}
 	
 	

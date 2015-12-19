@@ -23,14 +23,14 @@ public class CelulaSimple extends Celula {
 			if(this.pasosReprod <= 0) {
 				/*Se mueve la madre y nace la hija*/
 				if(CelulaSimple.moverCelula(pos,superficie) != null) {
-					superficie.insertarCelula(new CelulaSimple(),f,c);
+					superficie.insertar(new CelulaSimple(),f,c);
 					this.pasosReprod = CelulaSimple.PASOS_REPRODUCCION;
 					System.out.println("Nace nueva célula en (" + f + "," + c + ") " + 
 							"cuyo padre ha sido " + pos);
 				}
 				/*Si no se puede dividir, muere*/
 				else {
-					superficie.eliminarCelula(f,c);
+					superficie.eliminar(f,c);
 					System.out.println("Muere la célula de la casilla (" + f + "," + c + ") " + 
 							"por no poder reproducirse");
 				}
@@ -48,7 +48,7 @@ public class CelulaSimple extends Celula {
 		}
 		/*Si no le quedan pasos se muere*/
 		else {
-			superficie.eliminarCelula(f,c);
+			superficie.eliminar(f,c);
 			System.out.println("Muere la célula de la casilla (" + f + "," + c + ") " + 
 					"por inactividad");
 		}
@@ -71,7 +71,7 @@ public class CelulaSimple extends Celula {
 		/*Si se puede mover porque hay un hueco*/
 		if(nuevaPos!=null) {
 			pos.set(nuevaPos); /*Para devolverlo por el parámetro*/
-			superficie.moverCelula(f, c, pos.getFila(), pos.getColumna());
+			superficie.mover(f, c, pos.getFila(), pos.getColumna());
 		}
 		return nuevaPos;
 	}

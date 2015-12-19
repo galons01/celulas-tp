@@ -36,7 +36,7 @@ public class Mundo {
 	 */
 	public boolean crearCelulaSimple(int f, int c) {
 		if(this.superficie.posLibre(f,c)) {
-			this.superficie.insertarCelula(new CelulaSimple(), f, c);
+			this.superficie.insertar(new CelulaSimple(), f, c);
 			return true;
 		}
 		else return false;
@@ -50,7 +50,7 @@ public class Mundo {
 	 */
 	public boolean crearCelulaCompleja(int f, int c) {
 		if(this.superficie.posLibre(f,c)) {
-			this.superficie.insertarCelula(new CelulaCompleja(), f, c);
+			this.superficie.insertar(new CelulaCompleja(), f, c);
 			return true;
 		}
 		else return false;
@@ -65,7 +65,7 @@ public class Mundo {
 	 */
 	public boolean eliminarCelula(int f, int c) {
 		if(!this.superficie.posLibre(f, c)) {
-			this.superficie.eliminarCelula(f, c);
+			this.superficie.eliminar(f, c);
 			return true;
 		}
 		else return false;
@@ -120,7 +120,7 @@ public class Mundo {
 	 * @return Devuelve una ListaCasillas con las posiciones ocupadas por células.
 	 */
 	private ListaCasillas inspecSuperficie() {
-		int N = this.superficie.nCelulas();	/*Número total de células en la superficie*/
+		int N = this.superficie.nElems();	/*Número total de células en la superficie*/
 		ListaCasillas ocupadas = new ListaCasillas(N);
 		int n = 0;				/*Contador de número de células*/
 		int j;					/*Contador bucle while*/
