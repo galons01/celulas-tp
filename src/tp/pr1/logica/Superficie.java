@@ -1,5 +1,7 @@
 package tp.pr1.logica;
 
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Superficie {
 	private Celula[][] superficie;
@@ -175,4 +177,22 @@ public class Superficie {
 		else return false;
 	}
 	
+	/**
+	 * Guarda la superficie en un archivo.
+	 * @param file Archivo al que va la superficie.
+	 * @throws IOException
+	 */
+	public void save(FileWriter file) throws IOException {
+		try {
+			for(int i=0; i<this.filas; i++) {
+				for(int j=0; j<this.columnas; j++) {
+					file.write(i + " " + j);
+					this.superficie[i][j].save(file);
+				}
+			}
+		}
+		catch(IOException e) {
+			throw e;
+		}
+	}
 }

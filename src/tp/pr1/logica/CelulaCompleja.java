@@ -1,5 +1,8 @@
 package tp.pr1.logica;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class CelulaCompleja extends Celula {
 	
 	private final static int MAX_COMER = 3;
@@ -48,5 +51,11 @@ public class CelulaCompleja extends Celula {
 
 	public String toString() {
 		return "( " + this.celsComidas + " )";
+	}
+
+	
+	public void save(FileWriter file) throws IOException {
+		file.write("compleja " + this.celsComidas);
+		file.write(System.getProperty("line.separator"));
 	}
 }

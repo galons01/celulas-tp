@@ -1,5 +1,8 @@
 package tp.pr1.logica;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public abstract class Celula {
 	
 	protected boolean comestible;
@@ -23,4 +26,11 @@ public abstract class Celula {
 	 * @return String que representa una célula
 	 */
 	public abstract String toString();
+	
+	/**
+	 * Guarda la celula en un archivo dado.
+	 * @param file Archivo al que va la célula
+	 * @throws IOException
+	 */
+	public abstract void save(FileWriter file) throws IOException;
 }

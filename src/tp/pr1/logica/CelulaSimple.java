@@ -1,5 +1,8 @@
 package tp.pr1.logica;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class CelulaSimple extends Celula {
 	private static final short MAX_PASOS_SIN_MOVER = 2;
 	private static final short PASOS_REPRODUCCION = 4;
@@ -122,5 +125,11 @@ public class CelulaSimple extends Celula {
 	
 	public String toString() {
 		return "[" + this.pasosMuerte + "-" + this.pasosReprod + "]";
+	}
+	
+	
+	public void save(FileWriter file) throws IOException {
+			file.write("simple " + this.pasosMuerte + " " + this.pasosReprod);
+			file.write(System.getProperty("line.separator"));
 	}
 }
