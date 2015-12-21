@@ -3,7 +3,7 @@ package tp.pr1.logica;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CelulaSimple extends Celula {
+public class CelulaSimple implements Celula {
 	private static final short MAX_PASOS_SIN_MOVER = 2;
 	private static final short PASOS_REPRODUCCION = 4;
 
@@ -13,7 +13,6 @@ public class CelulaSimple extends Celula {
 	public CelulaSimple() {
 		this.pasosReprod = CelulaSimple.PASOS_REPRODUCCION;
 		this.pasosMuerte = CelulaSimple.MAX_PASOS_SIN_MOVER;
-		this.comestible = true;
 	}
 	
 	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie){
@@ -120,7 +119,7 @@ public class CelulaSimple extends Celula {
 	
 
 	public boolean esComestible() {
-		return this.comestible;
+		return true;
 	}
 	
 	public String toString() {

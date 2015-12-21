@@ -3,18 +3,17 @@ package tp.pr1.logica;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CelulaCompleja extends Celula {
+public class CelulaCompleja implements Celula {
 	
 	private final static int MAX_COMER = 3;
 	private int celsComidas;
 	
 	public CelulaCompleja() {
-		this.comestible = false;
 		this.celsComidas = 0;
 	}
 	
 	public boolean esComestible() {
-		return this.comestible;
+		return false;
 	}
 	
 	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie){
