@@ -1,3 +1,7 @@
+#Ignore root-only txt files (game savings mainly)
+*.txt
+!/*/*.txt
+
 #Binaries are ignored
 /bin/
 
@@ -9,4 +13,4 @@
 .project
 
 #File with the authors' names
-alumnos.txt
+/alumnos.txt
