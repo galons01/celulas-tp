@@ -1,5 +1,8 @@
 package tp.pr1.comandos;
 
+import tp.pr1.excepciones.ErrorDeInicializacion;
+import tp.pr1.excepciones.FormatoNumericoIncorrecto;
+import tp.pr1.excepciones.IndicesFueraDeRango;
 import tp.pr1.logica.Mundo;
 
 public abstract class Comando {
@@ -7,8 +10,10 @@ public abstract class Comando {
 	/**
 	 * Ejecuta las acciones del comando.
 	 * @param mundo Mundo sobre el que se ejecuta la acción.
+	 * @throws IndicesFueraDeRango Si los parámetros están fuera del mundo.
+	 * @throws ErrorDeInicializacion Si al ejecutar el comando el mundo es erróneo.
 	 */
-	public abstract void ejecuta(Mundo mundo);
+	public abstract void ejecuta(Mundo mundo) throws IndicesFueraDeRango, ErrorDeInicializacion;
 	
 	
 	/**
@@ -16,8 +21,10 @@ public abstract class Comando {
 	 * coinciden, se devuelve el comando.
 	 * @param cadenaComando Cadena con los parámetros del comando.
 	 * @return Comando de la subclase que coincida.
+	 * @throws FormatoNumericoIncorrecto Si se ha introducido algo que no es 
+	 * un número entero.
 	 */
-	public abstract Comando parsea(String[ ] cadenaComando);
+	public abstract Comando parsea(String[ ] cadenaComando) throws FormatoNumericoIncorrecto;
 	
 	
 	/**

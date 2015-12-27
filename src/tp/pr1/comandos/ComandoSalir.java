@@ -28,7 +28,7 @@ public class ComandoSalir extends Comando {
 	 * @return String con la descripción.
 	 */
 	public String textoAyuda() {
-		return "INICIAR: Inserta algunas células aleatorias en el mundo.";
+		return "SALIR: Abandonar el juego.";
 	}
 
 }

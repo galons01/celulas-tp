@@ -1,9 +1,9 @@
 package tp.pr1.control;
 
 import java.util.Scanner;
-
 import tp.pr1.comandos.Comando;
 import tp.pr1.comandos.ParserComandos;
+import tp.pr1.excepciones.*;
 import tp.pr1.logica.Mundo;
 
 public class Controlador {
@@ -31,13 +31,21 @@ public class Controlador {
 			System.out.print("Comando > ");
 
 			palabras = this.in.nextLine().split(" ");
-			comando = ParserComandos.parseaComando(palabras);
-			
-			if(comando != null) {
-				comando.ejecuta(this.mundo);
+			try {
+				comando = ParserComandos.parseaComando(palabras);
+				if(comando != null) {
+					comando.ejecuta(this.mundo);
+				}
+				else {
+					System.out.println("ERROR: Comando desconocido.");
+				}
+			} catch(IndicesFueraDeRango e) {
+				System.out.println(e.getMessage());
+			} catch(FormatoNumericoIncorrecto e) {
+				System.out.println(e.getMessage());
+			} catch (ErrorDeInicializacion e) {
+				System.out.println(e.getMessage());
 			}
-			//Comando inválido
-			else System.out.println("ERROR: Comando desconocido.");
 		}
 		
 		System.out.println("Fin de la simulación...");

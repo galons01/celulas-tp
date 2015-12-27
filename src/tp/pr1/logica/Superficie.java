@@ -105,17 +105,6 @@ public class Superficie {
 	
 	
 	/**
-	 * Valida que la posición esté dentro de la superficie
-	 * @param f Fila
-	 * @parama c Columna
-	 * @return true si está dentro, false en caso contrario
-	 */
-	public boolean posValida(int f, int c) {
-		return f>=0 && f<this.filas && c>=0 && c<this.columnas;
-	}
-	
-	
-	/**
 	 * Devuelve una posición aleatoria de la superficie.
 	 * @return Casilla aleatoria.
 	 */
@@ -145,7 +134,11 @@ public class Superficie {
 		}
 		return mostrar.toString();
 	}
-
+	
+	
+	public boolean hayCapacidad(int n) {
+		return (this.filas*this.columnas)-this.nElems >= n;
+	}
 	
 	
 	/************************************************

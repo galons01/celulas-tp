@@ -1,5 +1,7 @@
 package tp.pr1.logica;
 
+import tp.pr1.excepciones.ErrorDeInicializacion;
+
 public class Mundo {
 	
 	private final static int N_FILAS = 3;
@@ -90,12 +92,17 @@ public class Mundo {
 
 	/**
 	 * Inicializa el mundo con células aleatorias.
+	 * @throws ErrorDeInicializacion Si el mundo no es válido.
 	 */
-	public void iniciar() {
+	public void iniciar() throws ErrorDeInicializacion {
 		int i = 0;
 		int f, c;
 		
 		this.superficie.vaciar();
+		
+		if(!this.superficie.hayCapacidad(Mundo.DEF_CELULAS)) {
+			throw new ErrorDeInicializacion();
+		}
 		
 		/*Crea las células complejas*/
 		while(i<Mundo.DEF_CELULAS_COMPLEJAS) {
@@ -188,14 +195,5 @@ public class Mundo {
 		return this.superficie.toString();
 	}
 	
-	/**
-	 * Valida que la posición esté dentro del mundo
-	 * @param f Fila
-	 * @parama c Columna
-	 * @return true si está dentro, false en caso contrario
-	 */
-	public boolean posValida(int f, int c) {
-		return this.superficie.posValida(f,c);
-	}
 }
 
