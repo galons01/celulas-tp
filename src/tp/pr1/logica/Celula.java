@@ -3,6 +3,8 @@ package tp.pr1.logica;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import tp.pr1.excepciones.IndicesFueraDeRango;
+
 public interface Celula {
 	
 	/**
@@ -11,8 +13,10 @@ public interface Celula {
 	 * @param c Columna en la que se ebcuentra la célula dentro de la superficie
 	 * @param superficie Superficie en la que se ebcuentra la célula
 	 * @return Casilla a la que se ha movido o null.
+	 * @throws IndicesFueraDeRango Si la posicion está fuera de la superficie dada.
 	 */
-	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie);
+	public Casilla ejecutaMovimiento (int f, int c, Superficie superficie)
+			throws IndicesFueraDeRango;
 	
 	/**
 	 * Determina si una célula es comestible o no.

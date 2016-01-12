@@ -3,6 +3,8 @@ package tp.pr1.logica;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import tp.pr1.excepciones.IndicesFueraDeRango;
+
 public class CelulaCompleja implements Celula {
 	
 	private final static int MAX_COMER = 3;
@@ -16,7 +18,7 @@ public class CelulaCompleja implements Celula {
 		return false;
 	}
 	
-	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie){
+	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie) throws IndicesFueraDeRango{
 		Casilla pos;
 		boolean hayCelula;
 		

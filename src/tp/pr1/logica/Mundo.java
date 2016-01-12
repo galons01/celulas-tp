@@ -1,6 +1,7 @@
 package tp.pr1.logica;
 
 import tp.pr1.excepciones.ErrorDeInicializacion;
+import tp.pr1.excepciones.IndicesFueraDeRango;
 
 public abstract class Mundo {
 	
@@ -51,8 +52,9 @@ public abstract class Mundo {
 	 * @param f Fila
 	 * @param c Columna
 	 * @return Devuelve si ce creó la celula
+	 * @throws IndicesFueraDeRango Si la posición está fuera del mundo
 	 */
-	public boolean crearCelula(Celula celula, int f, int c) {
+	public boolean crearCelula(Celula celula, int f, int c) throws IndicesFueraDeRango {
 		if(this.superficie.posLibre(f,c)) {
 			this.superficie.insertar(celula, f, c);
 			return true;
@@ -65,8 +67,9 @@ public abstract class Mundo {
 	 * @param f Fila
 	 * @param c Columna
 	 * @return Devuelve si se movio la celula
+	 * @throws IndicesFueraDeRango Si la posición está fuera del mundo
 	 */
-	public boolean eliminarCelula(int f, int c) {
+	public boolean eliminarCelula(int f, int c) throws IndicesFueraDeRango {
 		if(!this.superficie.posLibre(f, c)) {
 			this.superficie.eliminar(f, c);
 			return true;
@@ -142,17 +145,20 @@ public abstract class Mundo {
 		
 		/*Y aplica la lógica para cada una de ellas*/
 		for(int i=0; i<ocupadas.len(); i++) {
-			nuevaPos = this.superficie.ejecutaMovimiento(ocupadas.get(i));
-			
-			/*Si se ha movido*/
-			if(nuevaPos!=null) {
-				/*Asegurándose de que la posición a la que se ha movido
-				  no está en la lista para que no se mueva dos veces*/
-				if(nuevaPos.greater(ocupadas.get(i))) {
-					x = ocupadas.buscar(nuevaPos);
-					if(x>=0)
-						ocupadas.eliminarCasilla(x);
+			try {
+				nuevaPos = this.superficie.ejecutaMovimiento(ocupadas.get(i));
+				/*Si se ha movido*/
+				if(nuevaPos!=null) {
+					/*Asegurándose de que la posición a la que se ha movido
+					  no está en la lista para que no se mueva dos veces*/
+					if(nuevaPos.greater(ocupadas.get(i))) {
+						x = ocupadas.buscar(nuevaPos);
+						if(x>=0)
+							ocupadas.eliminarCasilla(x);
+					}
 				}
+			} catch (IndicesFueraDeRango e) {
+				/*No hace nada. Sigue con el bucle.*/
 			}
 		}
 	}

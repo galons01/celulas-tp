@@ -3,6 +3,8 @@ package tp.pr1.logica;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import tp.pr1.excepciones.IndicesFueraDeRango;
+
 public class CelulaSimple implements Celula {
 	private static final short MAX_PASOS_SIN_MOVER = 2;
 	private static final short PASOS_REPRODUCCION = 4;
@@ -15,7 +17,7 @@ public class CelulaSimple implements Celula {
 		this.pasosMuerte = CelulaSimple.MAX_PASOS_SIN_MOVER;
 	}
 	
-	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie){
+	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie) throws IndicesFueraDeRango {
 		Casilla pos = null;
 		/*Si le quedan movimientos */
 		if(this.pasosMuerte > 0) {
@@ -62,8 +64,9 @@ public class CelulaSimple implements Celula {
 	 * INTENTA mover una célula
 	 * @param pos Posición de entrada y salida, null si no se ha movido
 	 * @return Devuelve el parámetro pos también.
+	 * @throws IndicesFueraDeRango 
 	 */
-	private static Casilla moverCelula(Casilla pos, Superficie superficie) {
+	private static Casilla moverCelula(Casilla pos, Superficie superficie) throws IndicesFueraDeRango {
 		/*Copiamos la posicion original*/
 		int f = pos.getFila();
 		int c = pos.getColumna();

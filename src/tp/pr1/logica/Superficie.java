@@ -3,6 +3,8 @@ package tp.pr1.logica;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import tp.pr1.excepciones.IndicesFueraDeRango;
+
 public class Superficie {
 	private Celula[][] superficie;
 	private int filas;
@@ -43,10 +45,15 @@ public class Superficie {
 	 * @param elem Elemento a insertar en la superficie.
 	 * @param f Fila en la superficie
 	 * @param c Columna en la superficie
+	 * @throws IndicesFueraDeRango Si la posición está fuera de la superficie
 	 */
-	public void insertar(Celula elem, int fila, int columna){
-		if(this.superficie[fila][columna]==null)
-			this.nElems++;
+	public void insertar(Celula elem, int fila, int columna) throws IndicesFueraDeRango{
+		try {
+			if(this.superficie[fila][columna]==null)
+				this.nElems++;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new IndicesFueraDeRango();
+		}
 		this.superficie[fila][columna] = elem;
 	}
 	
@@ -55,11 +62,16 @@ public class Superficie {
 	 * Elimina un elemento en una posición de la superficie
 	 * @param f Fila en la superficie
 	 * @param c Columna en la superficie
+	 * @throws IndicesFueraDeRango Si la posición está fuera de la superficie
 	 */
-	public void eliminar(int fila, int columna){
-		if(this.superficie[fila][columna]!=null) {
-			this.superficie[fila][columna] = null;
-			this.nElems--;
+	public void eliminar(int fila, int columna) throws IndicesFueraDeRango{
+		try {
+			if(this.superficie[fila][columna]!=null) {
+				this.superficie[fila][columna] = null;
+				this.nElems--;
+			}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new IndicesFueraDeRango();
 		}
 	}
 	
@@ -70,8 +82,9 @@ public class Superficie {
 	 * @param c1 Columna de origne en la superficie
 	 * @param f2 Fila destino en la superficie
 	 * @param c2 Columna destino en la superficie
+	 * @throws IndicesFueraDeRango Si la posición está fuera de la superficie
 	 */
-	public void mover(int f1, int c1, int f2, int c2) {			
+	public void mover(int f1, int c1, int f2, int c2) throws IndicesFueraDeRango {			
 		this.insertar(this.superficie[f1][c1], f2, c2);
 		this.eliminar(f1, c1);
 	}
@@ -152,8 +165,9 @@ public class Superficie {
 	 * @param c Columna en la que se ebcuentra la célula dentro de la superficie
 	 * @param superficie Superficie en la que se encuentra la célula
 	 * @return Casilla a la que se ha movido o null.
+	 * @throws IndicesFueraDeRango Si la posición está fuera de la superficie
 	 */
-	public Casilla ejecutaMovimiento(Casilla pos){
+	public Casilla ejecutaMovimiento(Casilla pos) throws IndicesFueraDeRango{
 		int f = pos.getFila();
 		int c = pos.getColumna();
 		return this.superficie[f][c].ejecutaMovimiento(f, c, this);

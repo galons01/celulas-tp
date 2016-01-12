@@ -1,6 +1,7 @@
 package tp.pr1.logica;
 
 import tp.pr1.excepciones.ErrorDeInicializacion;
+import tp.pr1.excepciones.IndicesFueraDeRango;
 
 public class MundoComplejo extends Mundo {
 	
@@ -34,16 +35,22 @@ public class MundoComplejo extends Mundo {
 		while(i<this.N_CELULAS_COMPLEJAS) {
 			f = numAleatorio(0,this.superficie.getFilas()-1);
 			c = numAleatorio(0,this.superficie.getColumnas()-1);
-			if(this.crearCelula(new CelulaCompleja(), f,c))
-				i++;
+			try {
+				if(this.crearCelula(new CelulaSimple(), f,c)) {
+					i++;
+				}
+			} catch (IndicesFueraDeRango e) {}
 		}
 		/*Crea las células simples*/
 		i = 0;
 		while(i<(this.N_CELULAS_SIMPLES)) {
 			f = numAleatorio(0,this.superficie.getFilas()-1);
 			c = numAleatorio(0,this.superficie.getColumnas()-1);
-			if(this.crearCelula(new CelulaSimple(), f,c))
-				i++;
+			try {
+				if(this.crearCelula(new CelulaSimple(), f,c)) {
+					i++;
+				}
+			} catch (IndicesFueraDeRango e) {}
 		}
 	}
 	
