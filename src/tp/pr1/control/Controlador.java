@@ -22,9 +22,17 @@ public class Controlador {
 	//Scanner para leer de teclado (sólo una vez por clase)
 	private Scanner in;
 	private Mundo mundo;
+	private boolean simulacionEnCurso = true;
 	
 	public Controlador(Scanner in) {
 		this.in = in;
+		this.mundo = new MundoSimple(3,4);
+		try {
+			this.mundo.iniciar();
+		}
+		catch (ErrorDeInicializacion e) {
+			//Do nothing. Safe tested configuration.
+		}
 	}
 	
 	/**
@@ -80,7 +88,7 @@ public class Controlador {
 		Comando comando;
 		String[] palabras;
 		
-		while(mundo.simulacionTerminada()) {
+		while(simulacionEnCurso) {
 			System.out.print(this.mundo.toString());
 			System.out.print("Comando > ");
 
@@ -131,7 +139,7 @@ public class Controlador {
 	}
 	
 	public void terminarSimulacion() {
-		this.mundo.terminarSimulacion();
+		this.simulacionEnCurso = false;
 	}
 	
 	public void vaciar() {

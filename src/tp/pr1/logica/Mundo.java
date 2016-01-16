@@ -14,12 +14,11 @@ public abstract class Mundo {
 	protected final int N_COLUMNAS;
 	
 	protected Superficie superficie;
-	protected boolean simulacionTerminada = true;
 	
 	public Mundo() {
-		this.N_FILAS = 0;
-		this.N_COLUMNAS = 0;
-		this.superficie = null;
+		this.N_FILAS = 5;
+		this.N_COLUMNAS = 4;
+		this.superficie = new Superficie(N_FILAS,N_COLUMNAS);
 	}
 	
 	public Mundo(int f, int c) {
@@ -34,23 +33,6 @@ public abstract class Mundo {
 	 * @throws ErrorDeInicializacion Si el mundo no es válido.
 	 */
 	abstract public void iniciar() throws ErrorDeInicializacion;
-	
-	
-	/**
-	 * Indica si la simulación ha terminado de ejecutarse.
-	 * @return Booleano inidcando true si la simulación está activa.
-	 */
-	public boolean simulacionTerminada() {
-		return this.simulacionTerminada;
-	}
-	
-	
-	/**
-	 * Indica al mundo que debe terminar la simulación.
-	 */
-	public void terminarSimulacion() {
-		this.simulacionTerminada = false;
-	}
 	
 	/**
 	 * Crea una celula en el mundo (para usar desde fuera)
