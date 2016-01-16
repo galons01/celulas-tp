@@ -114,8 +114,13 @@ public class Controlador {
 		
 		System.out.println("Fin de la simulación...");
 	}
-	public String readWord() {
-		return this.in.next();
+	
+	/**
+	 * Devuelve el siguiente comando a leer.
+	 * @return String con el siguiente comando.
+	 */
+	public String siguienteComando() {
+		return this.in.nextLine();
 	}
 	
 	//===================================
