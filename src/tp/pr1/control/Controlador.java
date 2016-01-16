@@ -31,17 +31,22 @@ public class Controlador {
 		int ancho, largo;
 		ancho = archivo.nextInt();
 		largo = archivo.nextInt();
-		if (primeraLinea=="simple"){
-			mundo = new MundoSimple(ancho, largo);
-			mundo.cargar(archivo);
+		try {
+			if (primeraLinea=="simple"){
+				mundo = new MundoSimple(ancho, largo);
+			}
+			else if (primeraLinea=="complejo") {
+				mundo = new MundoComplejo(ancho, largo);
+			}
+			else {
+				throw new ErrorCargar();
+			}
+		mundo.cargar(archivo);
+		} catch (ErrorCargar e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else if (primeraLinea=="complejo") {
-			mundo = new MundoComplejo(ancho, largo);
-			mundo.cargar(archivo);
-		}
-		else {
-			
-		}
+		archivo.close();
 	}
 	
 	public void realizaSimulacion() {
