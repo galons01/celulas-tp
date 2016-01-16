@@ -109,6 +109,12 @@ public class Controlador {
 				System.out.println(e.getMessage());
 			} catch (PalabraIncorrecta e) {
 				System.out.println(e.getMessage());
+			} catch (FileNotFoundException e) {
+				System.out.println(e.getMessage());
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+			} catch (ErrorCargar e) {
+				System.out.println(e.getMessage());
 			}
 		}
 		
