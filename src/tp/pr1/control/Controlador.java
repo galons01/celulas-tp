@@ -4,10 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Scanner;
+
 import tp.pr1.comandos.Comando;
 import tp.pr1.comandos.ParserComandos;
+
 import tp.pr1.excepciones.*;
+
 import tp.pr1.logica.Celula;
 import tp.pr1.logica.Mundo;
 import tp.pr1.logica.MundoComplejo;
@@ -95,12 +99,16 @@ public class Controlador {
 				System.out.println(e.getMessage());
 			} catch (ErrorDeInicializacion e) {
 				System.out.println(e.getMessage());
+			} catch (PalabraIncorrecta e) {
+				System.out.println(e.getMessage());
 			}
 		}
 		
 		System.out.println("Fin de la simulación...");
 	}
-	
+	public String readWord() {
+		return this.in.next();
+	}
 	
 	//===================================
 	// Funciones puente                 |

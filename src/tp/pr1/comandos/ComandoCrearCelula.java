@@ -1,10 +1,12 @@
 package tp.pr1.comandos;
 
+import tp.pr1.control.Controlador;
 import tp.pr1.excepciones.FormatoNumericoIncorrecto;
 import tp.pr1.excepciones.IndicesFueraDeRango;
+import tp.pr1.excepciones.PalabraIncorrecta;
+import tp.pr1.logica.Celula;
 import tp.pr1.logica.CelulaCompleja;
 import tp.pr1.logica.CelulaSimple;
-import tp.pr1.logica.Mundo;
 
 public class ComandoCrearCelula extends Comando {
 	private int fila;
@@ -20,8 +22,20 @@ public class ComandoCrearCelula extends Comando {
 	}
 
 
-	public void ejecuta(Mundo mundo) throws IndicesFueraDeRango {
-		if(mundo.crearCelula(new CelulaCompleja(),this.fila, this.columna)) {
+	public void ejecuta(Controlador cntrl) throws IndicesFueraDeRango, PalabraIncorrecta {
+		Celula celula;
+		String tCelula;
+		System.out.println("De qué tipo: ");
+		tCelula = cntrl.readWord();
+		if(igualesIns(tCelula,"simple")) {
+			celula = new CelulaSimple();
+		}
+		else if(igualesIns(tCelula,"compleja")) {
+			celula = new CelulaCompleja();
+		}
+		else throw new PalabraIncorrecta(tCelula);
+		
+		if(cntrl.crearCelula(celula,this.fila, this.columna)) {
 			System.out.print("Creamos célula compleja en la posición (");
 			System.out.println( this.fila + "," + this.columna + ")");
 		}
