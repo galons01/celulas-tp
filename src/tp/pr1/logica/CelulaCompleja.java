@@ -55,6 +55,5 @@ public class CelulaCompleja implements Celula {
 	
 	public void save(FileWriter file) throws IOException {
 		file.write("compleja " + this.celsComidas);
-		file.write(System.getProperty("line.separator"));
 	}
 }

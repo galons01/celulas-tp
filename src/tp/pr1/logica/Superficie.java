@@ -176,16 +176,12 @@ public class Superficie {
 	 * @throws IOException
 	 */
 	public void save(FileWriter file) throws IOException {
-		try {
-			for(int i=0; i<this.filas; i++) {
-				for(int j=0; j<this.columnas; j++) {
-					file.write(i + " " + j);
-					this.superficie[i][j].save(file);
-				}
+		for(int i=0; i<this.filas; i++) {
+			for(int j=0; j<this.columnas; j++) {
+				file.write(i + " " + j);
+				this.superficie[i][j].save(file);
+				file.write(System.getProperty("line.separator"));
 			}
-		}
-		catch(IOException e) {
-			throw e;
 		}
 	}
 }
