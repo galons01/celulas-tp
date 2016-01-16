@@ -1,5 +1,7 @@
 package tp.pr1.control;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import tp.pr1.comandos.Comando;
 import tp.pr1.comandos.ParserComandos;
@@ -15,7 +17,7 @@ public class Controlador {
 	private Scanner in;
 	private Mundo mundo;
 	
-	public Controlador(Mundo mundo, Scanner in) {
+	public Controlador(Scanner in) {
 		this.in = in;
 	}
 	
@@ -23,30 +25,35 @@ public class Controlador {
 	 * Comienza la simulacion del mundo. Pide comandos al usuario por medio
 	 * de una terminal. La función se mantendrá en bucle mientras no se
 	 * introduzca el comando salir.
+	 * @throws ErrorCargar 
+	 * @throws FileNotFoundException 
 	 */
-	
-	public void cargarMundo(String nombreArchivo){
-		Scanner archivo = new Scanner(nombreArchivo);
-		String primeraLinea = archivo.nextLine();
-		int ancho, largo;
-		ancho = archivo.nextInt();
-		largo = archivo.nextInt();
+	public void cargarMundo(String nombreArchivo) throws ErrorCargar, FileNotFoundException {
+		Scanner archivo;
+		String tMundo;
+		int filas, columnas;
+		Mundo nuevoMundo;
+		
+		archivo = new Scanner(new File(nombreArchivo));
+		
 		try {
-			if (primeraLinea=="simple"){
-				mundo = new MundoSimple(ancho, largo);
+			tMundo = archivo.nextLine();
+			filas = archivo.nextInt();
+			columnas = archivo.nextInt();
+			
+			if(tMundo.equals("simple")) {
+				nuevoMundo = new MundoSimple(filas, columnas);
 			}
-			else if (primeraLinea=="complejo") {
-				mundo = new MundoComplejo(ancho, largo);
+			else if(tMundo.equals("complejo")) {
+				nuevoMundo = new MundoComplejo(filas, columnas);
 			}
-			else {
-				throw new ErrorCargar();
-			}
-		mundo.cargar(archivo);
-		} catch (ErrorCargar e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			else throw new ErrorCargar();
+			mundo.cargar(archivo);
+		} 
+		finally {
+			archivo.close();
 		}
-		archivo.close();
+		this.mundo = nuevoMundo;
 	}
 	
 	public void realizaSimulacion() {

@@ -2,7 +2,9 @@ package tp.pr1.logica;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
+import tp.pr1.excepciones.ErrorCargar;
 import tp.pr1.excepciones.IndicesFueraDeRango;
 
 public interface Celula {
@@ -34,5 +36,12 @@ public interface Celula {
 	 * @param file Archivo al que va la célula
 	 * @throws IOException
 	 */
-	public void save(FileWriter file) throws IOException;
+	public abstract void save(FileWriter file) throws IOException;
+	
+	/**
+	 * Carga la celula de un archivo dado.
+	 * @param file Archivo al que va la célula
+	 * @throws IOException
+	 */
+	public abstract void cargar(Scanner file) throws ErrorCargar;
 }

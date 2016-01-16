@@ -46,29 +46,32 @@ public class MundoSimple extends Mundo {
 		}
 	}
 
-public void cargar(Scanner archivo) throws ErrorCargar{
-	int x,y, pasos, pasosSinMoverse = 0;
-	String tipoCelula = null;
-	
-		while(archivo.hasNext()){
-			x = archivo.nextInt();
-			y = archivo.nextInt();
-			tipoCelula = archivo.next();
-			try {
- 			if(tipoCelula=="simple"){
- 				crearCelula(new CelulaSimple(), x, y);
+
+	public void cargar(Scanner archivo) throws ErrorCargar {
+		int i,j;
+		String tCelula;
+		Celula celula;
+		
+ 		while(archivo.hasNext()){
+ 			i = archivo.nextInt();
+ 			j = archivo.nextInt();
+ 			tCelula = archivo.next();
+ 			
+ 			if(tCelula.equals("simple")) {
+ 				celula = new CelulaSimple();
 			}
- 
- 			else{
+ 			else throw new ErrorCargar();
+ 			
+ 			celula.cargar(archivo);
+	 		try {
+	 			this.superficie.insertar(celula, i, j);
+ 			} catch (IndicesFueraDeRango e) {
  				throw new ErrorCargar();
  			}
- 			
-			} catch (IndicesFueraDeRango e) {
-				throw new ErrorCargar();
-			}
-		}
-	}
-public void guardar(FileWriter file) throws IOException{
+ 		}
+ 	}
+	
+	public void guardar(FileWriter file) throws IOException{
 		file.write("simple");
 		file.write(System.getProperty("line.separator"));
 		file.write(N_FILAS);

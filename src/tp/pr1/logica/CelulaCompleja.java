@@ -2,7 +2,9 @@ package tp.pr1.logica;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
+import tp.pr1.excepciones.ErrorCargar;
 import tp.pr1.excepciones.IndicesFueraDeRango;
 
 public class CelulaCompleja implements Celula {
@@ -58,5 +60,14 @@ public class CelulaCompleja implements Celula {
 	public void save(FileWriter file) throws IOException {
 		file.write("compleja " + this.celsComidas);
 		file.write(System.getProperty("line.separator"));
+	}
+	
+	public void cargar(Scanner archivo) throws ErrorCargar {
+		String[] params = archivo.nextLine().split(" ");
+		try {
+			this.celsComidas = Short.parseShort(params[0]);
+		} catch (NullPointerException e) {
+			throw new ErrorCargar();
+		}
 	}
 }

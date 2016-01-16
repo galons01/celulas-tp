@@ -60,26 +60,26 @@ public class MundoComplejo extends Mundo {
 	}
 	
 	public void cargar(Scanner archivo) throws ErrorCargar{
-		int x,y, pasos, pasosSinMoverse = 0;
-		String tipoCelula = null;
+		int i,j;
+		String tCelula;
+		Celula celula;
 		
  		while(archivo.hasNext()){
- 			x = archivo.nextInt();
- 			y = archivo.nextInt();
- 			tipoCelula = archivo.next();
- 			try {
-	 			if(tipoCelula=="simple"){
-	 				crearCelula(new CelulaSimple(), x, y);
-				}
-	 			
-	 			else if(tipoCelula=="Compleja"){
-	 				crearCelula(new CelulaCompleja(), x, y);
-	 			}
-	 			
-	 			else{
-	 				throw new ErrorCargar();
-	 			}
-	 			
+ 			i = archivo.nextInt();
+ 			j = archivo.nextInt();
+ 			tCelula = archivo.next();
+ 			
+ 			if(tCelula.equals("simple")) {
+ 				celula = new CelulaSimple();
+			}
+ 			else if(tCelula.equals("compleja")) {
+ 				celula = new CelulaCompleja();
+ 			}
+ 			else throw new ErrorCargar();
+ 			celula.cargar(archivo);
+ 			
+	 		try {
+	 			this.superficie.insertar(celula, i, j);
  			} catch (IndicesFueraDeRango e) {
  				throw new ErrorCargar();
  			}

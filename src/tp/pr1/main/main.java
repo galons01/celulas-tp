@@ -9,7 +9,7 @@ public class main {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		Controlador ctrl = new Controlador(mundo, sc);
+		Controlador ctrl = new Controlador(sc);
 		
 		ctrl.realizaSimulacion();	
 	}

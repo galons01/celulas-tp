@@ -168,7 +168,6 @@ public abstract class Mundo {
 		}
 	}
 
-	
 	/**
 	 * Representa en un String la superficie.
 	 */
@@ -176,7 +175,18 @@ public abstract class Mundo {
 		return this.superficie.toString();
 	}
 	
+	/**
+	 * Carga un mundo del archivo.
+	 * @param archivo Archivo desde el que se carga el mundo.
+	 * @throws ErrorCargar Si el archivo está corrupto.
+	 */
 	public abstract void cargar(Scanner archivo) throws ErrorCargar;
+	
+	/**
+	 * Guarda un mundo en el archivo.
+	 * @param archivo Archivo en el que se guarda el mundo.
+	 * @throws ErrorCargar Si ocurre un error con el archivo.
+	 */
 	public abstract void guardar(FileWriter file) throws IOException;
 }
 
