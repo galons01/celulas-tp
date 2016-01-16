@@ -1,5 +1,7 @@
 package tp.pr1.logica;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import tp.pr1.excepciones.ErrorCargar;
@@ -83,6 +85,16 @@ public class MundoComplejo extends Mundo {
  			}
  		}
  	}
+	
+	public void guardar(FileWriter file) throws IOException{
+		file.write("complejo");
+		file.write(System.getProperty("line.separator"));
+		file.write(N_FILAS);
+		file.write(System.getProperty("line.separator"));
+		file.write(N_COLUMNAS);
+		file.write(System.getProperty("line.separator"));
+		this.superficie.save(file);
+	}
 	
 }
 

@@ -1,5 +1,7 @@
 package tp.pr1.logica;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import tp.pr1.excepciones.ErrorCargar;
@@ -175,5 +177,6 @@ public abstract class Mundo {
 	}
 	
 	public abstract void cargar(Scanner archivo) throws ErrorCargar;
+	public abstract void guardar(FileWriter file) throws IOException;
 }
 
