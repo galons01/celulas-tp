@@ -6,6 +6,8 @@ import tp.pr1.comandos.ParserComandos;
 import tp.pr1.excepciones.*;
 import tp.pr1.logica.Celula;
 import tp.pr1.logica.Mundo;
+import tp.pr1.logica.MundoComplejo;
+import tp.pr1.logica.MundoSimple;
 
 public class Controlador {
 	
@@ -30,7 +32,7 @@ public class Controlador {
 		ancho = archivo.nextInt();
 		largo = archivo.nextInt();
 		if (primeraLinea=="simple"){
-			mundo = new Mundosimple(ancho, largo);
+			mundo = new MundoSimple(ancho, largo);
 			mundo.cargar(archivo);
 		}
 		else if (primeraLinea=="complejo") {

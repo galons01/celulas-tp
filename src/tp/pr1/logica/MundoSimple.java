@@ -1,5 +1,8 @@
 package tp.pr1.logica;
 
+import java.util.Scanner;
+
+import tp.pr1.excepciones.ErrorCargar;
 import tp.pr1.excepciones.ErrorDeInicializacion;
 import tp.pr1.excepciones.IndicesFueraDeRango;
 
@@ -38,6 +41,29 @@ public class MundoSimple extends Mundo {
 					i++;
 				}
 			} catch (IndicesFueraDeRango e) {}
+		}
+	}
+
+public void cargar(Scanner archivo) throws ErrorCargar{
+	int x,y, pasos, pasosSinMoverse = 0;
+	String tipoCelula = null;
+	
+		while(archivo.hasNext()){
+			x = archivo.nextInt();
+			y = archivo.nextInt();
+			tipoCelula = archivo.next();
+			try {
+ 			if(tipoCelula=="simple"){
+ 				crearCelula(new CelulaSimple(), x, y);
+			}
+ 
+ 			else{
+ 				throw new ErrorCargar();
+ 			}
+ 			
+			} catch (IndicesFueraDeRango e) {
+				throw new ErrorCargar();
+			}
 		}
 	}
 }

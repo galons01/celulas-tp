@@ -2,6 +2,7 @@ package tp.pr1.logica;
 
 import java.util.Scanner;
 
+import tp.pr1.excepciones.ErrorCargar;
 import tp.pr1.excepciones.ErrorDeInicializacion;
 import tp.pr1.excepciones.IndicesFueraDeRango;
 
@@ -173,28 +174,6 @@ public abstract class Mundo {
 		return this.superficie.toString();
 	}
 	
-	public void cargar(Scanner archivo) throws Exception{
-		int x,y, pasos, pasosSinMoverse = 0;
-		String tipoCelula = null;
-		
- 		while(archivo.hasNext()){
- 			x = archivo.nextInt();
- 			y = archivo.nextInt();
- 			tipoCelula = archivo.next();
- 			pasos = archivo.nextInt();
- 			pasosSinMoverse= archivo.nextInt();
- 			
- 			if(tipoCelula=="simple"){
- 				crearCelula(new CelulaSimple(), x, y);
- 			}
- 			else if(tipoCelula=="Compleja"){
- 				crearCelula(new CelulaCompleja(), x, y);
- 			}
- 			else{
- 				
- 			}
- 			
- 		}
- 	}
+	public abstract void cargar(Scanner archivo) throws ErrorCargar;
 }
 
