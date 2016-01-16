@@ -2,6 +2,10 @@ package tp.pr1.logica;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+
+import tp.pr1.excepciones.ErrorCargar;
+import tp.pr1.excepciones.IndicesFueraDeRango;
 
 public class CelulaSimple implements Celula {
 	private static final short MAX_PASOS_SIN_MOVER = 2;
@@ -15,7 +19,7 @@ public class CelulaSimple implements Celula {
 		this.pasosMuerte = CelulaSimple.MAX_PASOS_SIN_MOVER;
 	}
 	
-	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie){
+	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie) throws IndicesFueraDeRango {
 		Casilla pos = null;
 		/*Si le quedan movimientos */
 		if(this.pasosMuerte > 0) {
@@ -62,8 +66,9 @@ public class CelulaSimple implements Celula {
 	 * INTENTA mover una célula
 	 * @param pos Posición de entrada y salida, null si no se ha movido
 	 * @return Devuelve el parámetro pos también.
+	 * @throws IndicesFueraDeRango 
 	 */
-	private static Casilla moverCelula(Casilla pos, Superficie superficie) {
+	private static Casilla moverCelula(Casilla pos, Superficie superficie) throws IndicesFueraDeRango {
 		/*Copiamos la posicion original*/
 		int f = pos.getFila();
 		int c = pos.getColumna();
@@ -126,9 +131,19 @@ public class CelulaSimple implements Celula {
 		return "[" + this.pasosMuerte + "-" + this.pasosReprod + "]";
 	}
 	
-	
+
 	public void save(FileWriter file) throws IOException {
 			file.write("simple " + this.pasosMuerte + " " + this.pasosReprod);
 			file.write(System.getProperty("line.separator"));
+	}
+	
+	public void cargar(Scanner archivo) throws ErrorCargar {
+		String[] params = archivo.nextLine().split(" ");
+		try {
+			this.pasosMuerte = Short.parseShort(params[0]);
+			this.pasosMuerte = Short.parseShort(params[1]);
+		} catch (NullPointerException e) {
+			throw new ErrorCargar();
+		}
 	}
 }

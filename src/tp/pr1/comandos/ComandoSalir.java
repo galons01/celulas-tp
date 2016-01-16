@@ -1,6 +1,6 @@
 package tp.pr1.comandos;
 
-import tp.pr1.logica.Mundo;
+import tp.pr1.control.Controlador;
 
 public class ComandoSalir extends Comando {
 
@@ -8,8 +8,8 @@ public class ComandoSalir extends Comando {
 	 * Ejecuta el comando.
 	 * @param mundo
 	 */
-	public void ejecuta(Mundo mundo) {
-		mundo.terminarSimulacion();
+	public void ejecuta(Controlador cntrl) {
+		cntrl.terminarSimulacion();
 	}
 
 	/**

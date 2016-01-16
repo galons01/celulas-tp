@@ -1,7 +1,7 @@
 package tp.pr1.comandos;
 
 import tp.pr1.excepciones.ErrorDeInicializacion;
-import tp.pr1.logica.Mundo;
+import tp.pr1.control.Controlador;;
 
 public class ComandoIniciar extends Comando {
 
@@ -9,8 +9,8 @@ public class ComandoIniciar extends Comando {
 	 * Ejecuta el comando.
 	 * @param mundo
 	 */
-	public void ejecuta(Mundo mundo) throws ErrorDeInicializacion {
-		mundo.iniciar();
+	public void ejecuta(Controlador cntrl) throws ErrorDeInicializacion {
+		cntrl.iniciar();
 	}
 
 	/**

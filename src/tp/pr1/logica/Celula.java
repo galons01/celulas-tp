@@ -2,6 +2,10 @@ package tp.pr1.logica;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+
+import tp.pr1.excepciones.ErrorCargar;
+import tp.pr1.excepciones.IndicesFueraDeRango;
 
 public interface Celula {
 	
@@ -11,8 +15,10 @@ public interface Celula {
 	 * @param c Columna en la que se ebcuentra la célula dentro de la superficie
 	 * @param superficie Superficie en la que se ebcuentra la célula
 	 * @return Casilla a la que se ha movido o null.
+	 * @throws IndicesFueraDeRango Si la posicion está fuera de la superficie dada.
 	 */
-	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie);
+	public Casilla ejecutaMovimiento (int f, int c, Superficie superficie)
+			throws IndicesFueraDeRango;
 	
 	/**
 	 * Determina si una célula es comestible o no.
@@ -30,5 +36,12 @@ public interface Celula {
 	 * @param file Archivo al que va la célula
 	 * @throws IOException
 	 */
-	public void save(FileWriter file) throws IOException;
+	public abstract void save(FileWriter file) throws IOException;
+	
+	/**
+	 * Carga la celula de un archivo dado.
+	 * @param file Archivo al que va la célula
+	 * @throws IOException
+	 */
+	public abstract void cargar(Scanner file) throws ErrorCargar;
 }

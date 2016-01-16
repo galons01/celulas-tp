@@ -3,7 +3,7 @@ package tp.pr1.comandos;
 import tp.pr1.excepciones.ErrorDeInicializacion;
 import tp.pr1.excepciones.FormatoNumericoIncorrecto;
 import tp.pr1.excepciones.IndicesFueraDeRango;
-import tp.pr1.logica.Mundo;
+import tp.pr1.control.Controlador;
 
 public abstract class Comando {
 	
@@ -13,7 +13,7 @@ public abstract class Comando {
 	 * @throws IndicesFueraDeRango Si los parámetros están fuera del mundo.
 	 * @throws ErrorDeInicializacion Si al ejecutar el comando el mundo es erróneo.
 	 */
-	public abstract void ejecuta(Mundo mundo) throws IndicesFueraDeRango, ErrorDeInicializacion;
+	public abstract void ejecuta(Controlador cntrl) throws IndicesFueraDeRango, ErrorDeInicializacion;
 	
 	
 	/**

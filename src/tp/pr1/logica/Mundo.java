@@ -1,16 +1,39 @@
 package tp.pr1.logica;
 
-import tp.pr1.excepciones.ErrorDeInicializacion;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
-public class Mundo {
+import tp.pr1.excepciones.ErrorCargar;
+import tp.pr1.excepciones.ErrorDeInicializacion;
+import tp.pr1.excepciones.IndicesFueraDeRango;
+
+public abstract class Mundo {
 	
-	private final static int N_FILAS = 3;
-	private final static int N_COLUMNAS = 4;
-	private final static int DEF_CELULAS = N_FILAS*N_COLUMNAS/3; /*33% de células aleatorias*/
-	private final static int DEF_CELULAS_COMPLEJAS = DEF_CELULAS/2; /*50% de células complejas*/
+	protected final int N_FILAS;
+	protected final int N_COLUMNAS;
 	
-	private Superficie superficie = new Superficie(N_FILAS,N_COLUMNAS);
-	private boolean simulacionTerminada = true;
+	protected Superficie superficie;
+	protected boolean simulacionTerminada = true;
+	
+	public Mundo() {
+		this.N_FILAS = 0;
+		this.N_COLUMNAS = 0;
+		this.superficie = null;
+	}
+	
+	public Mundo(int f, int c) {
+		this.N_FILAS = f;
+		this.N_COLUMNAS = c;
+		this.superficie = new Superficie(N_FILAS,N_COLUMNAS);
+	}
+	
+	
+	/**
+	 * Inicializa el mundo con células aleatorias.
+	 * @throws ErrorDeInicializacion Si el mundo no es válido.
+	 */
+	abstract public void iniciar() throws ErrorDeInicializacion;
 	
 	
 	/**
@@ -29,43 +52,29 @@ public class Mundo {
 		this.simulacionTerminada = false;
 	}
 	
-	
 	/**
-	 * Crea una celula simple en el mundo (para usar desde fuera)
+	 * Crea una celula en el mundo (para usar desde fuera)
 	 * @param f Fila
 	 * @param c Columna
 	 * @return Devuelve si ce creó la celula
+	 * @throws IndicesFueraDeRango Si la posición está fuera del mundo
 	 */
-	public boolean crearCelulaSimple(int f, int c) {
+	public boolean crearCelula(Celula celula, int f, int c) throws IndicesFueraDeRango {
 		if(this.superficie.posLibre(f,c)) {
-			this.superficie.insertar(new CelulaSimple(), f, c);
-			return true;
-		}
-		else return false;
-	}
-		
-	/**
-	 * Crea una celula compleja en el mundo (para usar desde fuera)
-	 * @param f Fila
-	 * @param c Columna
-	 * @return Devuelve si ce creó la celula
-	 */
-	public boolean crearCelulaCompleja(int f, int c) {
-		if(this.superficie.posLibre(f,c)) {
-			this.superficie.insertar(new CelulaCompleja(), f, c);
+			this.superficie.insertar(celula, f, c);
 			return true;
 		}
 		else return false;
 	}
 	
-
 	/**
 	 * Elimina una celula del mundo (para usar desde fuera)
 	 * @param f Fila
 	 * @param c Columna
 	 * @return Devuelve si se movio la celula
+	 * @throws IndicesFueraDeRango Si la posición está fuera del mundo
 	 */
-	public boolean eliminarCelula(int f, int c) {
+	public boolean eliminarCelula(int f, int c) throws IndicesFueraDeRango {
 		if(!this.superficie.posLibre(f, c)) {
 			this.superficie.eliminar(f, c);
 			return true;
@@ -88,37 +97,6 @@ public class Mundo {
 			a = a - b; //a(new) = (a+b) - b(new) = (a+b) - ((a+b)-b) = b(old)
 		}
 		return (int)(Math.random()*(b-a+1)+a);	
-	}
-
-	/**
-	 * Inicializa el mundo con células aleatorias.
-	 * @throws ErrorDeInicializacion Si el mundo no es válido.
-	 */
-	public void iniciar() throws ErrorDeInicializacion {
-		int i = 0;
-		int f, c;
-		
-		this.superficie.vaciar();
-		
-		if(!this.superficie.hayCapacidad(Mundo.DEF_CELULAS)) {
-			throw new ErrorDeInicializacion();
-		}
-		
-		/*Crea las células complejas*/
-		while(i<Mundo.DEF_CELULAS_COMPLEJAS) {
-			f = numAleatorio(0,this.superficie.getFilas()-1);
-			c = numAleatorio(0,this.superficie.getColumnas()-1);
-			if(this.crearCelulaCompleja(f,c))
-				i++;
-		}
-		/*Crea las células simples*/
-		i = 0;
-		while(i<(Mundo.DEF_CELULAS-Mundo.DEF_CELULAS_COMPLEJAS)) {
-			f = numAleatorio(0,this.superficie.getFilas()-1);
-			c = numAleatorio(0,this.superficie.getColumnas()-1);
-			if(this.crearCelulaSimple(f,c))
-				i++;
-		}
 	}
 	
 	
@@ -172,22 +150,24 @@ public class Mundo {
 		
 		/*Y aplica la lógica para cada una de ellas*/
 		for(int i=0; i<ocupadas.len(); i++) {
-			nuevaPos = this.superficie.ejecutaMovimiento(ocupadas.get(i));
-			
-			/*Si se ha movido*/
-			if(nuevaPos!=null) {
-				/*Asegurándose de que la posición a la que se ha movido
-				  no está en la lista para que no se mueva dos veces*/
-				if(nuevaPos.greater(ocupadas.get(i))) {
-					x = ocupadas.buscar(nuevaPos);
-					if(x>=0)
-						ocupadas.eliminarCasilla(x);
+			try {
+				nuevaPos = this.superficie.ejecutaMovimiento(ocupadas.get(i));
+				/*Si se ha movido*/
+				if(nuevaPos!=null) {
+					/*Asegurándose de que la posición a la que se ha movido
+					  no está en la lista para que no se mueva dos veces*/
+					if(nuevaPos.greater(ocupadas.get(i))) {
+						x = ocupadas.buscar(nuevaPos);
+						if(x>=0)
+							ocupadas.eliminarCasilla(x);
+					}
 				}
+			} catch (IndicesFueraDeRango e) {
+				/*No hace nada. Sigue con el bucle.*/
 			}
 		}
 	}
 
-	
 	/**
 	 * Representa en un String la superficie.
 	 */
@@ -195,5 +175,18 @@ public class Mundo {
 		return this.superficie.toString();
 	}
 	
+	/**
+	 * Carga un mundo del archivo.
+	 * @param archivo Archivo desde el que se carga el mundo.
+	 * @throws ErrorCargar Si el archivo está corrupto.
+	 */
+	public abstract void cargar(Scanner archivo) throws ErrorCargar;
+	
+	/**
+	 * Guarda un mundo en el archivo.
+	 * @param archivo Archivo en el que se guarda el mundo.
+	 * @throws ErrorCargar Si ocurre un error con el archivo.
+	 */
+	public abstract void guardar(FileWriter file) throws IOException;
 }
 

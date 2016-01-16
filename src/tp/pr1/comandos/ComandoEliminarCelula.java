@@ -1,8 +1,8 @@
 package tp.pr1.comandos;
 
+import tp.pr1.control.Controlador;
 import tp.pr1.excepciones.FormatoNumericoIncorrecto;
 import tp.pr1.excepciones.IndicesFueraDeRango;
-import tp.pr1.logica.Mundo;
 
 public class ComandoEliminarCelula extends Comando {
 	private int fila;
@@ -22,9 +22,9 @@ public class ComandoEliminarCelula extends Comando {
 	 * Ejecuta el comando eliminarcelula. Elimina una celula del mundo.
 	 * @param mundo Mundo sobre el que se ejecuta la acción.
 	 */
-	public void ejecuta(Mundo mundo) throws IndicesFueraDeRango {
+	public void ejecuta(Controlador cntrl) throws IndicesFueraDeRango {
 		try {
-			if(mundo.eliminarCelula(this.fila, this.columna)) {
+			if(cntrl.eliminarCelula(this.fila, this.columna)) {
 				System.out.print("Eliminamos la célula en la posición (");
 				System.out.println( this.fila + "," + this.columna + ")");
 			}

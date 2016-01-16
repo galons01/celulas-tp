@@ -8,8 +8,7 @@ public class ParserComandos {
 			new ComandoIniciar(),
 			new ComandoVaciar(),
 			new ComandoAyuda(),
-			new ComandoCrearCelulaSimple(),
-			new ComandoCrearCelulaCompleja(),
+			new ComandoCrearCelula(),
 			new ComandoEliminarCelula(),
 			new ComandoSalir()
 	};

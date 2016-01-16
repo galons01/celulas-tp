@@ -2,47 +2,45 @@ package tp.pr1.comandos;
 
 import tp.pr1.excepciones.FormatoNumericoIncorrecto;
 import tp.pr1.excepciones.IndicesFueraDeRango;
+import tp.pr1.logica.CelulaCompleja;
+import tp.pr1.logica.CelulaSimple;
 import tp.pr1.logica.Mundo;
 
-public class ComandoCrearCelulaSimple extends Comando {
+public class ComandoCrearCelula extends Comando {
 	private int fila;
 	private int columna;
 	
-	public ComandoCrearCelulaSimple(int f, int c) {
+	public ComandoCrearCelula(int f, int c) {
 		this.fila = f;
 		this.columna = c;
 	}
 	
-	public ComandoCrearCelulaSimple() {
+	public ComandoCrearCelula() {
 		this.fila = this.columna = 0;
 	}
 
 
 	public void ejecuta(Mundo mundo) throws IndicesFueraDeRango {
-		try {
-			if(mundo.crearCelulaSimple(this.fila, this.columna)) {
-				System.out.print("Creamos célula simple en la posición (");
-				System.out.println( this.fila + "," + this.columna + ")");
-			}
-			else System.out.println("Ya hay una célula en esa posición");
-		} catch(ArrayIndexOutOfBoundsException e) {
-			throw new IndicesFueraDeRango();
+		if(mundo.crearCelula(new CelulaCompleja(),this.fila, this.columna)) {
+			System.out.print("Creamos célula compleja en la posición (");
+			System.out.println( this.fila + "," + this.columna + ")");
 		}
+		else System.out.println("Ya hay una célula en esa posición");
 	}
 	
 	
 	/**
 	 * Parsea el comando.
 	 * @param cadenaComando Array de strings con el comando y los parámetros.
-	 * @return Objeto ComandoCrearCelulaSimple si procede o null.
+	 * @return Objeto ComandoCrearCelula si procede o null.
 	 */
 	public Comando parsea(String[] cadenaComando) throws FormatoNumericoIncorrecto {
 		if( cadenaComando.length == 3 &&
-			igualesIns(cadenaComando[0],"CREARCELULASIMPLE")) {
+			igualesIns(cadenaComando[0],"CREARCELULA")) {
 			try {
 				int f = Integer.parseInt(cadenaComando[1]);
 				int c = Integer.parseInt(cadenaComando[2]);
-				return new ComandoCrearCelulaSimple(f,c);
+				return new ComandoCrearCelula(f,c);
 			} catch ( NumberFormatException e ) {
 				throw new  FormatoNumericoIncorrecto();
 			}
@@ -56,7 +54,7 @@ public class ComandoCrearCelulaSimple extends Comando {
 	 * @return String con la descripción.
 	 */
 	public String textoAyuda() {
-		return "CREARCELULASIMPLE: Inserta una célula simple en la posición indicada.";
+		return "CREARCELULA: Inserta una célula en la posición indicada.";
 	}
 
 }
