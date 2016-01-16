@@ -15,7 +15,6 @@ public class Controlador {
 	
 	public Controlador(Mundo mundo, Scanner in) {
 		this.in = in;
-		this.mundo = mundo;
 	}
 	
 	/**
@@ -23,6 +22,26 @@ public class Controlador {
 	 * de una terminal. La función se mantendrá en bucle mientras no se
 	 * introduzca el comando salir.
 	 */
+	
+	public void cargarMundo(String nombreArchivo){
+		Scanner archivo = new Scanner(nombreArchivo);
+		String primeraLinea = archivo.nextLine();
+		int ancho, largo;
+		ancho = archivo.nextInt();
+		largo = archivo.nextInt();
+		if (primeraLinea=="simple"){
+			mundo = new Mundosimple(ancho, largo);
+			mundo.cargar(archivo);
+		}
+		else if (primeraLinea=="complejo") {
+			mundo = new MundoComplejo(ancho, largo);
+			mundo.cargar(archivo);
+		}
+		else {
+			
+		}
+	}
+	
 	public void realizaSimulacion() {
 		Comando comando;
 		String[] palabras;
