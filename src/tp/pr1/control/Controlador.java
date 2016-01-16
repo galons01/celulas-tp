@@ -22,11 +22,10 @@ public class Controlador {
 	}
 	
 	/**
-	 * Comienza la simulacion del mundo. Pide comandos al usuario por medio
-	 * de una terminal. La función se mantendrá en bucle mientras no se
-	 * introduzca el comando salir.
-	 * @throws ErrorCargar 
-	 * @throws FileNotFoundException 
+	 * Carga un mundo de un archivo.
+	 * @param nombreArchivo Nombre del archivo a cargar.
+	 * @throws ErrorCargar Si el archivo está corrupto.
+	 * @throws FileNotFoundException Si el archivo no existe.
 	 */
 	public void cargarMundo(String nombreArchivo) throws ErrorCargar, FileNotFoundException {
 		Scanner archivo;
@@ -56,6 +55,11 @@ public class Controlador {
 		this.mundo = nuevoMundo;
 	}
 	
+	/**
+	 * Comienza la simulacion del mundo. Pide comandos al usuario por medio de
+	 * una terminal. La función se mantendrá en bucle mientras no se introduzca
+	 * el comando salir.
+	 */
 	public void realizaSimulacion() {
 		Comando comando;
 		String[] palabras;
