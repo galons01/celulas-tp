@@ -2,6 +2,8 @@ package tp.pr1.control;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import tp.pr1.comandos.Comando;
 import tp.pr1.comandos.ParserComandos;
@@ -53,6 +55,16 @@ public class Controlador {
 			archivo.close();
 		}
 		this.mundo = nuevoMundo;
+	}
+	
+	/**
+	 * Guarda un mundo de un archivo.
+	 * @param nombreArchivo Nombre del archivo a guardar.
+	 * @throws IOException 
+	 */
+	public void guardarMundo(String nombreArchivo) throws IOException {
+		FileWriter file = new FileWriter(new File(nombreArchivo));
+		this.mundo.guardar(file);
 	}
 	
 	/**
