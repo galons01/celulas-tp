@@ -1,6 +1,6 @@
 package tp.pr1.comandos;
 
-import tp.pr1.logica.Mundo;
+import tp.pr1.control.Controlador;
 
 public class ComandoAyuda extends Comando {
 
@@ -8,7 +8,7 @@ public class ComandoAyuda extends Comando {
 	 * Ejecuta el comando.
 	 * @param mundo (Not needed)
 	 */
-	public void ejecuta(Mundo mundo) {
+	public void ejecuta(Controlador cntrl) {
 		System.out.print(ParserComandos.AyudaComandos());
 	}
 

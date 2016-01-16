@@ -1,6 +1,6 @@
 package tp.pr1.comandos;
 
-import tp.pr1.logica.Mundo;
+import tp.pr1.control.Controlador;
 
 public class ComandoVaciar extends Comando {
 
@@ -8,8 +8,8 @@ public class ComandoVaciar extends Comando {
 	 * Ejecuta el comando.
 	 * @param mundo
 	 */
-	public void ejecuta(Mundo mundo) {
-		mundo.vaciar();
+	public void ejecuta(Controlador cntrl) {
+		cntrl.vaciar();
 	}
 
 	/**

@@ -4,6 +4,7 @@ import java.util.Scanner;
 import tp.pr1.comandos.Comando;
 import tp.pr1.comandos.ParserComandos;
 import tp.pr1.excepciones.*;
+import tp.pr1.logica.Celula;
 import tp.pr1.logica.Mundo;
 
 public class Controlador {
@@ -34,7 +35,7 @@ public class Controlador {
 			try {
 				comando = ParserComandos.parseaComando(palabras);
 				if(comando != null) {
-					comando.ejecuta(this.mundo);
+					comando.ejecuta(this);
 				}
 				else {
 					System.out.println("ERROR: Comando desconocido.");
@@ -51,4 +52,32 @@ public class Controlador {
 		System.out.println("Fin de la simulación...");
 	}
 	
+	
+	//===================================
+	// Funciones puente                 |
+	//===================================
+	
+	public boolean crearCelula(Celula cel, int f, int c) throws IndicesFueraDeRango {
+		return this.mundo.crearCelula(cel, f, c);
+	}
+	
+	public boolean eliminarCelula(int f, int c) throws IndicesFueraDeRango {
+		return this.mundo.eliminarCelula(f, c);
+	}
+	
+	public void iniciar() throws ErrorDeInicializacion {
+		this.mundo.iniciar();
+	}
+	
+	public void evoluciona() {
+		this.mundo.evoluciona();
+	}
+	
+	public void terminarSimulacion() {
+		this.mundo.terminarSimulacion();
+	}
+	
+	public void vaciar() {
+		this.mundo.vaciar();
+	}
 }
