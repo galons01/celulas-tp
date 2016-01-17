@@ -41,7 +41,8 @@ public interface Celula {
 	/**
 	 * Carga la celula de un archivo dado.
 	 * @param file Archivo al que va la célula
-	 * @throws IOException
+	 * @throws IOException Si se produce un error de carga
+	 * @throws ErrorCargar Si la célula leída es errónea.
 	 */
 	public abstract void cargar(Scanner file) throws ErrorCargar;
 }

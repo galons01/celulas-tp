@@ -136,8 +136,13 @@ public class CelulaSimple implements Celula {
 			file.write("simple " + this.pasosMuerte + " " + this.pasosReprod);
 	}
 	
-	public void cargar(Scanner archivo) {
+	public void cargar(Scanner archivo) throws ErrorCargar {
 		this.pasosMuerte = archivo.nextShort();
 		this.pasosReprod = archivo.nextShort();
+		
+		if(this.pasosMuerte < 0 || this.pasosMuerte > MAX_PASOS_SIN_MOVER ||
+		this.pasosReprod < 0 || this.pasosReprod > PASOS_REPRODUCCION) {
+			throw new ErrorCargar();
+		}
 	}
 }
