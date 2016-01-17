@@ -28,7 +28,7 @@ public class ComandoGuardar extends Comando {
 	public Comando parsea(String[] cadenaComando) {
 		if( cadenaComando.length == 2 &&
 			igualesIns(cadenaComando[0],"GUARDAR")) {
-					return new ComandoCargar(cadenaComando[1]);
+					return new ComandoGuardar(cadenaComando[1]);
 		}
 		else return null;
 	}
