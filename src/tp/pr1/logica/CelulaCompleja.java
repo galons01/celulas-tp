@@ -12,7 +12,9 @@ public class CelulaCompleja implements Celula {
 	
 	private final static int MAX_COMER = 3;
 	private int celsComidas;
-	
+	/**
+	 * constructor de celula compleja que inicializa celulas comidas a cero
+	 */
 	public CelulaCompleja() {
 		this.celsComidas = 0;
 	}

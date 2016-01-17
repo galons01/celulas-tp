@@ -22,7 +22,6 @@ public class ComandoCrearCelula extends Comando {
 		this.fila = this.columna = 0;
 	}
 
-
 	public void ejecuta(Controlador cntrl) throws IndicesFueraDeRango, PalabraIncorrecta {
 		Celula celula;
 		String tCelula;
