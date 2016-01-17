@@ -5,6 +5,7 @@ import tp.pr1.excepciones.FormatoNumericoIncorrecto;
 public class ParserComandos {
 	private static final Comando[] comandos = {
 			new ComandoPaso(),
+			new ComandoJugar(),
 			new ComandoIniciar(),
 			new ComandoVaciar(),
 			new ComandoCargar(),

@@ -4,6 +4,7 @@ import tp.pr1.excepciones.ErrorDeCarga;
 import tp.pr1.excepciones.ErrorDeInicializacion;
 import tp.pr1.excepciones.FormatoNumericoIncorrecto;
 import tp.pr1.excepciones.IndicesFueraDeRango;
+import tp.pr1.excepciones.NumeroParametrosIncorrecto;
 import tp.pr1.excepciones.PalabraIncorrecta;
 
 import java.io.FileNotFoundException;
@@ -23,7 +24,7 @@ public abstract class Comando {
 	 * @throws ErrorDeCarga Si no se pudo cargar el archivo con la partida.
 	 * @throws FileNotFoundException Si no se encontró el archivo especificado. 
 	 */
-	public abstract void ejecuta(Controlador cntrl) throws IndicesFueraDeRango, ErrorDeInicializacion, PalabraIncorrecta, FileNotFoundException, IOException, ErrorDeCarga;
+	public abstract void ejecuta(Controlador cntrl) throws IndicesFueraDeRango, ErrorDeInicializacion, PalabraIncorrecta, FileNotFoundException, IOException, ErrorDeCarga, NumeroParametrosIncorrecto;
 	
 	
 	/**
