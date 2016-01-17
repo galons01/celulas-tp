@@ -74,9 +74,9 @@ public class MundoSimple extends Mundo {
 	public void guardar(FileWriter file) throws IOException{
 		file.write("simple");
 		file.write(System.getProperty("line.separator"));
-		file.write(N_FILAS);
+		file.write(String.valueOf(this.N_FILAS));
 		file.write(System.getProperty("line.separator"));
-		file.write(N_COLUMNAS);
+		file.write(String.valueOf(this.N_COLUMNAS));
 		file.write(System.getProperty("line.separator"));
 		this.superficie.save(file);
 	}

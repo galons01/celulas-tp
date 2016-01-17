@@ -77,6 +77,7 @@ public class Controlador {
 	public void guardarMundo(String nombreArchivo) throws IOException {
 		FileWriter file = new FileWriter(new File(nombreArchivo));
 		this.mundo.guardar(file);
+		file.close();
 	}
 	
 	/**

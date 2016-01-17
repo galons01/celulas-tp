@@ -193,7 +193,7 @@ public class Superficie {
 		for(int i=0; i<this.filas; i++) {
 			for(int j=0; j<this.columnas; j++) {
 				if(this.superficie[i][j] != null) {
-					file.write(i + " " + j);
+					file.write(i + " " + j + " ");
 					this.superficie[i][j].save(file);
 					file.write(System.getProperty("line.separator"));
 				}
