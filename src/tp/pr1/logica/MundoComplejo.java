@@ -26,6 +26,12 @@ public class MundoComplejo extends Mundo {
 		this.N_CELULAS_COMPLEJAS = (f * c) / 5;
 	}
 	
+	public MundoComplejo(int f, int c, int nCelulasSimples, int nCelulasComplejas) {
+		super(f, c);
+		this.N_CELULAS_SIMPLES = nCelulasSimples;
+		this.N_CELULAS_COMPLEJAS = nCelulasComplejas;
+	}
+	
 
 	public void iniciar() throws ErrorDeInicializacion {
 		int i = 0;

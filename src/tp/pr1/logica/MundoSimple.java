@@ -11,17 +11,22 @@ import tp.pr1.excepciones.IndicesFueraDeRango;
 
 public class MundoSimple extends Mundo {
 	
-	private final int DEF_CELULAS;
+	private final int N_CELULAS;
 	
 	
 	public MundoSimple() {
 		super();
-		this.DEF_CELULAS = 0;
+		this.N_CELULAS = 0;
 	}
 	
 	public MundoSimple(int f, int c) {
 		super(f, c);
-		this.DEF_CELULAS = (f * c) / 3;
+		this.N_CELULAS = (f * c) / 3;
+	}
+	
+	public MundoSimple(int f, int c, int nCelulas) {
+		super(f, c);
+		this.N_CELULAS = nCelulas;
 	}
 	
 
@@ -31,12 +36,12 @@ public class MundoSimple extends Mundo {
 		
 		this.superficie.vaciar();
 		
-		if(!this.superficie.hayCapacidad(this.DEF_CELULAS)) {
+		if(!this.superficie.hayCapacidad(this.N_CELULAS)) {
 			throw new ErrorDeInicializacion();
 		}
 
 		i = 0;
-		while(i<this.DEF_CELULAS) {
+		while(i<this.N_CELULAS) {
 			f = numAleatorio(0,this.superficie.getFilas()-1);
 			c = numAleatorio(0,this.superficie.getColumnas()-1);
 			try {
