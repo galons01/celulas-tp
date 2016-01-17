@@ -136,13 +136,8 @@ public class CelulaSimple implements Celula {
 			file.write("simple " + this.pasosMuerte + " " + this.pasosReprod);
 	}
 	
-	public void cargar(Scanner archivo) throws ErrorCargar {
-		String[] params = archivo.nextLine().split(" ");
-		try {
-			this.pasosMuerte = Short.parseShort(params[0]);
-			this.pasosMuerte = Short.parseShort(params[1]);
-		} catch (NullPointerException e) {
-			throw new ErrorCargar();
-		}
+	public void cargar(Scanner archivo) {
+		this.pasosMuerte = archivo.nextShort();
+		this.pasosReprod = archivo.nextShort();
 	}
 }

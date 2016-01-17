@@ -61,12 +61,7 @@ public class CelulaCompleja implements Celula {
 		file.write("compleja " + this.celsComidas);
 	}
 	
-	public void cargar(Scanner archivo) throws ErrorCargar {
-		String[] params = archivo.nextLine().split(" ");
-		try {
-			this.celsComidas = Short.parseShort(params[0]);
-		} catch (NullPointerException e) {
-			throw new ErrorCargar();
-		}
+	public void cargar(Scanner archivo) {
+		this.celsComidas =  archivo.nextShort();
 	}
 }

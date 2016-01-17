@@ -61,7 +61,7 @@ public class Controlador {
 				nuevoMundo = new MundoComplejo(filas, columnas);
 			}
 			else throw new ErrorCargar();
-			mundo.cargar(archivo);
+			nuevoMundo.cargar(archivo);
 		} 
 		finally {
 			archivo.close();
