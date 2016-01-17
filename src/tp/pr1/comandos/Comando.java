@@ -34,8 +34,9 @@ public abstract class Comando {
 	 * @return Comando de la subclase que coincida.
 	 * @throws FormatoNumericoIncorrecto Si se ha introducido algo que no es 
 	 * un número entero.
+	 * @throws NumeroParametrosIncorrecto Si el número de parámetros introducido no es correcto.
 	 */
-	public abstract Comando parsea(String[ ] cadenaComando) throws FormatoNumericoIncorrecto;
+	public abstract Comando parsea(String[ ] cadenaComando) throws FormatoNumericoIncorrecto, NumeroParametrosIncorrecto;
 	
 	
 	/**

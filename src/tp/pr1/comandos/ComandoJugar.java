@@ -39,13 +39,13 @@ public class ComandoJugar extends Comando {
 	 * Parsea el comando.
 	 * @param cadenaComando Array de strings con el comando y los parámetros.
 	 * @return Objeto ComandoIniciar si procede o null.
-	 * @throws FormatoNumericoIncorrecto 
+	 * @throws FormatoNumericoIncorrecto  
 	 */
-	public Comando parsea(String[] cadenaComando) throws FormatoNumericoIncorrecto {
+	public Comando parsea(String[] cadenaComando) throws FormatoNumericoIncorrecto, NumeroParametrosIncorrecto {
 		int f,c;
 		int [] nCelulas;
-		if( cadenaComando.length > 4 &&
-			igualesIns(cadenaComando[0],"JUGAR")) {
+		if(igualesIns(cadenaComando[0],"JUGAR")) {
+			if(cadenaComando.length > 4) {
 				try {
 					f = Integer.parseInt(cadenaComando[2]);
 					c = Integer.parseInt(cadenaComando[3]);
@@ -57,6 +57,8 @@ public class ComandoJugar extends Comando {
 					throw new  FormatoNumericoIncorrecto();
 				}
 				return new ComandoJugar(cadenaComando[1],f,c, nCelulas);
+			}
+			else throw new NumeroParametrosIncorrecto();
 		}
 		else return null;
 	}
@@ -66,5 +68,6 @@ public class ComandoJugar extends Comando {
 	 * @return String con la descripción.
 	 */
 	public String textoAyuda() {
-		return "JUGAR: Inserta algunas células aleatorias en el mundo. ";
+		return "JUGAR: Crea un mundo nuevo. ";
 	}
+}

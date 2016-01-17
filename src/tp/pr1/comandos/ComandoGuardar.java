@@ -2,7 +2,8 @@ package tp.pr1.comandos;
 
 import java.io.IOException;
 
-import tp.pr1.control.Controlador;;
+import tp.pr1.control.Controlador;
+import tp.pr1.excepciones.NumeroParametrosIncorrecto;;
 
 public class ComandoGuardar extends Comando {
 	
@@ -23,12 +24,14 @@ public class ComandoGuardar extends Comando {
 	/**
 	 * Parsea el comando.
 	 * @param cadenaComando Array de strings con el comando y los parámetros.
-	 * @return Objeto ComandoIniciar si procede o null.
+	 * @return Objeto ComandoIniciar si procede o null. 
 	 */
-	public Comando parsea(String[] cadenaComando) {
-		if( cadenaComando.length == 2 &&
-			igualesIns(cadenaComando[0],"GUARDAR")) {
-					return new ComandoGuardar(cadenaComando[1]);
+	public Comando parsea(String[] cadenaComando) throws NumeroParametrosIncorrecto {
+		if(igualesIns(cadenaComando[0],"GUARDAR")) {
+			if(cadenaComando.length == 3) {
+				return new ComandoGuardar(cadenaComando[1]);
+			}
+			else throw new NumeroParametrosIncorrecto();
 		}
 		else return null;
 	}
@@ -38,7 +41,7 @@ public class ComandoGuardar extends Comando {
 	 * @return String con la descripción.
 	 */
 	public String textoAyuda() {
-		return "INICIAR: Inserta algunas células aleatorias en el mundo.";
+		return "GUARDAR: Guardar el mundo en un arhivo. ";
 	}
 
 }
