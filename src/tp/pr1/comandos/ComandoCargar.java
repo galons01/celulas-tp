@@ -5,7 +5,8 @@ import java.io.IOException;
 
 import tp.pr1.control.Controlador;
 import tp.pr1.excepciones.ErrorDeCarga;
-import tp.pr1.excepciones.FormatoNumericoIncorrecto;;
+import tp.pr1.excepciones.FormatoNumericoIncorrecto;
+import tp.pr1.excepciones.NumeroParametrosIncorrecto;;
 
 public class ComandoCargar extends Comando {
 	
@@ -28,10 +29,12 @@ public class ComandoCargar extends Comando {
 	 * @param cadenaComando Array de strings con el comando y los parámetros.
 	 * @return Objeto ComandoIniciar si procede o null.
 	 */
-	public Comando parsea(String[] cadenaComando) {
-		if( cadenaComando.length == 2 &&
-			igualesIns(cadenaComando[0],"CARGAR")) {
+	public Comando parsea(String[] cadenaComando) throws NumeroParametrosIncorrecto {
+		if(igualesIns(cadenaComando[0],"CARGAR")){
+			if(cadenaComando.length == 2) {
 				return new ComandoCargar(cadenaComando[1]);
+			}
+			else throw new NumeroParametrosIncorrecto();
 		}
 		else return null;
 	}
@@ -41,7 +44,7 @@ public class ComandoCargar extends Comando {
 	 * @return String con la descripción.
 	 */
 	public String textoAyuda() {
-		return "INICIAR: Inserta algunas células aleatorias en el mundo.";
+		return "CARGAR: Cargar un mundo de un archivo.";
 	}
 
 }

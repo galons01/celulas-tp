@@ -81,6 +81,15 @@ public class MundoSimple extends Mundo {
  		}
  	}
 	
+	@Override
+	public boolean crearCelula(Celula celula, int f, int c) throws IndicesFueraDeRango {
+		if(this.superficie.posLibre(f,c)) {
+			this.superficie.insertar(new CelulaSimple(), f, c);
+			return true;
+		}
+		else return false;
+	}
+	
 	public void guardar(FileWriter file) throws IOException{
 		file.write("simple");
 		file.write(System.getProperty("line.separator"));

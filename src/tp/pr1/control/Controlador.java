@@ -118,6 +118,8 @@ public class Controlador {
 				System.out.println("EXCEPCIÓN: Archivo no encontrado.");
 			} catch (IOException e) {
 				System.out.println("EXCEPCIÓN: Error al guardar.");
+			} catch (NumeroParametrosIncorrecto e) {
+				System.out.println(e.getMessage());
 			}
 		}
 		
@@ -148,6 +150,10 @@ public class Controlador {
 		this.mundo.iniciar();
 	}
 	
+	public void vaciar() {
+		this.mundo.vaciar();
+	}
+	
 	public void evoluciona() {
 		this.mundo.evoluciona();
 	}
@@ -156,7 +162,26 @@ public class Controlador {
 		this.simulacionEnCurso = false;
 	}
 	
-	public void vaciar() {
-		this.mundo.vaciar();
+	/**
+	 * Crea un nuevo mundo en el juego.
+	 * @param tMundo Nombre del tipo del mundo
+	 * @param f Número de filas
+	 * @param c Número de columnas.
+	 * @param nCelulas Array con el número de células. Cada posición es un tipo de célula.
+	 * @throws PalabraIncorrecta Si no se reconoce el tipo de mundo.
+	 * @throws NumeroParametrosIncorrecto 
+	 */
+	public void nuevoMundo(String tMundo, int f, int c, int[] nCelulas) throws PalabraIncorrecta, NumeroParametrosIncorrecto {
+		try {
+			if(Comando.igualesIns(tMundo, "simple")) {
+				this.mundo = new MundoSimple(f,c,nCelulas[0]);
+			} else if(Comando.igualesIns(tMundo, "complejo")) {
+				this.mundo = new MundoComplejo(f,c,nCelulas[0], nCelulas[1]);
+			}
+			else throw new PalabraIncorrecta(tMundo);
+		} catch(IndexOutOfBoundsException e) {
+			throw new NumeroParametrosIncorrecto();
+		}
 	}
+	
 }

@@ -1,10 +1,12 @@
 package tp.pr1.comandos;
 
 import tp.pr1.excepciones.FormatoNumericoIncorrecto;
+import tp.pr1.excepciones.NumeroParametrosIncorrecto;
 
 public class ParserComandos {
 	private static final Comando[] comandos = {
 			new ComandoPaso(),
+			new ComandoJugar(),
 			new ComandoIniciar(),
 			new ComandoVaciar(),
 			new ComandoCargar(),
@@ -26,7 +28,7 @@ public class ParserComandos {
 	}
 	
 	
-	public static Comando parseaComando(String[] cadenas) throws FormatoNumericoIncorrecto {
+	public static Comando parseaComando(String[] cadenas) throws FormatoNumericoIncorrecto, NumeroParametrosIncorrecto {
 		int i = 0;
 		Comando comando = null;
 		

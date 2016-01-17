@@ -1,33 +1,73 @@
 package tp.pr1.comandos;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import tp.pr1.control.Controlador;
-import tp.pr1.excepciones.ErrorDeCarga;
 import tp.pr1.excepciones.ErrorDeInicializacion;
 import tp.pr1.excepciones.FormatoNumericoIncorrecto;
-import tp.pr1.excepciones.IndicesFueraDeRango;
+import tp.pr1.excepciones.NumeroParametrosIncorrecto;
 import tp.pr1.excepciones.PalabraIncorrecta;
 
 public class ComandoJugar extends Comando {
-
-	@Override
-	public void ejecuta(Controlador cntrl) throws IndicesFueraDeRango, ErrorDeInicializacion, PalabraIncorrecta,
-			FileNotFoundException, IOException, ErrorDeCarga {
-		
-		
-	}
-
-	@Override
-	public Comando parsea(String[] cadenaComando) throws FormatoNumericoIncorrecto {
-		
-		return null;
-	}
-
-	@Override
-	public String textoAyuda() {
-		return "Comando Jugar: introduce el tipo de mundo, la fila y columnas y las celulas, ej: jugar simple 2 2 2";
+	
+	private int filas, columnas;
+	private int [] nCelulas;
+	private String tMundo;
+	
+	public ComandoJugar() {
+		this.filas = 0;
+		this.columnas = 0;
+		this.nCelulas = null;
+		this.tMundo = "";
 	}
 	
+	public ComandoJugar(String tMundo, int f, int c, int[] nCelulas) {
+		this.filas = f;
+		this.columnas = c;
+		this.nCelulas = new int[nCelulas.length];
+		for(int i = 0; i<nCelulas.length; i++) {
+			this.nCelulas[i] = nCelulas[i];
+		}
+		this.tMundo = tMundo;
+	}
+	
+	
+	public void ejecuta(Controlador cntrl) throws PalabraIncorrecta, ErrorDeInicializacion, NumeroParametrosIncorrecto  {
+		cntrl.nuevoMundo(this.tMundo, this.filas, this.columnas, this.nCelulas);
+		cntrl.iniciar();
+	}
+
+	/**
+	 * Parsea el comando.
+	 * @param cadenaComando Array de strings con el comando y los parámetros.
+	 * @return Objeto ComandoIniciar si procede o null.
+	 * @throws FormatoNumericoIncorrecto  
+	 */
+	public Comando parsea(String[] cadenaComando) throws FormatoNumericoIncorrecto, NumeroParametrosIncorrecto {
+		int f,c;
+		int [] nCelulas;
+		if(igualesIns(cadenaComando[0],"JUGAR")) {
+			if(cadenaComando.length > 4) {
+				try {
+					f = Integer.parseInt(cadenaComando[2]);
+					c = Integer.parseInt(cadenaComando[3]);
+					nCelulas = new int[cadenaComando.length-4];
+					for(int i = 4; i<cadenaComando.length; i++) {
+						nCelulas[i-4] = Integer.parseInt(cadenaComando[i]);
+					}
+				} catch ( NumberFormatException e ) {
+					throw new  FormatoNumericoIncorrecto();
+				}
+				return new ComandoJugar(cadenaComando[1],f,c, nCelulas);
+			}
+			else throw new NumeroParametrosIncorrecto();
+		}
+		else return null;
+	}
+
+	/**
+	 * Texto de ayuda del comando.
+	 * @return String con la descripción.
+	 */
+	public String textoAyuda() {
+		return "JUGAR: Crea un mundo nuevo. ";
+	}
 }

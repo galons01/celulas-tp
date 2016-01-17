@@ -3,6 +3,7 @@ package tp.pr1.comandos;
 import tp.pr1.control.Controlador;
 import tp.pr1.excepciones.FormatoNumericoIncorrecto;
 import tp.pr1.excepciones.IndicesFueraDeRango;
+import tp.pr1.excepciones.NumeroParametrosIncorrecto;
 import tp.pr1.excepciones.PalabraIncorrecta;
 import tp.pr1.logica.Celula;
 import tp.pr1.logica.CelulaCompleja;
@@ -48,16 +49,17 @@ public class ComandoCrearCelula extends Comando {
 	 * @param cadenaComando Array de strings con el comando y los parámetros.
 	 * @return Objeto ComandoCrearCelula si procede o null.
 	 */
-	public Comando parsea(String[] cadenaComando) throws FormatoNumericoIncorrecto {
-		if( cadenaComando.length == 3 &&
-			igualesIns(cadenaComando[0],"CREARCELULA")) {
-			try {
-				int f = Integer.parseInt(cadenaComando[1]);
-				int c = Integer.parseInt(cadenaComando[2]);
-				return new ComandoCrearCelula(f,c);
-			} catch ( NumberFormatException e ) {
-				throw new  FormatoNumericoIncorrecto();
-			}
+	public Comando parsea(String[] cadenaComando) throws FormatoNumericoIncorrecto, NumeroParametrosIncorrecto {
+		if(igualesIns(cadenaComando[0],"CREARCELULA")) {
+			if(cadenaComando.length == 3) {
+				try {
+					int f = Integer.parseInt(cadenaComando[1]);
+					int c = Integer.parseInt(cadenaComando[2]);
+					return new ComandoCrearCelula(f,c);
+				} catch ( NumberFormatException e ) {
+					throw new  FormatoNumericoIncorrecto();
+				}
+			} else throw new NumeroParametrosIncorrecto();
 		}
 		else return null;
 	}
