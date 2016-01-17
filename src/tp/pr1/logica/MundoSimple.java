@@ -13,12 +13,19 @@ public class MundoSimple extends Mundo {
 	
 	private final int N_CELULAS;
 	
-	
+	/**
+	 * Construye un mundo simple con una superficie.
+	 */
 	public MundoSimple() {
 		super();
 		this.N_CELULAS = 0;
 	}
 	
+	/**
+	 * Construye un mundo simple con una superficie.
+	 * @param f Número de filas.
+	 * @param c Número de columnas.
+	 */
 	public MundoSimple(int f, int c) {
 		super(f, c);
 		this.N_CELULAS = (f * c) / 3;

@@ -15,12 +15,21 @@ public abstract class Mundo {
 	
 	protected Superficie superficie;
 	
+	/**
+	 * Construye un mundo con una superficie de 5 filas y 4 columnas.
+	 * Constructor por defecto.
+	 */
 	public Mundo() {
 		this.N_FILAS = 5;
 		this.N_COLUMNAS = 4;
 		this.superficie = new Superficie(N_FILAS,N_COLUMNAS);
 	}
 	
+	/**
+	 * Construye un mundo con una superficie.
+	 * @param f Número de filas.
+	 * @param c Número de columnas.
+	 */
 	public Mundo(int f, int c) {
 		this.N_FILAS = f;
 		this.N_COLUMNAS = c;

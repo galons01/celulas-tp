@@ -11,6 +11,11 @@ public class Superficie {
 	private int columnas;
 	private int nElems = 0;
 	
+	/**
+	 * Construye una superficie de posiciones discretas en las que puede haber elementos.
+	 * @param nf Número de filas.
+	 * @param nc Número de columnas.
+	 */
 	public Superficie(int nf, int nc){
 		this.filas=nf;
 		this.columnas=nc;
