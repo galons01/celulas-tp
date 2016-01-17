@@ -23,7 +23,10 @@ public class Controlador {
 	private Scanner in;
 	private Mundo mundo;
 	private boolean simulacionEnCurso = true;
-	
+	/**
+	 * nuevo constructo para el controlador
+	 * @param in un escaner de entrada
+	 */
 	public Controlador(Scanner in) {
 		this.in = in;
 		this.mundo = new MundoSimple(3,4);

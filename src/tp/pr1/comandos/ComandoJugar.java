@@ -11,14 +11,22 @@ public class ComandoJugar extends Comando {
 	private int filas, columnas;
 	private int [] nCelulas;
 	private String tMundo;
-	
+	/**
+	 * contructor de comando jugar vacio
+	 */
 	public ComandoJugar() {
 		this.filas = 0;
 		this.columnas = 0;
 		this.nCelulas = null;
 		this.tMundo = "";
 	}
-	
+	/**
+	 * constructor del comando Jugar con un string del tipo mundo, numero de filas y columnas y numero de celulas
+	 * @param tMundo tipo de mundo
+	 * @param f numero de filas
+	 * @param c numero de columnas
+	 * @param nCelulas numero de celulas aleatorias
+	 */
 	public ComandoJugar(String tMundo, int f, int c, int[] nCelulas) {
 		this.filas = f;
 		this.columnas = c;
@@ -29,7 +37,9 @@ public class ComandoJugar extends Comando {
 		this.tMundo = tMundo;
 	}
 	
-	
+	/**
+	 * ejecuta el comando
+	 */
 	public void ejecuta(Controlador cntrl) throws PalabraIncorrecta, ErrorDeInicializacion, NumeroParametrosIncorrecto  {
 		cntrl.nuevoMundo(this.tMundo, this.filas, this.columnas, this.nCelulas);
 		cntrl.iniciar();
