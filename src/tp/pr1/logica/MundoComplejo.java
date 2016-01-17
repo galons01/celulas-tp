@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import tp.pr1.excepciones.ErrorCargar;
+import tp.pr1.excepciones.ErrorDeCarga;
 import tp.pr1.excepciones.ErrorDeInicializacion;
 import tp.pr1.excepciones.IndicesFueraDeRango;
 
@@ -60,7 +60,7 @@ public class MundoComplejo extends Mundo {
 		}
 	}
 	
-	public void cargar(Scanner archivo) throws ErrorCargar{
+	public void cargar(Scanner archivo) throws ErrorDeCarga{
 		int i,j;
 		String tCelula;
 		Celula celula;
@@ -71,7 +71,7 @@ public class MundoComplejo extends Mundo {
  				j = archivo.nextInt();
  				tCelula = archivo.next();
  			} catch (NoSuchElementException e) {
- 				throw new ErrorCargar();
+ 				throw new ErrorDeCarga();
  			}
  			
  			if(tCelula.equals("simple")) {
@@ -80,13 +80,13 @@ public class MundoComplejo extends Mundo {
  			else if(tCelula.equals("compleja")) {
  				celula = new CelulaCompleja();
  			}
- 			else throw new ErrorCargar();
+ 			else throw new ErrorDeCarga();
  			celula.cargar(archivo);
  			
 	 		try {
 	 			this.superficie.insertar(celula, i, j);
  			} catch (IndicesFueraDeRango e) {
- 				throw new ErrorCargar();
+ 				throw new ErrorDeCarga();
  			}
  		}
  	}

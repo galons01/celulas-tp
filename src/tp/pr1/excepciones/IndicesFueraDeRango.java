@@ -4,7 +4,7 @@ public class IndicesFueraDeRango extends Exception {
 	
 	@Override
 	public String getMessage() {
-		return "Índices fuera de rango. ";
+		return "EXCEPCIÓN: Índices fuera de rango. ";
 		
 	}
 	

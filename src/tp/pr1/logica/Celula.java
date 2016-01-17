@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import tp.pr1.excepciones.ErrorCargar;
+import tp.pr1.excepciones.ErrorDeCarga;
 import tp.pr1.excepciones.IndicesFueraDeRango;
 
 public interface Celula {
@@ -42,7 +42,7 @@ public interface Celula {
 	 * Carga la celula de un archivo dado.
 	 * @param file Archivo al que va la célula
 	 * @throws IOException Si se produce un error de carga
-	 * @throws ErrorCargar Si la célula leída es errónea.
+	 * @throws ErrorDeCarga Si la célula leída es errónea.
 	 */
-	public abstract void cargar(Scanner file) throws ErrorCargar;
+	public abstract void cargar(Scanner file) throws ErrorDeCarga;
 }

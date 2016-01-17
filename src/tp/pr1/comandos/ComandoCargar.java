@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import tp.pr1.control.Controlador;
-import tp.pr1.excepciones.ErrorCargar;
+import tp.pr1.excepciones.ErrorDeCarga;
 import tp.pr1.excepciones.FormatoNumericoIncorrecto;;
 
 public class ComandoCargar extends Comando {
@@ -19,7 +19,7 @@ public class ComandoCargar extends Comando {
 		this.nombreArchivo = "unnamed.txt";
 	}
 	
-	public void ejecuta(Controlador cntrl) throws ErrorCargar, FileNotFoundException {
+	public void ejecuta(Controlador cntrl) throws ErrorDeCarga, FileNotFoundException {
 		cntrl.cargarMundo(this.nombreArchivo);
 	}
 

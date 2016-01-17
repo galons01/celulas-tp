@@ -4,7 +4,7 @@ public class FormatoNumericoIncorrecto extends Exception {
 	
 	@Override
 	public String getMessage() {
-		return "Formato numérico incorrecto. ";
+		return "EXCEPCIÓN: Formato numérico incorrecto. ";
 		
 	}
 	

@@ -38,10 +38,10 @@ public class Controlador {
 	/**
 	 * Carga un mundo de un archivo.
 	 * @param nombreArchivo Nombre del archivo a cargar.
-	 * @throws ErrorCargar Si el archivo está corrupto.
+	 * @throws ErrorDeCarga Si el archivo está corrupto.
 	 * @throws FileNotFoundException Si el archivo no existe.
 	 */
-	public void cargarMundo(String nombreArchivo) throws ErrorCargar, FileNotFoundException {
+	public void cargarMundo(String nombreArchivo) throws ErrorDeCarga, FileNotFoundException {
 		Scanner archivo;
 		String tMundo;
 		int filas, columnas;
@@ -60,10 +60,10 @@ public class Controlador {
 			else if(tMundo.equals("complejo")) {
 				nuevoMundo = new MundoComplejo(filas, columnas);
 			}
-			else throw new ErrorCargar();
+			else throw new ErrorDeCarga();
 			nuevoMundo.cargar(archivo);
 		} catch (NoSuchElementException e) {
-			throw new ErrorCargar();
+			throw new ErrorDeCarga();
 		}
 		finally {
 			archivo.close();
@@ -112,7 +112,7 @@ public class Controlador {
 				System.out.println(e.getMessage());
 			} catch (PalabraIncorrecta e) {
 				System.out.println(e.getMessage());
-			} catch (ErrorCargar e) {
+			} catch (ErrorDeCarga e) {
 				System.out.println(e.getMessage());
 			} catch (FileNotFoundException e) {
 				System.out.println("EXCEPCIÓN: Archivo no encontrado.");

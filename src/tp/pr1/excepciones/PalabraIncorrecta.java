@@ -14,7 +14,7 @@ public class PalabraIncorrecta extends Exception {
 	
 	@Override
 	public String getMessage() {
-		return "Palabra" + this.palabra + "no reconocida. ";
+		return "EXCEPCIÓN: Palabra" + this.palabra + "no reconocida. ";
 		
 	}
 	

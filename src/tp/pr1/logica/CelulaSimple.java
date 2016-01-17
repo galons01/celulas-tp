@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import tp.pr1.excepciones.ErrorCargar;
+import tp.pr1.excepciones.ErrorDeCarga;
 import tp.pr1.excepciones.IndicesFueraDeRango;
 
 public class CelulaSimple implements Celula {
@@ -137,17 +137,17 @@ public class CelulaSimple implements Celula {
 			file.write("simple " + this.pasosMuerte + " " + this.pasosReprod);
 	}
 	
-	public void cargar(Scanner archivo) throws ErrorCargar {
+	public void cargar(Scanner archivo) throws ErrorDeCarga {
 		try {
 			this.pasosMuerte = archivo.nextShort();
 			this.pasosReprod = archivo.nextShort();
 		} catch (NoSuchElementException e) {
-			throw new ErrorCargar();
+			throw new ErrorDeCarga();
 		}
 		
 		if(this.pasosMuerte < 0 || this.pasosMuerte > MAX_PASOS_SIN_MOVER ||
 		this.pasosReprod < 0 || this.pasosReprod > PASOS_REPRODUCCION) {
-			throw new ErrorCargar();
+			throw new ErrorDeCarga();
 		}
 	}
 }

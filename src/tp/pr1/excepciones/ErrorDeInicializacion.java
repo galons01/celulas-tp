@@ -4,7 +4,7 @@ public class ErrorDeInicializacion extends Exception {
 	
 	@Override
 	public String getMessage() {
-		return "Capacidad máxima alcanzada. Error de inicialización. ";
+		return "EXCEPCIÓN: Error de inicialización. Capacidad máxima alcanzada. ";
 		
 	}
 	

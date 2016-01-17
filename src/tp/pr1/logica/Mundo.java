@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import tp.pr1.excepciones.ErrorCargar;
+import tp.pr1.excepciones.ErrorDeCarga;
 import tp.pr1.excepciones.ErrorDeInicializacion;
 import tp.pr1.excepciones.IndicesFueraDeRango;
 
@@ -160,14 +160,14 @@ public abstract class Mundo {
 	/**
 	 * Carga un mundo del archivo.
 	 * @param archivo Archivo desde el que se carga el mundo.
-	 * @throws ErrorCargar Si el archivo está corrupto.
+	 * @throws ErrorDeCarga Si el archivo está corrupto.
 	 */
-	public abstract void cargar(Scanner archivo) throws ErrorCargar;
+	public abstract void cargar(Scanner archivo) throws ErrorDeCarga;
 	
 	/**
 	 * Guarda un mundo en el archivo.
 	 * @param archivo Archivo en el que se guarda el mundo.
-	 * @throws ErrorCargar Si ocurre un error con el archivo.
+	 * @throws ErrorDeCarga Si ocurre un error con el archivo.
 	 */
 	public abstract void guardar(FileWriter file) throws IOException;
 }

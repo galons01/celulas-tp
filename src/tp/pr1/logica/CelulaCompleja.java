@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import tp.pr1.excepciones.ErrorCargar;
+import tp.pr1.excepciones.ErrorDeCarga;
 import tp.pr1.excepciones.IndicesFueraDeRango;
 
 public class CelulaCompleja implements Celula {
@@ -62,14 +62,14 @@ public class CelulaCompleja implements Celula {
 		file.write("compleja " + this.celsComidas);
 	}
 	
-	public void cargar(Scanner archivo) throws ErrorCargar {
+	public void cargar(Scanner archivo) throws ErrorDeCarga {
 		try {
 			this.celsComidas =  archivo.nextShort();
 		} catch (NoSuchElementException e) {
-			throw new ErrorCargar();
+			throw new ErrorDeCarga();
 		}
 		if(this.celsComidas < 0 || this.celsComidas > MAX_COMER) {
-			throw new ErrorCargar();
+			throw new ErrorDeCarga();
 		}
 	}
 }

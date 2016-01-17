@@ -1,6 +1,6 @@
 package tp.pr1.comandos;
 
-import tp.pr1.excepciones.ErrorCargar;
+import tp.pr1.excepciones.ErrorDeCarga;
 import tp.pr1.excepciones.ErrorDeInicializacion;
 import tp.pr1.excepciones.FormatoNumericoIncorrecto;
 import tp.pr1.excepciones.IndicesFueraDeRango;
@@ -20,10 +20,10 @@ public abstract class Comando {
 	 * @throws ErrorDeInicializacion Si al ejecutar el comando el mundo es erróneo.
 	 * @throws PalabraIncorrecta Si la palabra no es correcta
 	 * @throws IOException Si no se pudo guardar el archivo con la partida.
-	 * @throws ErrorCargar Si no se pudo cargar el archivo con la partida.
+	 * @throws ErrorDeCarga Si no se pudo cargar el archivo con la partida.
 	 * @throws FileNotFoundException Si no se encontró el archivo especificado. 
 	 */
-	public abstract void ejecuta(Controlador cntrl) throws IndicesFueraDeRango, ErrorDeInicializacion, PalabraIncorrecta, FileNotFoundException, IOException, ErrorCargar;
+	public abstract void ejecuta(Controlador cntrl) throws IndicesFueraDeRango, ErrorDeInicializacion, PalabraIncorrecta, FileNotFoundException, IOException, ErrorDeCarga;
 	
 	
 	/**
