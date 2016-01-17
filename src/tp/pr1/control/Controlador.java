@@ -138,26 +138,54 @@ public class Controlador {
 	// Funciones puente                 |
 	//===================================
 	
+	/**
+	 * crea una celula (funcion puente)
+	 * @param cel celula que se va a crear
+	 * @param f fila donde se creara
+	 * @param c columna donde se creara
+	 * @return si no se crea retorna false
+	 * @throws IndicesFueraDeRango
+	 */
 	public boolean crearCelula(Celula cel, int f, int c) throws IndicesFueraDeRango {
 		return this.mundo.crearCelula(cel, f, c);
 	}
 	
+	
+	/**
+	 * elimina la celula de una posicion (funcion puente)
+	 * @param f fila donde esta la celula
+	 * @param c columna donde esta la celula
+	 * @return devuelve si se borro correctamente un true sino un false
+	 * @throws IndicesFueraDeRango
+	 */
 	public boolean eliminarCelula(int f, int c) throws IndicesFueraDeRango {
 		return this.mundo.eliminarCelula(f, c);
 	}
 	
+	/**
+	 * inicia el mundo
+	 * @throws ErrorDeInicializacion
+	 */
 	public void iniciar() throws ErrorDeInicializacion {
 		this.mundo.iniciar();
 	}
 	
+	/**
+	 * vacia el mundo dejandolo sin celulas
+	 */
 	public void vaciar() {
 		this.mundo.vaciar();
 	}
-	
+	/**
+	 * da un paso
+	 */
 	public void evoluciona() {
 		this.mundo.evoluciona();
 	}
 	
+	/**
+	 * termina la simulacion
+	 */
 	public void terminarSimulacion() {
 		this.simulacionEnCurso = false;
 	}
