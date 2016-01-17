@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import tp.pr1.comandos.Comando;
@@ -62,7 +62,9 @@ public class Controlador {
 			}
 			else throw new ErrorCargar();
 			nuevoMundo.cargar(archivo);
-		} 
+		} catch (NoSuchElementException e) {
+			throw new ErrorCargar();
+		}
 		finally {
 			archivo.close();
 		}
@@ -110,12 +112,12 @@ public class Controlador {
 				System.out.println(e.getMessage());
 			} catch (PalabraIncorrecta e) {
 				System.out.println(e.getMessage());
-			} catch (FileNotFoundException e) {
-				System.out.println(e.getMessage());
-			} catch (IOException e) {
-				System.out.println(e.getMessage());
 			} catch (ErrorCargar e) {
 				System.out.println(e.getMessage());
+			} catch (FileNotFoundException e) {
+				System.out.println("EXCEPCIÓN: Archivo no encontrado.");
+			} catch (IOException e) {
+				System.out.println("EXCEPCIÓN: Error al guardar.");
 			}
 		}
 		

@@ -2,6 +2,7 @@ package tp.pr1.logica;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import tp.pr1.excepciones.ErrorCargar;
@@ -137,8 +138,12 @@ public class CelulaSimple implements Celula {
 	}
 	
 	public void cargar(Scanner archivo) throws ErrorCargar {
-		this.pasosMuerte = archivo.nextShort();
-		this.pasosReprod = archivo.nextShort();
+		try {
+			this.pasosMuerte = archivo.nextShort();
+			this.pasosReprod = archivo.nextShort();
+		} catch (NoSuchElementException e) {
+			throw new ErrorCargar();
+		}
 		
 		if(this.pasosMuerte < 0 || this.pasosMuerte > MAX_PASOS_SIN_MOVER ||
 		this.pasosReprod < 0 || this.pasosReprod > PASOS_REPRODUCCION) {

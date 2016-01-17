@@ -2,6 +2,7 @@ package tp.pr1.logica;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import tp.pr1.excepciones.ErrorCargar;
@@ -65,9 +66,13 @@ public class MundoComplejo extends Mundo {
 		Celula celula;
 		
  		while(archivo.hasNext()){
- 			i = archivo.nextInt();
- 			j = archivo.nextInt();
- 			tCelula = archivo.next();
+ 			try {
+ 				i = archivo.nextInt();
+ 				j = archivo.nextInt();
+ 				tCelula = archivo.next();
+ 			} catch (NoSuchElementException e) {
+ 				throw new ErrorCargar();
+ 			}
  			
  			if(tCelula.equals("simple")) {
  				celula = new CelulaSimple();
