@@ -14,8 +14,9 @@ public class CelulaSimple implements Celula {
 
 	private short pasosReprod;	//Pasos que le quedan para dividirse (pasos movidos)
 	private short pasosMuerte;	//Pasos que le quedan para morir (pasos sin moverse)
+	
 	/**
-	 * contruye una celula simple y le asigna pasos de reproduccion y pasos sin moverse
+	 * Construye una nueva célula simple.
 	 */
 	public CelulaSimple() {
 		this.pasosReprod = CelulaSimple.PASOS_REPRODUCCION;

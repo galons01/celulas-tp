@@ -62,7 +62,7 @@ public abstract class Mundo {
 	 * Elimina una celula del mundo (para usar desde fuera)
 	 * @param f Fila
 	 * @param c Columna
-	 * @return Devuelve si se movio la celula
+	 * @return Devuelve si se eliminó la celula
 	 * @throws IndicesFueraDeRango Si la posición está fuera del mundo
 	 */
 	public boolean eliminarCelula(int f, int c) throws IndicesFueraDeRango {

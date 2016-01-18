@@ -4,6 +4,11 @@ public class Casilla {
 	private int fila = 0;
 	private int col = 0;
 	
+	/**
+	 * Constructor de casilla. Crea una casilla que contiene una posición en dos dimensiones.
+	 * @param f Fila.
+	 * @param c Columna.
+	 */
 	public Casilla (int f, int c) {
 		this.fila = f;
 		this.col = c;

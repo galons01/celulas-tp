@@ -5,6 +5,10 @@ public class ListaCasillas {
 	Casilla[] lista;
 	int longitud;
 	
+	/**
+	 * Constructor de una lista de casillas.
+	 * @param n Longitud de la lista.
+	 */
 	public ListaCasillas(int n) {
 		this.lista = new Casilla[n];
 		this.longitud = 0;

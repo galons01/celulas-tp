@@ -14,12 +14,20 @@ public class MundoComplejo extends Mundo {
 	private final int N_CELULAS_SIMPLES ;
 	private final int N_CELULAS_COMPLEJAS;
 	
+	/**
+	 * Construye un mundo complejo con una superficie.
+	 */
 	public MundoComplejo() {
 		super();
 		this.N_CELULAS_SIMPLES = 0;
 		this.N_CELULAS_COMPLEJAS = 0;
 	}
 	
+	/**
+	 * Construye un mundo complejo con una superficie.
+	 * @param f Número de filas.
+	 * @param c Número de columnas.
+	 */
 	public MundoComplejo(int f, int c) {
 		super(f, c);
 		this.N_CELULAS_SIMPLES = (f * c) / 5;

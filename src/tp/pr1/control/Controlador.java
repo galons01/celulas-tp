@@ -23,9 +23,10 @@ public class Controlador {
 	private Scanner in;
 	private Mundo mundo;
 	private boolean simulacionEnCurso = true;
+	
 	/**
-	 * nuevo constructo para el controlador
-	 * @param in un escaner de entrada
+	 * Construye un controlador del juego de la vida.
+	 * @param in Scanner de lectura de consola.
 	 */
 	public Controlador(Scanner in) {
 		this.in = in;
@@ -142,12 +143,11 @@ public class Controlador {
 	//===================================
 	
 	/**
-	 * crea una celula (funcion puente)
-	 * @param cel celula que se va a crear
-	 * @param f fila donde se creara
-	 * @param c columna donde se creara
-	 * @return si no se crea retorna false
-	 * @throws IndicesFueraDeRango
+	 * Crea una celula en el mundo (para usar desde fuera)
+	 * @param f Fila
+	 * @param c Columna
+	 * @return Devuelve si ce creó la celula
+	 * @throws IndicesFueraDeRango Si la posición está fuera del mundo
 	 */
 	public boolean crearCelula(Celula cel, int f, int c) throws IndicesFueraDeRango {
 		return this.mundo.crearCelula(cel, f, c);
@@ -155,39 +155,40 @@ public class Controlador {
 	
 	
 	/**
-	 * elimina la celula de una posicion (funcion puente)
-	 * @param f fila donde esta la celula
-	 * @param c columna donde esta la celula
-	 * @return devuelve si se borro correctamente un true sino un false
-	 * @throws IndicesFueraDeRango
+	 * Elimina una celula del mundo (para usar desde fuera)
+	 * @param f Fila
+	 * @param c Columna
+	 * @return Devuelve si se eliminó la celula
+	 * @throws IndicesFueraDeRango Si la posición está fuera del mundo
 	 */
 	public boolean eliminarCelula(int f, int c) throws IndicesFueraDeRango {
 		return this.mundo.eliminarCelula(f, c);
 	}
 	
 	/**
-	 * inicia el mundo
-	 * @throws ErrorDeInicializacion
+	 * Inicializa el mundo con células aleatorias.
+	 * @throws ErrorDeInicializacion Si el mundo no es válido.
 	 */
 	public void iniciar() throws ErrorDeInicializacion {
 		this.mundo.iniciar();
 	}
 	
 	/**
-	 * vacia el mundo dejandolo sin celulas
+	 * Limpia la superficie del mundo, dejándolo sin células
 	 */
 	public void vaciar() {
 		this.mundo.vaciar();
 	}
+	
 	/**
-	 * da un paso
+	 * Da un paso en la evolución del mundo para todas las células.
 	 */
 	public void evoluciona() {
 		this.mundo.evoluciona();
 	}
 	
 	/**
-	 * termina la simulacion
+	 * Termina la simulación.
 	 */
 	public void terminarSimulacion() {
 		this.simulacionEnCurso = false;
