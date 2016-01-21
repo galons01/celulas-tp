@@ -28,7 +28,7 @@ public class ComandoGuardar extends Comando {
 	 */
 	public Comando parsea(String[] cadenaComando) throws NumeroParametrosIncorrecto {
 		if(igualesIns(cadenaComando[0],"GUARDAR")) {
-			if(cadenaComando.length == 3) {
+			if(cadenaComando.length == 2) {
 				return new ComandoGuardar(cadenaComando[1]);
 			}
 			else throw new NumeroParametrosIncorrecto();
