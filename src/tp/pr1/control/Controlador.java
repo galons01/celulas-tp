@@ -210,7 +210,7 @@ public class Controlador {
 					throw new NumeroParametrosIncorrecto();
 				this.mundo = new MundoSimple(f,c,nCelulas[0]);
 			} else if(Comando.igualesIns(tMundo, "complejo")) {
-				if(nCelulas.length != 1)
+				if(nCelulas.length != 2)
 					throw new NumeroParametrosIncorrecto();
 				this.mundo = new MundoComplejo(f,c,nCelulas[0], nCelulas[1]);
 			}
