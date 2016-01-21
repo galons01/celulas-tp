@@ -201,13 +201,17 @@ public class Controlador {
 	 * @param c Número de columnas.
 	 * @param nCelulas Array con el número de células. Cada posición es un tipo de célula.
 	 * @throws PalabraIncorrecta Si no se reconoce el tipo de mundo.
-	 * @throws NumeroParametrosIncorrecto 
+	 * @throws NumeroParametrosIncorrecto Si el número de parámetros es incorrecto.
 	 */
 	public void nuevoMundo(String tMundo, int f, int c, int[] nCelulas) throws PalabraIncorrecta, NumeroParametrosIncorrecto {
 		try {
 			if(Comando.igualesIns(tMundo, "simple")) {
+				if(nCelulas.length != 1)
+					throw new NumeroParametrosIncorrecto();
 				this.mundo = new MundoSimple(f,c,nCelulas[0]);
 			} else if(Comando.igualesIns(tMundo, "complejo")) {
+				if(nCelulas.length != 1)
+					throw new NumeroParametrosIncorrecto();
 				this.mundo = new MundoComplejo(f,c,nCelulas[0], nCelulas[1]);
 			}
 			else throw new PalabraIncorrecta(tMundo);
