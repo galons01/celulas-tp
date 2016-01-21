@@ -56,7 +56,7 @@ public class MundoComplejo extends Mundo {
 			f = numAleatorio(0,this.superficie.getFilas()-1);
 			c = numAleatorio(0,this.superficie.getColumnas()-1);
 			try {
-				if(this.crearCelula(new CelulaSimple(), f,c)) {
+				if(this.crearCelula(new CelulaCompleja(), f,c)) {
 					i++;
 				}
 			} catch (IndicesFueraDeRango e) {}
