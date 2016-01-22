@@ -99,16 +99,20 @@ public abstract class Mundo {
 		int F = this.superficie.getFilas();	/*Número de  filas*/
 		int C = this.superficie.getColumnas();	/*Número de columnas*/
 		
-		for(int i = 0; i<F; i++) {
-			j = 0;
-			while(j<C && n<N) {
-				/*Si encuentra una posición ocupada (una célula)*/
-				if(!this.superficie.posLibre(i,j)) {
-					ocupadas.add(new Casilla(i,j), n);
-					n++;
+		try {
+			for(int i = 0; i<F; i++) {
+				j = 0;
+				while(j<C && n<N) {
+					/*Si encuentra una posición ocupada (una célula)*/
+					if(!this.superficie.posLibre(i,j)) {
+						ocupadas.add(new Casilla(i,j), n);
+						n++;
+					}
+					j++;
 				}
-				j++;
 			}
+		} catch (IndicesFueraDeRango e) {
+			//Do nothing. Secure configuration.
 		}
 		return ocupadas;
 	}

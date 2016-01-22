@@ -124,7 +124,7 @@ public class MundoComplejo extends Mundo {
 	public boolean crearCelula(int f, int c) throws IndicesFueraDeRango, PalabraIncorrecta {
 		String tipoCelula;
 		if(this.superficie.posLibre(f,c)) {
-			System.out.println("Qué tipo de célula?");
+			System.out.print("¿Qué tipo de célula? > ");
 			tipoCelula = in.nextLine();
 			if (tipoCelula.equals("simple")) {
 				this.superficie.insertar(new CelulaSimple(), f, c);

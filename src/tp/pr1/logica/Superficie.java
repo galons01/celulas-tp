@@ -39,9 +39,14 @@ public class Superficie {
 	 * @param fila Fila dentro de la superficie
 	 * @param columna Columna dentro de la superficie
 	 * @return True si está libre, false en caso contrario
+	 * @throws IndicesFueraDeRango Si la posición está fuera de la superficie
 	 */
-	public boolean posLibre(int fila, int columna) {
-		return this.superficie[fila][columna] == null;
+	public boolean posLibre(int fila, int columna) throws IndicesFueraDeRango {
+		try {
+			return this.superficie[fila][columna] == null;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new IndicesFueraDeRango();
+		}
 	}
 	
 
@@ -138,17 +143,21 @@ public class Superficie {
 	 */
 	public String toString() {
 		StringBuilder mostrar = new StringBuilder();
-		for(int i = 0; i< this.filas; i++) {
-			for(int j = 0; j< this.columnas; j++) {
-				if(this.posLibre(i,j)) {
-					mostrar.append("  -  ");
+		try {
+			for(int i = 0; i< this.filas; i++) {
+				for(int j = 0; j< this.columnas; j++) {
+					if(this.posLibre(i,j)) {
+						mostrar.append("  -  ");
+					}
+					else {
+						mostrar.append(this.superficie[i][j]);
+					}
+					mostrar.append(" ");
 				}
-				else {
-					mostrar.append(this.superficie[i][j]);
-				}
-				mostrar.append(" ");
+				mostrar.append("\n");
 			}
-			mostrar.append("\n");
+		} catch (IndicesFueraDeRango e) {
+			// Do nothing. Secure configuration.
 		}
 		return mostrar.toString();
 	}
@@ -175,24 +184,33 @@ public class Superficie {
 	public Casilla ejecutaMovimiento(Casilla pos) throws IndicesFueraDeRango{
 		int f = pos.getFila();
 		int c = pos.getColumna();
-		return this.superficie[f][c].ejecutaMovimiento(f, c, this);
+		try {
+			return this.superficie[f][c].ejecutaMovimiento(f, c, this);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new IndicesFueraDeRango();
+		}
 	}
 	
 	
 	/**
 	 * Determina si la célula en la posición (f,c) es comestible o no.
 	 * @return true si es comestible, false en caso contrario
+	 * @throws IndicesFueraDeRango Si la posición está fuera de la superficie
 	 */
-	public boolean esComestible(int f, int c) {
-		if(this.superficie[f][c]!=null)
+	public boolean esComestible(int f, int c) throws IndicesFueraDeRango {
+		try {
 			return this.superficie[f][c].esComestible();
-		else return false;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new IndicesFueraDeRango();
+		} catch (NullPointerException e) {
+			return false;
+		}
 	}
 	
 	/**
 	 * Guarda la superficie en un archivo.
 	 * @param file Archivo al que va la superficie.
-	 * @throws IOException
+	 * @throws IOException Si hubo un error al guardar
 	 */
 	public void save(FileWriter file) throws IOException {
 		for(int i=0; i<this.filas; i++) {

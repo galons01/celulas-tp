@@ -95,8 +95,9 @@ public class CelulaSimple implements Celula {
 	 * @param c Columna
 	 * @param superficie
 	 * @return Posición libre aleatoria, null si no hay ninguna
+	 * @throws IndicesFueraDeRango Si la posición está fuera de la superficie
 	 */
-	private static Casilla inspecAlrededores(int f, int c, Superficie superficie) {
+	private static Casilla inspecAlrededores(int f, int c, Superficie superficie) throws IndicesFueraDeRango {
 		//Si la posición en cuestión tiene una célula
 		if(!superficie.posLibre(f,c)) {
 			//Nos aseguramos de que no nos salimos
