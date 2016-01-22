@@ -134,11 +134,12 @@ public class MundoComplejo extends Mundo {
 	public boolean crearCelula(int f, int c) throws IndicesFueraDeRango {
 		String tipoCelula;
 		Scanner entradaEscaner = new Scanner (System.in);
-		System.out.println("¿tipo de celula?");
-		tipoCelula = entradaEscaner.nextLine();
+
 		
 		
 			if(this.superficie.posLibre(f,c)) {
+				System.out.println("¿tipo de celula?");
+				tipoCelula = entradaEscaner.nextLine();
 				if (tipoCelula == "simple") {
 					this.superficie.insertar(new CelulaSimple(), f, c);
 					return true;
