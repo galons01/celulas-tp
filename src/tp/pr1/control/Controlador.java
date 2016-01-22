@@ -129,14 +129,7 @@ public class Controlador {
 		
 		System.out.println("Fin de la simulación...");
 	}
-	
-	/**
-	 * Devuelve el siguiente comando a leer.
-	 * @return String con el siguiente comando.
-	 */
-	public String siguienteComando() {
-		return this.in.nextLine();
-	}
+
 	
 	//===================================
 	// Funciones puente                 |
@@ -148,8 +141,9 @@ public class Controlador {
 	 * @param c Columna
 	 * @return Devuelve si ce creó la celula
 	 * @throws IndicesFueraDeRango Si la posición está fuera del mundo
+	 * @throws PalabraIncorrecta Si el tipo de célula es desconocido para el mundo.
 	 */
-	public boolean crearCelula(int f, int c) throws IndicesFueraDeRango {
+	public boolean crearCelula(int f, int c) throws IndicesFueraDeRango, PalabraIncorrecta {
 		return this.mundo.crearCelula(f, c);
 	}
 	

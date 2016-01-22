@@ -8,12 +8,14 @@ import java.util.Scanner;
 import tp.pr1.excepciones.ErrorDeCarga;
 import tp.pr1.excepciones.ErrorDeInicializacion;
 import tp.pr1.excepciones.IndicesFueraDeRango;
+import tp.pr1.excepciones.PalabraIncorrecta;
 
 public class MundoComplejo extends Mundo {
 	
-	private Scanner in;
 	private final int N_CELULAS_SIMPLES ;
 	private final int N_CELULAS_COMPLEJAS;
+	
+	protected Scanner in = new Scanner (System.in);
 	
 	/**
 	 * Construye un mundo complejo con una superficie.
@@ -57,7 +59,8 @@ public class MundoComplejo extends Mundo {
 			f = numAleatorio(0,this.superficie.getFilas()-1);
 			c = numAleatorio(0,this.superficie.getColumnas()-1);
 			try {
-				if(this.crearCelula(f,c, "compleja")) {
+				if(this.superficie.posLibre(f, c)) {
+					this.superficie.insertar(new CelulaCompleja(), f,c);
 					i++;
 				}
 			} catch (IndicesFueraDeRango e) {}
@@ -68,7 +71,8 @@ public class MundoComplejo extends Mundo {
 			f = numAleatorio(0,this.superficie.getFilas()-1);
 			c = numAleatorio(0,this.superficie.getColumnas()-1);
 			try {
-				if(this.crearCelula( f,c, "simple")) {
+				if(this.superficie.posLibre(f, c)) {
+					this.superficie.insertar(new CelulaSimple(), f,c);
 					i++;
 				}
 			} catch (IndicesFueraDeRango e) {}
@@ -116,41 +120,22 @@ public class MundoComplejo extends Mundo {
 		this.superficie.save(file);
 	}
 	
-	public boolean crearCelula(int f, int c, String tipoCelula) throws IndicesFueraDeRango{
-		if(this.superficie.posLibre(f,c)) {
-			if (tipoCelula == "simple") {
-				this.superficie.insertar(new CelulaSimple(), f, c);
-				return true;
-			}
-			else if (tipoCelula == "compleja") {
-				this.superficie.insertar(new CelulaCompleja(), f, c);
-				return true;
-			}
-			else return false;
-			}
-		else return false;
-	}
 	
-	public boolean crearCelula(int f, int c) throws IndicesFueraDeRango {
+	public boolean crearCelula(int f, int c) throws IndicesFueraDeRango, PalabraIncorrecta {
 		String tipoCelula;
-		Scanner entradaEscaner = new Scanner (System.in);
-
-		
-		
-			if(this.superficie.posLibre(f,c)) {
-				System.out.println("�tipo de celula?");
-				tipoCelula = entradaEscaner.nextLine();
-				if (tipoCelula == "simple") {
-					this.superficie.insertar(new CelulaSimple(), f, c);
-					return true;
-				}
-				else if (tipoCelula == "compleja") {
-					this.superficie.insertar(new CelulaCompleja(), f, c);
-					return true;
-				}
-				else return false;
-				}
-			else return false;
+		if(this.superficie.posLibre(f,c)) {
+			System.out.println("Qué tipo de célula?");
+			tipoCelula = in.nextLine();
+			if (tipoCelula.equals("simple")) {
+				this.superficie.insertar(new CelulaSimple(), f, c);
+			}
+			else if (tipoCelula.equals("compleja")) {
+				this.superficie.insertar(new CelulaCompleja(), f, c);
+			}
+			else throw new PalabraIncorrecta(tipoCelula);
+			return true;
+		}
+		else return false;
 	}
 }
 

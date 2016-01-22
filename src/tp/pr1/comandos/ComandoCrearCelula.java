@@ -5,9 +5,6 @@ import tp.pr1.excepciones.FormatoNumericoIncorrecto;
 import tp.pr1.excepciones.IndicesFueraDeRango;
 import tp.pr1.excepciones.NumeroParametrosIncorrecto;
 import tp.pr1.excepciones.PalabraIncorrecta;
-import tp.pr1.logica.Celula;
-import tp.pr1.logica.CelulaCompleja;
-import tp.pr1.logica.CelulaSimple;
 
 public class ComandoCrearCelula extends Comando {
 	private int fila;
@@ -22,19 +19,7 @@ public class ComandoCrearCelula extends Comando {
 		this.fila = this.columna = 0;
 	}
 
-	public void ejecuta(Controlador cntrl) throws IndicesFueraDeRango {
-	//	Celula celula;
-	//	String tCelula;
-	//	System.out.print("De qué tipo: ");
-	//	tCelula = cntrl.siguienteComando();
-	//	if(igualesIns(tCelula,"simple")) {
-	//		celula = new CelulaSimple();
-	//	}
-	//	else if(igualesIns(tCelula,"compleja")) {
-	//		celula = new CelulaCompleja();
-	//	}
-	//	else throw new PalabraIncorrecta(tCelula);
-		
+	public void ejecuta(Controlador cntrl) throws IndicesFueraDeRango, PalabraIncorrecta {
 		if(cntrl.crearCelula(this.fila, this.columna))  {
 			System.out.print("Creamos célula en la posición (");
 			System.out.println( this.fila + "," + this.columna + ")");

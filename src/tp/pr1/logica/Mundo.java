@@ -7,6 +7,7 @@ import java.util.Scanner;
 import tp.pr1.excepciones.ErrorDeCarga;
 import tp.pr1.excepciones.ErrorDeInicializacion;
 import tp.pr1.excepciones.IndicesFueraDeRango;
+import tp.pr1.excepciones.PalabraIncorrecta;
 
 public abstract class Mundo {
 	
@@ -49,8 +50,9 @@ public abstract class Mundo {
 	 * @param c Columna
 	 * @return Devuelve si ce creó la celula
 	 * @throws IndicesFueraDeRango Si la posición está fuera del mundo
+	 * @throws PalabraIncorrecta Si el tipo de célula es deconocido para el mundo
 	 */
-	abstract public boolean crearCelula(int f, int c) throws IndicesFueraDeRango;
+	abstract public boolean crearCelula(int f, int c) throws IndicesFueraDeRango, PalabraIncorrecta;
 	
 	/**
 	 * Elimina una celula del mundo (para usar desde fuera)
