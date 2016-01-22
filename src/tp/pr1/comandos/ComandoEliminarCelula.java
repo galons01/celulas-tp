@@ -18,11 +18,6 @@ public class ComandoEliminarCelula extends Comando {
 		this.columna = c;
 	}
 	
-
-	/**
-	 * Ejecuta el comando eliminarcelula. Elimina una celula del mundo.
-	 * @param mundo Mundo sobre el que se ejecuta la acción.
-	 */
 	public void ejecuta(Controlador cntrl) throws IndicesFueraDeRango {
 		try {
 			if(cntrl.eliminarCelula(this.fila, this.columna)) {

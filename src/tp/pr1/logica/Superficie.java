@@ -53,8 +53,8 @@ public class Superficie {
 	/**
 	 * Inserta un elemento en una posición de la superficie
 	 * @param elem Elemento a insertar en la superficie.
-	 * @param f Fila en la superficie
-	 * @param c Columna en la superficie
+	 * @param fila Fila en la superficie
+	 * @param columna Columna en la superficie
 	 * @throws IndicesFueraDeRango Si la posición está fuera de la superficie
 	 */
 	public void insertar(Celula elem, int fila, int columna) throws IndicesFueraDeRango{
@@ -70,8 +70,8 @@ public class Superficie {
 	
 	/**
 	 * Elimina un elemento en una posición de la superficie
-	 * @param f Fila en la superficie
-	 * @param c Columna en la superficie
+	 * @param fila Fila en la superficie
+	 * @param columna Columna en la superficie
 	 * @throws IndicesFueraDeRango Si la posición está fuera de la superficie
 	 */
 	public void eliminar(int fila, int columna) throws IndicesFueraDeRango{
@@ -175,9 +175,7 @@ public class Superficie {
 	
 	/**
 	 * Ejecuta la lógica de una célula en la superficie
-	 * @param f Fila en la que se ebcuentra la célula dentro de la superficie
-	 * @param c Columna en la que se ebcuentra la célula dentro de la superficie
-	 * @param superficie Superficie en la que se encuentra la célula
+	 * @param pos Posición en la que se encuentra la célula dentro de la superficie
 	 * @return Casilla a la que se ha movido o null.
 	 * @throws IndicesFueraDeRango Si la posición está fuera de la superficie
 	 */

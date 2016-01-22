@@ -175,7 +175,7 @@ public abstract class Mundo {
 	
 	/**
 	 * Guarda un mundo en el archivo.
-	 * @param archivo Archivo en el que se guarda el mundo.
+	 * @param file Archivo en el que se guarda el mundo.
 	 * @throws ErrorDeCarga Si ocurre un error con el archivo.
 	 */
 	public abstract void guardar(FileWriter file) throws IOException;

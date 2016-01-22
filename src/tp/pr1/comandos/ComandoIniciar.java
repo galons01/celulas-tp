@@ -5,10 +5,6 @@ import tp.pr1.control.Controlador;;
 
 public class ComandoIniciar extends Comando {
 
-	/**
-	 * Ejecuta el comando.
-	 * @param mundo
-	 */
 	public void ejecuta(Controlador cntrl) throws ErrorDeInicializacion {
 		cntrl.iniciar();
 	}

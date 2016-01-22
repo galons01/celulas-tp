@@ -4,10 +4,6 @@ import tp.pr1.control.Controlador;
 
 public class ComandoSalir extends Comando {
 
-	/**
-	 * Ejecuta el comando.
-	 * @param mundo
-	 */
 	public void ejecuta(Controlador cntrl) {
 		cntrl.terminarSimulacion();
 	}

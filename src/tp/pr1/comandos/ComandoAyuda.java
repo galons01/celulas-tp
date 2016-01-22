@@ -4,10 +4,6 @@ import tp.pr1.control.Controlador;
 
 public class ComandoAyuda extends Comando {
 
-	/**
-	 * Ejecuta el comando.
-	 * @param mundo (Not needed)
-	 */
 	public void ejecuta(Controlador cntrl) {
 		System.out.print(ParserComandos.AyudaComandos());
 	}

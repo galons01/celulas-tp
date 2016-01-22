@@ -16,7 +16,7 @@ public abstract class Comando {
 	
 	/**
 	 * Ejecuta las acciones del comando.
-	 * @param mundo Mundo sobre el que se ejecuta la acción.
+	 * @param cntrl Controlador sobre el que se ejecuta la acción.
 	 * @throws IndicesFueraDeRango Si los parámetros están fuera del mundo.
 	 * @throws ErrorDeInicializacion Si al ejecutar el comando el mundo es erróneo.
 	 * @throws PalabraIncorrecta Si la palabra no es correcta
