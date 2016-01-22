@@ -149,8 +149,8 @@ public class Controlador {
 	 * @return Devuelve si ce creó la celula
 	 * @throws IndicesFueraDeRango Si la posición está fuera del mundo
 	 */
-	public boolean crearCelula(Celula cel, int f, int c) throws IndicesFueraDeRango {
-		return this.mundo.crearCelula(cel, f, c);
+	public boolean crearCelula(int f, int c) throws IndicesFueraDeRango {
+		return this.mundo.crearCelula(f, c);
 	}
 	
 	

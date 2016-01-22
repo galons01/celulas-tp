@@ -23,19 +23,19 @@ public class ComandoCrearCelula extends Comando {
 	}
 
 	public void ejecuta(Controlador cntrl) throws IndicesFueraDeRango, PalabraIncorrecta {
-		Celula celula;
-		String tCelula;
-		System.out.print("De qué tipo: ");
-		tCelula = cntrl.siguienteComando();
-		if(igualesIns(tCelula,"simple")) {
-			celula = new CelulaSimple();
-		}
-		else if(igualesIns(tCelula,"compleja")) {
-			celula = new CelulaCompleja();
-		}
-		else throw new PalabraIncorrecta(tCelula);
+	//	Celula celula;
+	//	String tCelula;
+	//	System.out.print("De qué tipo: ");
+	//	tCelula = cntrl.siguienteComando();
+	//	if(igualesIns(tCelula,"simple")) {
+	//		celula = new CelulaSimple();
+	//	}
+	//	else if(igualesIns(tCelula,"compleja")) {
+	//		celula = new CelulaCompleja();
+	//	}
+	//	else throw new PalabraIncorrecta(tCelula);
 		
-		if(cntrl.crearCelula(celula,this.fila, this.columna)) {
+		if(cntrl.crearCelula(this.fila, this.columna))  {
 			System.out.print("Creamos célula en la posición (");
 			System.out.println( this.fila + "," + this.columna + ")");
 		}

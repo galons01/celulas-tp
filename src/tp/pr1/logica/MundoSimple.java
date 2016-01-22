@@ -52,7 +52,7 @@ public class MundoSimple extends Mundo {
 			f = numAleatorio(0,this.superficie.getFilas()-1);
 			c = numAleatorio(0,this.superficie.getColumnas()-1);
 			try {
-				if(this.crearCelula(new CelulaSimple(), f,c)) {
+				if(this.crearCelula(f,c)) {
 					i++;
 				}
 			} catch (IndicesFueraDeRango e) {}
@@ -89,7 +89,7 @@ public class MundoSimple extends Mundo {
  	}
 	
 	@Override
-	public boolean crearCelula(Celula celula, int f, int c) throws IndicesFueraDeRango {
+	public boolean crearCelula( int f, int c) throws IndicesFueraDeRango {
 		if(this.superficie.posLibre(f,c)) {
 			this.superficie.insertar(new CelulaSimple(), f, c);
 			return true;
