@@ -122,14 +122,19 @@ public class MundoComplejo extends Mundo {
 		System.out.println("¿tipo de celula?");
 		tipoCelula = entradaEscaner.nextLine();
 		
-		if (tipoCelula == "simple" || tipoCelula == "compleja") {
+		
 			if(this.superficie.posLibre(f,c)) {
-				this.superficie.insertar(new CelulaSimple(), f, c);
-				return true;
+				if (tipoCelula == "simple") {
+					this.superficie.insertar(new CelulaSimple(), f, c);
+					return true;
+				}
+				else if (this.superficie.posLibre(f,c)) {
+					this.superficie.insertar(new CelulaCompleja(), f, c);
+					return true;
+				}
+				else return false;
 				}
 			else return false;
-		}
-		else return false;
 	}
 }
 
