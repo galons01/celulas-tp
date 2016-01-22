@@ -11,6 +11,7 @@ import tp.pr1.excepciones.IndicesFueraDeRango;
 
 public class MundoComplejo extends Mundo {
 	
+	private Scanner in;
 	private final int N_CELULAS_SIMPLES ;
 	private final int N_CELULAS_COMPLEJAS;
 	
@@ -115,5 +116,20 @@ public class MundoComplejo extends Mundo {
 		this.superficie.save(file);
 	}
 	
+	public boolean crearCelula(Celula celula, int f, int c) throws IndicesFueraDeRango {
+		String tipoCelula;
+		Scanner entradaEscaner = new Scanner (System.in);
+		System.out.println("¿tipo de celula?");
+		tipoCelula = entradaEscaner.nextLine();
+		
+		if (tipoCelula == "simple" || tipoCelula == "compleja") {
+			if(this.superficie.posLibre(f,c)) {
+				this.superficie.insertar(new CelulaSimple(), f, c);
+				return true;
+				}
+			else return false;
+		}
+		else return false;
+	}
 }
 

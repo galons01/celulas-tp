@@ -50,13 +50,7 @@ public abstract class Mundo {
 	 * @return Devuelve si ce creó la celula
 	 * @throws IndicesFueraDeRango Si la posición está fuera del mundo
 	 */
-	public boolean crearCelula(Celula celula, int f, int c) throws IndicesFueraDeRango {
-		if(this.superficie.posLibre(f,c)) {
-			this.superficie.insertar(celula, f, c);
-			return true;
-		}
-		else return false;
-	}
+	abstract public boolean crearCelula(Celula celula, int f, int c) throws IndicesFueraDeRango;
 	
 	/**
 	 * Elimina una celula del mundo (para usar desde fuera)
