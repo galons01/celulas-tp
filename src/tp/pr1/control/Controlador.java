@@ -12,7 +12,6 @@ import tp.pr1.comandos.ParserComandos;
 
 import tp.pr1.excepciones.*;
 
-import tp.pr1.logica.Celula;
 import tp.pr1.logica.Mundo;
 import tp.pr1.logica.MundoComplejo;
 import tp.pr1.logica.MundoSimple;

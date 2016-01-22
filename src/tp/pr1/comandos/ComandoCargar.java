@@ -1,11 +1,9 @@
 package tp.pr1.comandos;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import tp.pr1.control.Controlador;
 import tp.pr1.excepciones.ErrorDeCarga;
-import tp.pr1.excepciones.FormatoNumericoIncorrecto;
 import tp.pr1.excepciones.NumeroParametrosIncorrecto;;
 
 public class ComandoCargar extends Comando {
