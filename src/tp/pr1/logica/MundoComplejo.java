@@ -57,7 +57,7 @@ public class MundoComplejo extends Mundo {
 			f = numAleatorio(0,this.superficie.getFilas()-1);
 			c = numAleatorio(0,this.superficie.getColumnas()-1);
 			try {
-				if(this.crearCelula(f,c)) {
+				if(this.crearCelula(f,c, "compleja")) {
 					i++;
 				}
 			} catch (IndicesFueraDeRango e) {}
@@ -68,7 +68,7 @@ public class MundoComplejo extends Mundo {
 			f = numAleatorio(0,this.superficie.getFilas()-1);
 			c = numAleatorio(0,this.superficie.getColumnas()-1);
 			try {
-				if(this.crearCelula( f,c)) {
+				if(this.crearCelula( f,c, "simple")) {
 					i++;
 				}
 			} catch (IndicesFueraDeRango e) {}
@@ -116,7 +116,22 @@ public class MundoComplejo extends Mundo {
 		this.superficie.save(file);
 	}
 	
-	public boolean crearCelula( int f, int c) throws IndicesFueraDeRango {
+	public boolean crearCelula(int f, int c, String tipoCelula) throws IndicesFueraDeRango{
+		if(this.superficie.posLibre(f,c)) {
+			if (tipoCelula == "simple") {
+				this.superficie.insertar(new CelulaSimple(), f, c);
+				return true;
+			}
+			else if (tipoCelula == "compleja") {
+				this.superficie.insertar(new CelulaCompleja(), f, c);
+				return true;
+			}
+			else return false;
+			}
+		else return false;
+	}
+	
+	public boolean crearCelula(int f, int c) throws IndicesFueraDeRango {
 		String tipoCelula;
 		Scanner entradaEscaner = new Scanner (System.in);
 		System.out.println("¿tipo de celula?");
@@ -128,7 +143,7 @@ public class MundoComplejo extends Mundo {
 					this.superficie.insertar(new CelulaSimple(), f, c);
 					return true;
 				}
-				else if (this.superficie.posLibre(f,c)) {
+				else if (tipoCelula == "compleja") {
 					this.superficie.insertar(new CelulaCompleja(), f, c);
 					return true;
 				}
