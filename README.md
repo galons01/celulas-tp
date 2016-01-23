@@ -1,4 +1,12 @@
-/*
+#celulas-tp
+A simple console Game of Life.
+
+---
+##License
+This program was developed by Germán Franco and Alonso Patiño and is under GPLv3 license. Check out *COPYING* file too see the full notice.
+
+
+```
     celulas-tp - A simple console Game of Life.
     Copyright (C) 2015-2016  Guillermo Alonso and Germán Franco
 
@@ -14,16 +22,4 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-package tp.pr1.excepciones;
-
-public class ErrorDeCarga extends Exception {
-	
-	@Override
-	public String getMessage() {
-		return "EXCEPCIÓN: Error en la carga de archivos. Formato incorrecto. ";
-		
-	}
-	
-}
+```
