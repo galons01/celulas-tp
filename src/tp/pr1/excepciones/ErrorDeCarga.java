@@ -20,6 +20,11 @@ package tp.pr1.excepciones;
 
 public class ErrorDeCarga extends Exception {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3820178761096069994L;
+
 	@Override
 	public String getMessage() {
 		return "EXCEPCIÓN: Error en la carga de archivos. Formato incorrecto. ";

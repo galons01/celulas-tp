@@ -20,6 +20,11 @@ package tp.pr1.excepciones;
 
 public class IndicesFueraDeRango extends Exception {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8721371384790794422L;
+
 	@Override
 	public String getMessage() {
 		return "EXCEPCIÓN: Índices fuera de rango. ";

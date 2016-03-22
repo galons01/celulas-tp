@@ -20,6 +20,10 @@ package tp.pr1.excepciones;
 
 public class PalabraIncorrecta extends Exception {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3636000682160456256L;
 	private String palabra;
 	
 	public PalabraIncorrecta(String palabra) {

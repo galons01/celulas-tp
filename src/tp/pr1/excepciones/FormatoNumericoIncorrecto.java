@@ -20,6 +20,11 @@ package tp.pr1.excepciones;
 
 public class FormatoNumericoIncorrecto extends Exception {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7537989343539787967L;
+
 	@Override
 	public String getMessage() {
 		return "EXCEPCIÓN: Formato numérico incorrecto. ";

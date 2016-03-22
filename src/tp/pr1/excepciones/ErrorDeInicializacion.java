@@ -20,6 +20,11 @@ package tp.pr1.excepciones;
 
 public class ErrorDeInicializacion extends Exception {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3958995405565228361L;
+
 	@Override
 	public String getMessage() {
 		return "EXCEPCIÓN: Error de inicialización. Capacidad máxima alcanzada. ";

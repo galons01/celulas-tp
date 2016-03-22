@@ -21,7 +21,7 @@ package tp.pr1.main;
 import tp.pr1.control.Controlador;
 import java.util.Scanner;
 
-public class main {
+public class Main {
 
 	public static void main(String[] args) {
 		

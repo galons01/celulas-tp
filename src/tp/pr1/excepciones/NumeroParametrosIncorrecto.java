@@ -20,6 +20,11 @@ package tp.pr1.excepciones;
 
 public class NumeroParametrosIncorrecto extends Exception {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3277414083560276504L;
+
 	@Override
 	public String getMessage() {
 		return "EXCEPCIÓN: Número de parámetros incorrecto. ";
